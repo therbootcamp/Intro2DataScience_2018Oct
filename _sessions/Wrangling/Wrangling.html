@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wrangling</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Basel R Bootcamp www.therbootcamp.com @therbootcamp" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="baselrbootcamp.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Wrangling
+### Basel R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+### July 2018
+
+---
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Basel, July 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+---
+  
+
+
+
+
+.pull-left4[
+
+# Where you're at...
+
+1 - Loaded packages (like `tidyverse`) with `library()`&lt;br&gt;
+
+2 - Loaded external files as a new dataframe&lt;br&gt;
+
+3 - Explore dataframes
+
+4 - Calculate descriptive statistics on specific columns&lt;br&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+What's next?... &lt;high&gt;Wrangling!&lt;/high&gt;
+
+]
+
+.pull-right55[
+
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+# Step 0) Load libraries
+
+library(tidyverse)
+
+# Step 1) Read file called baslers.txt 
+#  in a data folder with read_csv()
+#  and save as new object baslers
+
+baslers &lt;- read_csv(file = "data/baslers.txt")
+
+# Step 2) Explore data
+
+View(baslers)   # Open in new window
+dim(baslers)    # Show number of rows and columns
+names(baslers)  # Show names
+
+# Step 3) Calculate descriptives on named colums
+
+mean(baslers$age)   # What is the mean age?
+table(baslers$sex)  # How many of each sex?
+
+# Step 4) ...
+```
+
+]
+
+---
+.pull-left45[
+
+# What is wrangling?
+
+&lt;font size = 5&gt;&lt;high&gt;Transform&lt;/high&gt;&lt;/font&gt;
+
+Change column names
+
+Add new columns
+
+&lt;font size = 5&gt;&lt;high&gt;Organise&lt;/high&gt;&lt;/font&gt;
+
+Sort data by columns
+
+Merging data from two separate dataframes
+
+Move data between columns and rows
+
+&lt;font size = &gt;&lt;high&gt;Aggregate&lt;/high&gt;&lt;/font&gt;
+
+Group data and summarise
+]
+
+
+.pull-right5[
+&lt;br&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" height = "550px"&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+
+
+.pull-left45[
+
+# `dplyr` &amp; `tidyr`
+
+To wrangle data in R, we will use the `dplyr` and `tidyr` packages.
+
+&lt;br&gt;
+
+```r
+# Load packages individually
+
+# install.packages('dplyr')
+# install.packages('tidyr')
+
+library(dplyr)
+library(tidyr)
+
+# Or just use the tidyverse!
+
+# install.packages('tidyverse')
+
+library(tidyverse)
+```
+
+]
+ 
+.pull-right5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/dplyr_tidyr_hex.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# The Pipe!  &lt;high&gt;`%&gt;%`&lt;/high&gt;
+
+.pull-left4[
+
+`dplyr` makes extensive use of a new operator called the "Pipe" &lt;high&gt;`%&gt;%`&lt;/high&gt;&lt;br&gt;
+
+Read the "Pipe" &lt;high&gt;`%&gt;%`&lt;/high&gt; as "And Then..."
+
+&lt;br&gt;
+
+
+```r
+# Start with data
+data %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+```
+
+]
+
+.pull-right55[
+
+&lt;p align="center"&gt;
+  &lt;img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/MagrittePipe.jpg/300px-MagrittePipe.jpg" width = "450px"&gt;&lt;br&gt;
+  This is not a pipe (but %&gt;% is!)
+&lt;/p&gt;
+
+]
+
+
+
+---
+
+# The Pipe!  &lt;high&gt;`%&gt;%`&lt;/high&gt;
+
+.pull-left4[
+
+Task: Calculate the mean of a vector of `scores`
+
+
+```r
+# Create a vector score
+score &lt;- c(8, 4, 6, 3, 7, 3)
+```
+
+Base-R method
+
+
+```r
+mean(x = score)
+```
+
+```
+## [1] 5.167
+```
+
+Pipe &lt;high&gt;%&gt;%&lt;/high&gt; method
+
+
+```r
+score %&gt;%  # AND THEN 
+  mean()  
+```
+
+```
+## [1] 5.167
+```
+
+
+]
+
+.pull-right55[
+
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe_explanation_kn.png" height = "400px"&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# The Pipe! &lt;high&gt;`%&gt;%`&lt;/high&gt;
+
+.pull-left4[
+
+Task: Calculate the mean of a vector of `scores` and round to 1 digit.
+
+
+```r
+# Create a vector score
+score &lt;- c(8, 4, 6, 3, 7, 3)
+```
+
+Base-R method
+
+
+```r
+round(x = mean(score), digits = 1)
+```
+
+```
+## [1] 5.2
+```
+
+Pipe &lt;high&gt;%&gt;%&lt;/high&gt; method
+
+
+```r
+score %&gt;%        # AND THEN
+  mean() %&gt;%       # AND THEN
+  round(digits = 1)
+```
+
+```
+## [1] 5.2
+```
+
+]
+
+.pull-right55[
+
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe_explanation_kn.png" height = "400px"&gt;
+&lt;/p&gt;
+
+
+]
+
+
+---
+
+.pull-left35[
+
+# `dplyr` Functions
+
+There are &lt;high&gt;dozens of wrangling functions&lt;/high&gt; in `dplyr`.
+
+For an overview, check out &lt;a href='http://dplyr.tidyverse.org/'&gt;dplyr.tidyverse.org&lt;/a&gt;
+
+&lt;p align="center"&gt; &lt;a href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf'&gt;
+  &lt;img src="https://image.slidesharecdn.com/data-wrangling-cheatsheet-160705210122/95/data-wrangling-with-dplyr-and-tidyr-cheat-sheet-2-638.jpg?cb=1467752577g" height="270px"&gt;&lt;/a&gt;
+  &lt;a href= 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf'&gt; Wrangling Cheat Sheet&lt;/a&gt;
+&lt;/p&gt;
+
+
+]
+
+.pull-right65[
+&lt;br&gt;&lt;br&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_functions.png" height="420px"&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+
+
+
+
+# Transformation Functions
+
+.pull-left4[
+
+&lt;br&gt;
+
+| Function| Description|
+|:-------------|:----|
+| `rename()` | Change column names |
+| `mutate()`|   Create a new column from existing columns|
+| `case_when()`|  Recode values from a vector to another|
+| `left_join()` | Combine multiple dataframes| 
+
+]
+
+.pull-right55[
+&lt;br&gt;
+
+```r
+patients_df   # Demographic data
+```
+
+```
+## # A tibble: 5 x 3
+##      id     b     c
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    37     1
+## 2     2    65     2
+## 3     3    57     2
+## 4     4    34     1
+## 5     5    45     2
+```
+
+
+]
+
+
+---
+
+
+# `rename` 
+
+.pull-left45[
+
+
+Change &lt;high&gt;column names&lt;/high&gt; with `rename()`.
+
+
+```r
+df %&gt;%
+  rename(NEW = OLD,
+         NEW = OLD)
+```
+
+
+```r
+patients_df  # Original
+```
+
+```
+## # A tibble: 5 x 3
+##      id     b     c
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    37     1
+## 2     2    65     2
+## 3     3    57     2
+## 4     4    34     1
+## 5     5    45     2
+```
+]
+
+.pull-right45[
+
+Change the old name "b" to "age", and "c" to "arm"
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;% 
+
+# 1) Change column names with rename()
+  rename(age = b,  # New = Old
+         arm = c)  # New = Old
+```
+
+```
+## # A tibble: 5 x 3
+##      id   age   arm
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    37     1
+## 2     2    65     2
+## 3     3    57     2
+## 4     4    34     1
+## 5     5    45     2
+```
+
+
+]
+
+---
+
+# `mutate` 
+
+.pull-left35[
+
+Calculate &lt;high&gt;new columns&lt;/high&gt;, or change existing ones, with `mutate()`.
+
+
+```r
+df %&gt;%
+  mutate(
+   NEW1 = DEFINITION1,
+   NEW2 = DEFINITION2,
+   NEW3 = DEFINITION3,
+   ...
+  )
+```
+]
+
+.pull-right6[
+
+Calculate two new columns `age_months` and `age_years`
+
+
+```r
+patients_df %&gt;% 
+
+  rename(age = b, 
+         arm = c) %&gt;%   # AND THEN...
+  
+# Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10)
+```
+
+```
+## # A tibble: 5 x 5
+##      id   age   arm age_months age_decades
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1     1    37     1        444         3.7
+## 2     2    65     2        780         6.5
+## 3     3    57     2        684         5.7
+## 4     4    34     1        408         3.4
+## 5     5    45     2        540         4.5
+```
+
+]
+
+---
+
+# `case_when`
+
+.pull-left4[
+
+Use `case_when()` with `mutate()` to define &lt;high&gt;new columns based on logical conditions&lt;/high&gt;.
+
+
+```r
+# Using mutate(case_when())
+df %&gt;%
+  mutate(
+    NEW = case_when(
+      COND1 ~ VAL1,
+      COND2 ~ VAL2
+    ))
+```
+
+
+]
+
+.pull-right55[
+
+
+```r
+patients_df %&gt;% 
+
+  rename(age = b, 
+         arm = c) %&gt;%
+  
+  # Create column arm_char based on values of arm
+  
+  mutate(arm_char = case_when(arm == 1 ~ "placebo",
+                              arm == 2 ~ "drug"))
+```
+
+```
+## # A tibble: 5 x 4
+##      id   age   arm arm_char
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+## 1     1    37     1 placebo 
+## 2     2    65     2 drug    
+## 3     3    57     2 drug    
+## 4     4    34     1 placebo 
+## 5     5    45     2 drug
+```
+
+]
+
+
+---
+
+# Joining data
+ 
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/joining_data.png" height="450px"&gt;
+&lt;/p&gt; 
+
+
+---
+
+# `left_join`
+
+.pull-left35[
+
+Use `left_join()` to &lt;high&gt;combine two data frames&lt;/high&gt; based on one or more key columns
+
+
+```r
+# Join df2 to df1
+#   using KEY as the key column
+df1 %&gt;%
+  left_join(df2, 
+      by = c("KEY"))
+```
+
+&lt;br2&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/joining_data.png" height="190px"&gt;
+&lt;/p&gt; 
+
+]
+
+.pull-right6[
+
+
+```r
+# Join patients_df with results_df to create combined_df
+combined_df &lt;- patients_df %&gt;% 
+  rename(age = b, arm = c) %&gt;%
+  mutate(arm_char = case_when(arm == 1 ~ "placebo",
+                              arm == 2 ~ "drug")) %&gt;%
+  
+# Join with results_df with left_join()
+  left_join(results_df, by = "id")
+
+# Show a few columns
+combined_df %&gt;%
+  select(id, arm, age, t1, t2)
+```
+
+```
+## # A tibble: 5 x 5
+##      id   arm   age    t1    t2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1    37   123   135
+## 2     2     2    65   143   140
+## 3     3     2    57    NA    NA
+## 4     4     1    34   100   105
+## 5     5     2    45    NA    NA
+```
+
+]
+
+---
+
+
+# Keep in mind
+
+.pull-left35[
+
+1 - Don't forget to start by assigning to a new (or existing) object with &lt;-&lt;br&gt;
+
+2 - Keep adding new functions connected by the pipe &lt;high&gt;%&gt;%&lt;/high&gt;&lt;br&gt;
+
+3 - Order matters! You can refer to new columns in later code
+&lt;br&gt;&lt;br&gt;
+
+
+
+]
+
+.pull-right6[
+
+
+```r
+# 0) Start with patients_df data
+combined_df &lt;- patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c) %&gt;%  # AND THEN...
+  
+# 2) Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10,
+         arm_char = case_when(arm == 0 ~ "placebo",
+                              arm == 1 ~ "drug")
+         ) %&gt;%  # AND THEN..
+  
+# 3) Add data from results_df with left_join()
+  left_join(results_df, by = "id")
+```
+
+
+]
+
+---
+
+# Organisation Functions
+
+.pull-left35[
+
+Organisation functions help you shuffle your data by &lt;high&gt;sorting rows&lt;/high&gt; by columns, &lt;high&gt;filter rows&lt;/high&gt; based on criteria, &lt;high&gt;select columns&lt;/high&gt; (etc).
+
+]
+
+.pull-right6[
+
+| Function| Purpose|Example|
+|:--------|:----|:-------------|
+| `arrange()` |Sort rows by columns|`df %&gt;%`&lt;br&gt;`arrange(arm, age)`|
+| `slice()`|   Select rows by location|`df %&gt;%`&lt;br&gt;`slice(1:10)`|
+| `filter()` | Select specific rows by criteria|`df %&gt;%`&lt;br&gt;`filter(age &gt; 50)`|
+| `select()`|   Select specific columns|`df %&gt;%`&lt;br&gt;`select(arm, t1)`|
+
+]
+
+---
+
+# `arrange()`
+
+.pull-left3[
+
+Use `arrange()` to &lt;high&gt;arrange (aka, sort) rows&lt;/high&gt; in increasing or decreasing order of one (or more) columns.
+
+To sort in descending order, use `desc()`
+
+]
+
+.pull-right65[
+
+&lt;font size = 5&gt;&lt;/font&gt;
+
+
+```r
+# Sort combined_df by id 
+# then in descending order of age
+combined_df %&gt;%
+  arrange(id, desc(age))
+```
+
+```
+## # A tibble: 5 x 6
+##      id   age   arm arm_char    t1    t2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    37     1 placebo    123   135
+## 2     2    65     2 drug       143   140
+## 3     3    57     2 drug        NA    NA
+## 4     4    34     1 placebo    100   105
+## 5     5    45     2 drug        NA    NA
+```
+
+]
+
+---
+
+# `filter()`
+
+
+.pull-left4[
+
+Use `filter()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) based on criteria
+
+For complex conditions, chain multiple logical comparison operators with `&amp;` (AND) and `|` (OR)
+
+&lt;high&gt;`==`&lt;/high&gt; - is equal to&lt;br&gt;
+&lt;high&gt;`&lt;`&lt;/high&gt;, &lt;high&gt;`&gt;`&lt;/high&gt; - smaller/greater than&lt;br&gt;
+&lt;high&gt;`≤`&lt;/high&gt;, &lt;high&gt;`≥`&lt;/high&gt; - smaller/greater than or equal&lt;br&gt;
+&lt;high&gt;`&amp;`&lt;/high&gt;, &lt;high&gt;`&amp;&amp;`&lt;/high&gt; - logical AND&lt;br&gt;
+&lt;high&gt;`|`&lt;/high&gt;, &lt;high&gt;`||`&lt;/high&gt; - logical OR&lt;br&gt;
+
+]
+
+.pull-right55[
+
+Select &lt;i&gt;only&lt;/i&gt; patients over 30 given drug.
+
+
+```r
+# Filter patients older than 30 given drug
+combined_df %&gt;%
+  arrange(id, desc(age)) %&gt;%
+  filter(age &gt; 30 &amp; arm_char == "drug")
+```
+
+```
+## # A tibble: 3 x 6
+##      id   age   arm arm_char    t1    t2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1     2    65     2 drug       143   140
+## 2     3    57     2 drug        NA    NA
+## 3     5    45     2 drug        NA    NA
+```
+
+]
+
+---
+
+# `select()`
+
+.pull-left4[
+
+Use `select()` to &lt;high&gt;select columns&lt;/high&gt; (and remove all others)
+
+
+```r
+# Select columns id, age
+df %&gt;% 
+  select(id, age)
+```
+
+&lt;high&gt;Remove columns&lt;/high&gt; with `-`.
+
+
+```r
+# Select everything BUT sex and id
+df %&gt;% 
+  select(-sex, -id)
+```
+
+
+]
+
+.pull-right55[
+
+Remove `age_months` and `age_decades` colummns.
+
+
+```r
+combined_df %&gt;%
+  
+  arrange(id, desc(age)) %&gt;%
+  
+  filter(arm_char == "drug" &amp; age &gt; 30) %&gt;%
+  
+# Drop age and arm columns
+  select(-age, -arm)
+```
+
+```
+## # A tibble: 3 x 4
+##      id arm_char    t1    t2
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1     2 drug       143   140
+## 2     3 drug        NA    NA
+## 3     5 drug        NA    NA
+```
+
+]
+
+
+---
+
+# Grouped Aggregation
+
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/summarsed_data_diagram.png" height="470px"&gt;
+&lt;/p&gt; 
+
+
+
+---
+
+# `group_by()`, `summarise()`
+
+.pull-left45[
+
+Use `group_by()` to &lt;high&gt;group data&lt;/high&gt; according to one or more columns
+
+After grouping data, use `summarise()` to &lt;high&gt;calculate summary statistics&lt;/high&gt; across groups of data
+
+&lt;u&gt;Statistical functions&lt;/u&gt;
+
+| Function| asdf |
+|:-------------|:---|
+| `n()`| Number of cases in each group|
+| `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
+]
+
+.pull-right45[
+
+
+
+
+
+```r
+# Group data by arm, and calculate many
+#  summary statistics
+combined_df %&gt;%
+  group_by(arm) %&gt;%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    t1_mean = mean(t1, na.rm = TRUE),
+    t2_mean = mean(t2, na.rm = TRUE)
+  )
+```
+
+```
+## # A tibble: 2 x 5
+##   arm         N age_mean t1_mean t2_mean
+##   &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 drug        3     55.7    143      140
+## 2 placebo     2     35.5    112.     120
+```
+
+
+]
+
+
+---
+
+# Reshaping data
+
+.pull-left45[
+
+Two key functions that allow you to &lt;high&gt;`reshape`&lt;/high&gt; a dataframe between 'wide'and 'long' formats.
+
+Some functions require data to be in a certain shape.
+
+#### Two key tidyr functions
+
+| Function | Result |
+|:----------|:-------|
+|`gather()`|Move data from 'wide' to 'long' format|
+|`spread()`|Move data from 'long' to 'wide' format|
+
+]
+
+.pull-right5[
+
+#### 'Wide' vs. 'Long' data
+
+
+
+
+```r
+# Wide format
+stock_w
+```
+
+```
+##   id t1 t2
+## 1  a 10 20
+## 2  b 20 26
+## 3  c 15 30
+```
+
+
+```r
+# Long format
+stock_l
+```
+
+```
+##   id time measure
+## 1  a   t1      10
+## 2  b   t1      20
+## 3  c   t1      15
+## 4  a   t2      20
+## 5  b   t2      26
+## 6  c   t2      30
+```
+
+]
+
+---
+
+.pull-left45[
+
+# `gather()`
+
+
+```r
+# Show wide data
+stock_w
+```
+
+```
+##   id t1 t2
+## 1  a 10 20
+## 2  b 20 26
+## 3  c 15 30
+```
+
+
+```r
+# "Gather" wide data to long
+stock_w %&gt;% 
+  gather(time,    # New group column
+         measure, # New target column
+         -id)     # ID column
+```
+
+```
+##   id time measure
+## 1  a   t1      10
+## 2  b   t1      20
+## 3  c   t1      15
+## 4  a   t2      20
+## 5  b   t2      26
+## 6  c   t2      30
+```
+
+]
+
+.pull-right45[
+
+# `spread()`
+
+
+```r
+# Show long data
+stock_l
+```
+
+```
+##   id time measure
+## 1  a   t1      10
+## 2  b   t1      20
+## 3  c   t1      15
+## 4  a   t2      20
+## 5  b   t2      26
+## 6  c   t2      30
+```
+
+
+
+```r
+# "Spread" long data to wide
+stock_l %&gt;% 
+  spread(time,    # Old group column
+         measure) # Old target column
+```
+
+```
+##   id t1 t2
+## 1  a 10 20
+## 2  b 20 26
+## 3  c 15 30
+```
+
+]
+
+
+---
+
+# Summary
+
+.pull-left4[
+
+1 - Start by assigning your result to a new object to save it!
+
+2 - "Keep the pipe &lt;high&gt;%&gt;%&lt;/high&gt; going" to continue working with your data frame.
+
+3 - The output of dplyr functions will (almost) always be a &lt;high&gt;tibble&lt;/high&gt;.
+
+4 - You can almost always include &lt;high&gt;multiple operations&lt;/high&gt; within each function.
+
+]
+
+.pull-right55[
+
+
+```r
+# Assign result to baslers_agg
+
+baslers_agg &lt;- baselers %&gt;% 
+  
+  # Change column names with rename()
+  rename(age_years = age,
+         weight_kg = weight)  %&gt;% # PIPE!
+
+  # Select specific rows with filter()
+  filter(age_years &lt; 40)  %&gt;% # PIPE!
+  
+  # Create new columns witb mutate()
+  mutate(debt_ratio = debt / income)  %&gt;% # PIPE!
+  
+  # Group data with group_by()
+  group_by(sex) %&gt;% # PIPE!
+  
+  # Calculate summary statistics with summarise()
+  summarise(income_mean = mean(income),
+            debt_mean = mean(debt),
+            dr_mean = mean(dr))
+```
+
+]
+
+---
+
+# Practical
+
+&lt;p&gt;
+  &lt;font size=6&gt;
+    &lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Wrangling/Wrangling_practical.html"&gt;&lt;b&gt;Link to practical&lt;b&gt;&lt;/a&gt;
+  &lt;/font&gt;
+&lt;/p&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
