@@ -1,6 +1,6 @@
 ---
-title: "Basel R Bootcamp"
-date: "July 2018"
+title: "Introduction to Data Science with R"
+date: "October 2018"
 author: "http://www.therbootcamp.com"
 output: html_document
 ---
@@ -8,21 +8,22 @@ output: html_document
 <br>
 
 ## Materials
-
+<!---
 #### <a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data.zip">Get datasets</a>
 #### <a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_pdf/Baselrbootcamp_slides_pt1.zip">Get pdfs pt1</a> <font size=2><a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_knit/knit_bootcamp.R">[download code]</a></font>
-
+--->
 <br>
 
-|  | Day 1<br>Essentials| Day 2<br>Statistics| Day 3<br>Plotting | Day 4<br> Productivity |
-|:--|:-------------|:-------------|:-------------|:--------------|
-|0| Welcome!<br>[slides](_sessions/Welcome/Welcome.html) | Recap I<br>[slides](_sessions/RecapI/RecapI.html) | Recap II<br>[slides](_sessions/RecapII/Recap_II.html)| Recap III<br>[slides](_sessions/RecapIII/Recap_III.html)  |
-|1| Intro to R<br>[slides](_sessions/IntroToR/IntroToR.html), [practical](_sessions/IntroToR/IntroToR_interactive.R) | Data Wrangling<br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) | [Intro](_sessions/ChooseII/ChooseII.html)<br>  A) Case Studies: Solutions <br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study_Answers.html)<br>[2: Finance](_sessions/CaseStudies/Financial_Data_Case_Study_answers.html)<br>[3: Sales](_sessions/CaseStudies/Sales_Data_Case_Study_Answers.html)<br> B) Machine Learning II<br>[slides](_sessions/MachineLearningII/MachineLearningII.html), [practical](_sessions/MachineLearningII/MachineLearningII_practical.html) | [Intro](_sessions/ChooseIV/ChooseIV.html) <br> A) Efficient Code <br>[slides](_sessions/EfficientCode/EfficientCode.html), [practical](_sessions/EfficientCode/EfficientCode_practical.html) <br>B) Programming in R<br>[slides](_sessions/Programming/Programming.html), [practical](_sessions/Programming/Programming_practical.html)|
-|2|  Objects & Functions<br>[slides](_sessions/Objects/Objects.html), [practical](_sessions/Objects/Objects_practical.html)| Statistics<br>[slides](_sessions/Statistics/Statistics.html), [practical](_sessions/Statistics/Statistics_practical.html)| Plotting<br>[slides](_sessions/Plotting/Plotting.html), [practical](_sessions/Plotting/Plotting_practical.html)|  Dynamic Reports<br>[slides](_sessions/DynamicReports/DynamicReports.html), [practical](_sessions/DynamicReports/DynamicReports_practical.html)|
-|3|   Data I/O<br>[slides](_sessions/DataIO/DataIO.html), [practical](_sessions/DataIO/DataIO_practical.html) | [Intro](_sessions/ChooseI/ChooseI.html) <br> A) Case Studies<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)<br>[3: Sales ](_sessions/CaseStudies/Sales_Data_Case_Study.html) <br> B) Machine Learning<br>[slides](_sessions/MachineLearning/MachineLearning.html), [practical](_sessions/MachineLearning/MachineLearning_practical.html) | [Intro](_sessions/ChooseIII/ChooseIII.html) <br> A) Interactive Plotting<br>[slides](_sessions/Shiny/Shiny.html), [practical](_sessions/Shiny/Shiny_practical.html)<br>B) Natural Language Processing<br>[slides](_sessions/LanguageProcessing/LanguageProcessing.html), [practical](_sessions/LanguageProcessing/LanguageProcessing_practical.html)| Next Steps<br>[slides](_sessions/NextSteps/NextSteps.html)|
+|  | Day 1<br>Preparation| Day 2<br>Analysis| 
+|:--|:-------------|:-------------|
+|0| Welcome!<br>[slides](_sessions/Welcome/Welcome.html) | Recap<br>[slides](_sessions/RecapI/RecapI.html)|
+|1| Intro to R<br>[slides](_sessions/IntroToR/IntroToR.html), [practical](_sessions/IntroToR/IntroToR_interactive.R) | Analysing <br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) |
+|2|  Data <br>[slides](_sessions/Objects/Objects.html), [practical](_sessions/Objects/Objects_practical.html)| Plotting<br>[slides](_sessions/Statistics/Statistics.html), [practical](_sessions/Statistics/Statistics_practical.html)|
+|3|   Wrangling<br>[slides](_sessions/DataIO/DataIO.html), [practical](_sessions/DataIO/DataIO_practical.html) |Case Studies<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html) [2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)|
+
 <br>
 
 ## Schedule
 
 <p align="center"><br>
-    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/schedule.html"><img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Jul.png?raw=true" width=660></a><br>
+    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/schedule.html"><img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" style="width:450px"></a><br>
