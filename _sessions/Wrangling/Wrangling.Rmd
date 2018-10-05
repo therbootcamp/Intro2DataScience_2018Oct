@@ -18,13 +18,13 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Basel, July 2018</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
+
 
 ---
   
@@ -110,9 +110,14 @@ Merging data from two separate dataframes
 
 Move data between columns and rows
 
-<font size = ><high>Aggregate</high></font>
+<font size = 5><high>Aggregate and summarise</high></font>
 
-Group data and summarise
+Group data and calculate and summary stats
+
+*We'll do this tomorrow!*
+
+
+
 ]
 
 
@@ -345,7 +350,7 @@ patients_df   # Demographic data
 ---
 
 
-# `rename` 
+# `rename()` 
 
 .pull-left45[
 
@@ -381,7 +386,7 @@ patients_df %>%
 
 ---
 
-# `mutate` 
+# `mutate()` 
 
 .pull-left35[
 
@@ -417,7 +422,7 @@ patients_df %>%
 
 ---
 
-# `case_when`
+# `case_when()`
 
 .pull-left4[
 
@@ -465,7 +470,7 @@ patients_df %>%
 
 ---
 
-# `left_join`
+# `left_join()`
 
 .pull-left35[
 
@@ -507,10 +512,9 @@ combined_df %>%
 
 ---
 
+.pull-left35[
 
 # Keep in mind
-
-.pull-left35[
 
 1 - Don't forget to start by assigning to a new (or existing) object with <-<br>
 
@@ -519,11 +523,10 @@ combined_df %>%
 3 - Order matters! You can refer to new columns in later code
 <br><br>
 
-
-
 ]
 
 .pull-right6[
+<br><br>
 
 ```{r, eval = FALSE}
 # 0) Start with patients_df data
@@ -549,6 +552,215 @@ combined_df <- patients_df %>%
 
 ---
 
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+
+### Chunk A
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income)
+
+baselers <- baselers %>%
+        rename(weight = weight_kg)
+```
+
+]
+
+.pull-right45[
+<br><br><br><br><br><br>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income,
+               weight = weight_kg)
+```
+
+]
+
+
+---
+
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+### Chunk A
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income)
+
+baselers <- baselers %>%
+        rename(weight = weight_kg)
+```
+
+
+*This is a long way to do it*
+
+]
+
+.pull-right45[
+<br><br><br><br><br><high>Answer: Yes!</high>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income,
+               weight = weight_kg)
+```
+
+*This is simpler, you can do multiple rename() operations at the same time*
+
+]
+
+
+---
+
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+### Chunk A
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income)
+
+baselers <- baselers %>%
+        mutate(age_months = age * 12)
+```
+
+]
+
+
+.pull-right45[
+<br><br><br><br><br><br>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+              rename(salary = income) %>%
+              mutate(age_months = age * 12)
+```
+
+
+]
+
+
+
+---
+
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+### Chunk A
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+        rename(salary = income)
+
+baselers <- baselers %>%
+        mutate(age_months = age * 12)
+```
+
+*This is the long way to do multiple operations.*
+
+]
+
+
+.pull-right45[
+<br><br><br><br><br><high>Answer: Yes!</high>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+              rename(salary = income) %>%
+              mutate(age_months = age * 12)
+```
+*This is the short way that uses the pipe to continue working on the same dataframe*
+
+]
+
+
+
+---
+
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+### Chunk A
+```{r, eval = FALSE, echo = TRUE}
+baselers %>%
+      rename(salary = income) %>%
+      mutate(age_months = age * 12)
+```
+
+]
+
+
+.pull-right45[
+<br><br><br><br><br><br>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+      rename(salary = income) %>%
+      mutate(age_months = age * 12)
+```
+
+
+]
+
+
+
+---
+
+.pull-left5[
+# Test!
+
+Do these two chunks do the same thing?
+
+
+### Chunk A
+```{r, eval = FALSE, echo = TRUE}
+baselers %>%
+      rename(salary = income) %>%
+      mutate(age_months = age * 12)
+```
+
+*This just prints a result without changing anything*
+
+]
+
+
+.pull-right45[
+<br><br><br><br><br><high>Answer: No!</high>
+### Chunk B
+
+```{r, eval = FALSE, echo = TRUE}
+baselers <- baselers %>%
+      rename(salary = income) %>%
+      mutate(age_months = age * 12)
+```
+*This actually changes the baselers dataframe because we used assignment <- !*
+
+]
+
+
+
+
+
+---
+
 # Organisation Functions
 
 .pull-left35[
@@ -570,35 +782,98 @@ Organisation functions help you shuffle your data by <high>sorting rows</high> b
 
 ---
 
-# `arrange()`
+.pull-left4[
 
-.pull-left3[
+# `arrange()`
 
 Use `arrange()` to <high>arrange (aka, sort) rows</high> in increasing or decreasing order of one (or more) columns.
 
+```{r, echo = TRUE, eval = FALSE}
+df %>%
+  arrange(A, B)
+```
+
 To sort in descending order, use `desc()`
+
+```{r, echo = TRUE, eval = FALSE}
+df %>%
+  arrange(desc(A), B)
+```
 
 ]
 
-.pull-right65[
+.pull-right55[
 
-<font size = 5></font>
+<font size = 5>Sort by arm</font>
 
 ```{r}
-# Sort combined_df by id 
-# then in descending order of age
 combined_df %>%
-  arrange(id, desc(age))
+  arrange(arm)   # Sort by arm
+```
+
+
+<font size = 5>Sort by arm and then age</font>
+
+```{r}
+combined_df %>%
+  arrange(arm, desc(age))  # Sort by arm then age
+```
+
+]
+
+
+---
+
+.pull-left4[
+
+# `slice()`
+
+
+Use `slice()` to <high>select rows</high> (and remove others) by row number.
+
+Use functions like `c()`, `a:b` and `seq()` to create row numbers
+
+```{r}
+# Specific numbers
+c(2, 6, 10)
+
+# Integers from 0 to 5
+0:5
+
+# Every 10th integer
+seq(0, 50, by = 10)
+```
+
+
+]
+
+.pull-right55[
+
+Select rows <i>3, 6, and 10</i>
+
+```{r}
+# Rows 3 and 5 only
+combined_df %>%
+  slice(c(3, 5))
+```
+
+
+Select rows<i> 1 through 5</i>
+
+```{r}
+# First 5 rows
+combined_df %>%
+  slice(1:5)
 ```
 
 ]
 
 ---
 
+.pull-left4[
+
 # `filter()`
 
-
-.pull-left4[
 
 Use `filter()` to <high>select rows</high> (and remove others) based on criteria
 
@@ -614,12 +889,19 @@ For complex conditions, chain multiple logical comparison operators with `&` (AN
 
 .pull-right55[
 
+Select <i>only</i> patients over 30
+
+```{r}
+# Filter patients older than 30 given drug
+combined_df %>%
+  filter(age > 30)
+```
+
 Select <i>only</i> patients over 30 given drug.
 
 ```{r}
 # Filter patients older than 30 given drug
 combined_df %>%
-  arrange(id, desc(age)) %>%
   filter(age > 30 & arm_char == "drug")
 ```
 
@@ -627,24 +909,24 @@ combined_df %>%
 
 ---
 
-# `select()`
-
 .pull-left4[
+
+# `select()`
 
 Use `select()` to <high>select columns</high> (and remove all others)
 
 ```{r, eval = FALSE}
-# Select columns id, age
+# Select columns A, B
 df %>% 
-  select(id, age)
+  select(A, B)
 ```
 
 <high>Remove columns</high> with `-`.
 
 ```{r, eval = FALSE}
-# Select everything BUT sex and id
+# Select everything BUT A
 df %>% 
-  select(-sex, -id)
+  select(-A)
 ```
 
 
@@ -652,19 +934,19 @@ df %>%
 
 .pull-right55[
 
-Remove `age_months` and `age_decades` colummns.
+Select columns `id` and `arm`
+
+```{r}
+combined_df %>%
+  select(id, arm) # Select id and arm columns
+```
+
+Select everything *except* id
 
 ```{r}
 
 combined_df %>%
-  
-  arrange(id, desc(age)) %>%
-  
-  filter(arm_char == "drug" & age > 30) %>%
-  
-# Drop age and arm columns
-  select(-age, -arm)
-  
+  select(-id) # Everything BUT id
 ```
 
 ]
@@ -811,9 +1093,10 @@ stock_l %>%
 
 ---
 
+.pull-left4[
+
 # Summary
 
-.pull-left4[
 
 1 - Start by assigning your result to a new object to save it!
 
@@ -840,15 +1123,7 @@ baslers_agg <- baselers %>%
   filter(age_years < 40)  %>% # PIPE!
   
   # Create new columns witb mutate()
-  mutate(debt_ratio = debt / income)  %>% # PIPE!
-  
-  # Group data with group_by()
-  group_by(sex) %>% # PIPE!
-  
-  # Calculate summary statistics with summarise()
-  summarise(income_mean = mean(income),
-            debt_mean = mean(debt),
-            dr_mean = mean(dr))
+  mutate(debt_ratio = debt / income)
 ```
 
 ]
