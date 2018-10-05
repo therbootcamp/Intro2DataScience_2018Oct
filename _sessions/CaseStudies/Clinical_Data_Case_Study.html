@@ -296,8 +296,37 @@ library(tidyverse)</code></pre>
 <div id="b---data-io" class="section level2">
 <h2>B - Data I/O</h2>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Using <code>read_csv()</code>, load the <code>dimarta_trial.csv</code>, <code>dimarta_demographics.csv</code>, and <code>dimarta_biomarker.csv</code> datasets as <em>three</em> new objects called <code>trial_df</code>, <code>demographics_df</code>, and <code>biomarker_df</code>.</p></li>
-<li><p>Get a first impression of the objects you just created by exploring them with a mixture of the <code>View()</code>, <code>head()</code>, <code>names()</code>, and <code>str()</code> functions. Were they all loaded correctly?</p></li>
+<li>Using <code>read_csv()</code>, load the <code>dimarta_trial.csv</code>, <code>dimarta_demographics.csv</code>, and <code>dimarta_biomarker.csv</code> datasets as <em>three</em> new objects called <code>trial_df</code>, <code>demographics_df</code>, and <code>biomarker_df</code>.</li>
+</ol>
+<pre class="r"><code>## read in datasets
+trial_df &lt;- read_csv(&quot;XXX/XXX&quot;)
+demographics_df &lt;- read_csv(&quot;XXX/XXX&quot;)
+biomarker_df &lt;- read_csv(&quot;XXX/XXX&quot;)</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  PatientID = col_character(),
+  arm = col_integer(),
+  histamine_start = col_double(),
+  histamine_end = col_double(),
+  qol_start = col_integer(),
+  qol_end = col_integer()
+)</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  PatientID = col_character(),
+  age = col_integer(),
+  gender = col_integer(),
+  site = col_character(),
+  diseasestatus = col_character()
+)</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  PatientID = col_character(),
+  Biomarker = col_character(),
+  BiomarkerStatus = col_logical()
+)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Get a first impression of the objects you just created by exploring them with a mixture of the <code>View()</code>, <code>head()</code>, <code>names()</code>, and <code>str()</code> functions. Were they all loaded correctly?</li>
 </ol>
 </div>
 <div id="c---data-wrangling" class="section level2">
@@ -310,7 +339,7 @@ library(tidyverse)</code></pre>
 </ol>
 <pre class="r"><code># Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df &lt;- trial_df %&gt;%
-  left_join(demographics_df)</code></pre>
+  left_join(XXX)</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>You’ll notice that the <code>biomarker_df</code> dataframe is in the ‘long’ format, where each row is a patient’s biomarker result. Using the code below, making use of the <code>spread()</code> function, create a new dataframe called <code>biomarker_wide_df</code> where each row is a patient, and the results from different biomarkers are in different columns. When you finish, look at <code>biomarker_wide_df</code> to see how it looks!</li>
 </ol>
@@ -320,7 +349,7 @@ biomarker_wide_df &lt;- biomarker_df %&gt;%
 
 biomarker_wide_df</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li><p>Now, using the <code>left_join</code> function, add the <code>biomarker_wide_df</code> data to the <code>dimarta_df</code> data! Now you should hve all of the data in a single dataframe called <code>dimarta_df</code></p></li>
+<li><p>Now, using the <code>left_join</code> function, add the <code>biomarker_wide_df</code> data to the <code>dimarta_df</code> data! Now you should have all of the data in a single dataframe called <code>dimarta_df</code></p></li>
 <li><p>View <code>dimarta_df</code> to make sure the data look correct! The data should have one row for each patient, and 13 separate columns, including <code>dw</code>, <code>ms</code>, and <code>np</code></p></li>
 <li><p>Using the <code>mean()</code> function, calculate the mean age of all patients.</p></li>
 <li><p>Using the following template, find out how many male and female patients were in the trial.</p></li>
@@ -357,33 +386,17 @@ dimarta_df %&gt;%
 <ol style="list-style-type: decimal">
 <li>Run the following code block to visualise the relationship between study arm and histamine change. What do you find?</li>
 </ol>
-<pre class="r"><code>ggplot(data = dimarta_df,
-       mapping = aes(x = StudyArm, 
-                     y = histamine_change)) +
-  geom_boxplot()</code></pre>
+<pre class="r"><code>ggplot(data = XXX,
+       mapping = aes(x = XXX, 
+                     y = XXX)) +
+  geom_boxplot() +
+  labs(title = &quot;XX&quot;,
+       subtitle = &quot;XX&quot;,
+       caption = &quot;XX&quot;)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?</li>
-</ol>
-</div>
-<div id="e---statistics" class="section level2">
-<h2>E - Statistics</h2>
-<ol style="list-style-type: decimal">
-<li>Using <code>t.test()</code> conduct a t-test comparing the change in histamine results between the placebo and dimarta. Did dimarta differ from the placebo?</li>
-</ol>
-<pre class="r"><code># T.test comparing change in histamine between placebo and dimarta
-
-t.test(formula = XX ~ XX,
-       data = XXX %&gt;%
-              filter(XXX %in% c(XXX, XXX)))  # Only include placebo and dimarta</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li><p>Using <code>t.test()</code> conduct a t-test comparing the change in histamine results between the adiclax (the standard of care) and dimarta. Did dimarta improve over the standard of care?</p></li>
-<li><p>Using <code>glm()</code> conduct a regression analysis predicting <code>histamine_change</code> as a function of 4 variables: treatment arm, histamine test results at the start of the trial, age, and quality of life at the start of the trial. Save the result as an object called <code>histamine_change_glm</code>. Once you do, apply the <code>summary()</code> function to the <code>histamine_change_glm</code> object to explore the results. Which variables reliably predict changes in test results?</p></li>
-<li><p>Repeat your previous regression analysis, but now predict change in quality of life. Do you get different results compared to your previous analysis?</p></li>
-<li><p>Now it’s time to see if the patient’s biomarkers were related to treatment success. For the <code>dw</code> biomarker, calculate the mean change in test results (<code>histamine_change</code>) separately for patients with different outcomes on the <code>dw</code> biomarker (hint: just group the data by <code>dw</code> and use <code>summarise()</code> to calculate the mean <code>histamine_change</code>).</p></li>
-<li><p>Do the same analysis for the other two biomarkers <code>ms</code> and <code>np</code>. Do either of these biomarkers seem to predict changes in test results?</p></li>
-<li><p>Using <code>glm()</code>, create a new regression object called <code>histamine_change_bio_glm</code> predicting <code>histamine_change</code> as a function of the 3 biomarkers. Explore the results with <code>summary()</code>. Do you find that any of these biomarkers predict changes in histamine?</p></li>
-<li><p>Did some drugs work better for patients with some biomarkers than others? For example, did patients who expressed the <code>dw</code> biomarker have better results when given dimarta compared to patients who do not express the <code>dw</code> biomarker? To answer this, start by calculating the descriptive statistics by calculating mean change in histamine <code>histamine_change</code> for all groups of <code>dw</code> and <code>StudyArm</code> (Hint: Just use <code>group_by(dw, StudyArm)</code> and <code>summarise(histamine_change_mean = mean(histamine_change))</code>).</p></li>
-<li><p>Once you’ve looked at the descriptive statistics, conduct a regression analysis predicting <code>histamine_change</code> based on the <em>interaction</em> between <code>dw</code> and <code>StudyArm</code>. Remember to calculate an interaction term in regression, use the <code>*</code> symbol in the formula. What do the results show?</p></li>
+<li><p>Try using <code>geom_jitter()</code> to add the raw points to the plot</p></li>
+<li><p>Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?</p></li>
+<li><p>Now create the same plot but show both gender and study arm in the same plot. One way to do this would be to color the points by gender!</p></li>
 </ol>
 </div>
 </div>

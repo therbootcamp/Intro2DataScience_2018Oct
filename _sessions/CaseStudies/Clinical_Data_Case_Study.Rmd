@@ -62,7 +62,8 @@ trial_df <-  tibble(
   histamine_start = round(rnorm(n = 300, mean = 50, sd = 15), 2),
   histamine_end = NA
 ) %>% as_tibble() %>%
-  sample_frac(1)
+  sample_frac(1) 
+
 
 trial_df$histamine_end[trial_df$arm == 1] <- trial_df$histamine_start[trial_df$arm == 1] + round(rnorm(sum(trial_df$arm == 1), mean = 3, sd = 5), 2)
 trial_df$histamine_end[trial_df$arm == 2] <- trial_df$histamine_start[trial_df$arm == 2] + round(rnorm(sum(trial_df$arm == 2), mean = -4, sd = 5), 2)
@@ -173,6 +174,21 @@ library(tidyverse)
 
 2. Using `read_csv()`, load the `dimarta_trial.csv`, `dimarta_demographics.csv`, and `dimarta_biomarker.csv` datasets as *three* new objects called `trial_df`, `demographics_df`, and `biomarker_df`.
 
+```{r, echo = TRUE}
+## read in datasets
+trial_df <- read_csv("XXX/XXX")
+demographics_df <- read_csv("XXX/XXX")
+biomarker_df <- read_csv("XXX/XXX")
+```
+
+
+```{r, echo = FALSE, eval = TRUE}
+## read in datasets
+trial_df <- read_csv("_sessions/CaseStudies/1_Data/dimarta_trial.csv")
+demographics_df <- read_csv("_sessions/CaseStudies/1_Data/dimarta_demographics.csv")
+biomarker_df <- read_csv("_sessions/CaseStudies/1_Data/dimarta_biomarker.csv")
+```
+
 
 3. Get a first impression of the objects you just created by exploring them with a mixture of the `View()`, `head()`, `names()`, and `str()` functions. Were they all loaded correctly?
 
@@ -194,6 +210,8 @@ trial_df <- trial_df %>%
 2. Using the `table()` function, look at the values of the `StudyArm` column in `trial_df`. You'll notice the values are 1, 2, and 3. Using `mutate()` and `case_when()` change these values to the appropriate names of the study arms (look at the variable descriptions to see which is which!)
 
 ```{r}
+table(trial_df$StudyArm)
+
 trial_df <- trial_df %>%
   mutate(StudyArm = case_when(
     StudyArm == 1 ~ "placebo",
@@ -218,6 +236,12 @@ demographics_df <- demographics_df %>%
 ```{r, echo = TRUE}
 # Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df <- trial_df %>%
+  left_join(XXX)
+```
+
+```{r, echo = FALSE}
+# Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
+dimarta_df <- trial_df %>%
   left_join(demographics_df)
 ```
 
@@ -231,7 +255,7 @@ biomarker_wide_df <- biomarker_df %>%
 biomarker_wide_df
 ```
 
-6. Now, using the `left_join` function, add the `biomarker_wide_df` data  to the `dimarta_df` data! Now you should hve all of the data in a single dataframe called `dimarta_df`
+6. Now, using the `left_join` function, add the `biomarker_wide_df` data  to the `dimarta_df` data! Now you should have all of the data in a single dataframe called `dimarta_df`
 
 ```{r}
 dimarta_df <- dimarta_df %>% 
@@ -391,117 +415,39 @@ dimarta_df %>%
 1. Run the following code block to visualise the relationship between study arm and histamine change. What do you find?
 
 ```{r, echo = TRUE}
+ggplot(data = XXX,
+       mapping = aes(x = XXX, 
+                     y = XXX)) +
+  geom_boxplot() +
+  labs(title = "XX",
+       subtitle = "XX",
+       caption = "XX")
+```
+
+```{r, echo = FALSE}
 ggplot(data = dimarta_df,
        mapping = aes(x = StudyArm, 
                      y = histamine_change)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(title = "Histamine change",
+       subtitle = "Dimarta",
+       caption = "I love R!")
 ```
 
-2. Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?
-
-## E - Statistics
-
-1. Using `t.test()` conduct a t-test comparing the change in histamine results between the placebo and dimarta. Did dimarta differ from the placebo?
-
-```{r, eval = FALSE, echo = TRUE}
-# T.test comparing change in histamine between placebo and dimarta
-
-t.test(formula = XX ~ XX,
-       data = XXX %>%
-              filter(XXX %in% c(XXX, XXX)))  # Only include placebo and dimarta
-```
-
+2. Try using `geom_jitter()` to add the raw points to the plot
 
 ```{r}
-# T.test comparing change in histamine between placebo and dimarta
-
-t.test(formula = histamine_change ~ StudyArm,
-       data = dimarta_df %>%
-              filter(StudyArm %in% c("placebo", "dimarta")))  # Only include placebo and dimarta
+ggplot(data = dimarta_df,
+       mapping = aes(x = StudyArm, 
+                     y = histamine_change)) +
+  geom_boxplot() + 
+  geom_jitter(width = .1) +
+  labs(title = "Histamine change",
+       subtitle = "Dimarta",
+       caption = "I love R!")
 ```
 
-2. Using `t.test()` conduct a t-test comparing the change in histamine results between the adiclax (the standard of care) and dimarta. Did dimarta improve over the standard of care?
+3. Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?
 
-```{r}
-# T.test comparing change in histamine between placebo and dimarta
-
-t.test(formula = histamine_change ~ StudyArm,
-       data = dimarta_df %>%
-              filter(StudyArm %in% c("adiclax", "dimarta")))  # Only include placebo and dimarta
-```
-
-3. Using `glm()` conduct a regression analysis predicting `histamine_change` as a function of 4 variables: treatment arm, histamine test results at the start of the trial, age, and quality of life at the start of the trial. Save the result as an object called `histamine_change_glm`. Once you do, apply the `summary()` function to the `histamine_change_glm` object to explore the results. Which variables reliably predict changes in test results?
-
-```{r}
-
-histamine_change_glm <- glm(histamine_change ~ StudyArm + histamine_start + qol_start + age,
-                            data = dimarta_df)
-
-summary(histamine_change_glm)
-
-```
-
-4. Repeat your previous regression analysis, but now predict change in quality of life. Do you get different results compared to your previous analysis?
-
-```{r}
-qol_change_glm <- glm(qol_change ~ StudyArm + histamine_start + qol_start + age,
-                            data = dimarta_df)
-
-summary(qol_change_glm)
-```
-
-5. Now it's time to see if the patient's biomarkers were related to treatment success. For the `dw` biomarker, calculate the mean change in test results (`histamine_change`) separately for patients with different outcomes on the `dw` biomarker (hint: just group the data by `dw` and use `summarise()` to calculate the mean `histamine_change`).
-
-```{r}
-dimarta_df %>%
-  group_by(dw) %>%
-  summarise(
-    histamine_change_mean = mean(histamine_change, na.rm = TRUE)
-  )
-```
-
-6. Do the same analysis for the other two biomarkers `ms` and `np`. Do either of these biomarkers seem to predict changes in test results?
-
-```{r}
-dimarta_df %>%
-  group_by(ms) %>%
-  summarise(
-    histamine_change_mean = mean(histamine_change, na.rm = TRUE)
-  )
-
-dimarta_df %>%
-  group_by(np) %>%
-  summarise(
-    histamine_change_mean = mean(histamine_change, na.rm = TRUE)
-  )
-```
-
-7. Using `glm()`, create a new regression object called `histamine_change_bio_glm` predicting `histamine_change` as a function of the 3 biomarkers. Explore the results with `summary()`. Do you find that any of these biomarkers predict changes in histamine?
-
-```{r}
-histamine_change_bio_glm <- glm(histamine_change ~ dw + np + ms,
-                                data = dimarta_df)
-
-summary(histamine_change_bio_glm)
-```
-
-8. Did some drugs work better for patients with some biomarkers than others? For example, did patients who expressed the `dw` biomarker have better results when given dimarta compared to patients who do not express the `dw` biomarker? To answer this, start by calculating the descriptive statistics by calculating mean change in histamine `histamine_change` for all groups of `dw` and `StudyArm` (Hint: Just use `group_by(dw, StudyArm)` and `summarise(histamine_change_mean = mean(histamine_change))`). 
-
-```{r}
-dimarta_df %>%
-  group_by(dw, StudyArm) %>%
-  summarise(
-    histamine_change_mean = mean(histamine_change, na.rm = TRUE)
-  )
-```
-
-9. Once you've looked at the descriptive statistics, conduct a regression analysis predicting `histamine_change` based on the *interaction* between `dw` and `StudyArm`. Remember to calculate an interaction term in regression, use the `*` symbol in the formula. What do the results show?
-
-```{r}
-dw_arm_glm <- glm(histamine_change ~ dw * StudyArm,
-                  data = dimarta_df)
-
-summary(dw_arm_glm)
-```
-
+4. Now create the same plot but show both gender and study arm in the same plot. One way to do this would be to color the points by gender!
 
