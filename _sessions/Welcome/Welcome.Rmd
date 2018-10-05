@@ -1,8 +1,8 @@
 ---
 title: "Welcome!"
 subtitle: ""
-author: "Basel R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "July 2018"
+author: "Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "October 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -17,19 +17,14 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">BaselRBootcamp, July 2018</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
 ---
-```{r, eval = FALSE, echo = FALSE}
-# Code to knit slides
-xaringan::inf_mr('_sessions/D1S0_Intro/Intro.Rmd')
-```
 
 
 ```{r setup, include=FALSE}
@@ -96,28 +91,24 @@ Click the "Bootcamp running" link on our homepage!
 ]
 
 ---
-
-.pull-left4[
+<br><br>
+.pull-left6[
 # Schedule 
 
-We have a very <high>ambitious schedule</high>!
+We have an <high>ambitious schedule</high>!
 
->4 days, 3 sessions per day, 2 hours per session, on a vast variety of topics.
+>2 days, 3 sessions per day, 2 hours per session, on a variety of topics.
 
 >Each session contains a slide-based <high>introduction</high> and a hands-on <high>programming practical</high>
 
 <br>
-### Two Tracks
 
-There is both a <high>beginner</high> (gray) and <high>advanced track</high> (red)
-
-More details to come before each track
 
 ]
 
-.pull-right55[
+.pull-right4[
 
-<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Jul.png?raw=true" height="600" align="right">
+<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="550" align="center">
 
 ]
 
@@ -331,7 +322,7 @@ knitr::include_graphics("https://cdn.southampton.ac.uk/assets/imported/transform
 
 <p align="center">
   <font size=8><hfont><high>Questions?</high></hfont></font><br>
-  <font size = 4><a href = "https://therbootcamp.github.io/BaselRBootcamp_2018July/">Link to schedule</a></font>
+  <font size = 4><a href = "https://therbootcamp.github.io/Intro2DataScience_2018Oct/">Link to schedule</a></font>
 </p>
 
 ]
@@ -339,7 +330,7 @@ knitr::include_graphics("https://cdn.southampton.ac.uk/assets/imported/transform
 
 .pull-right6[
 
-<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Jul.png?raw=true" height="580" align="right">
+<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="580" align="center">
 
 
 ]
