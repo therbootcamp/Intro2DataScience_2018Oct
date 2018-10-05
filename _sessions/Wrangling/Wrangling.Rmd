@@ -19,7 +19,7 @@ layout: true
 
 <div class="my-footer"><span>
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, October 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
@@ -1106,7 +1106,7 @@ stock_l %>%
 ]
 
 .pull-right55[
-
+<br><br><br>
 ```{r, eval = FALSE}
 # Assign result to baslers_agg
 
