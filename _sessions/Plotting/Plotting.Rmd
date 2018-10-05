@@ -235,7 +235,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
 
 .pull-left45[
 
-The Grammar of graphics breaks down plots into several key pieces:
+The <high>Grammar of graphics</high> breaks down plots into several key pieces:
 
 | Aesthetics| Description|
 |:------|:----|
@@ -319,7 +319,7 @@ ggplot(data = mpg,
 
 ---
 
-# `ggplot`
+# `ggplot()`
 
 
 .pull-left45[
@@ -345,7 +345,7 @@ ggplot(data = mpg)
 
 ---
 
-# `ggplot`
+# `ggplot()`
 
 
 .pull-left45[
@@ -450,7 +450,7 @@ ggplot(data = mpg,
 .pull-left45[
 
 <br>
-## `geom_boxplot`
+## `geom_boxplot()`
 <br>
 
 ```{r, fig.width = 6, fig.height = 4}
@@ -466,7 +466,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 <br>
-## `geom_violin`
+## `geom_violin()`
 <br>
 
 ```{r, out.width= "100%", fig.width = 6, fig.height = 4}
@@ -486,7 +486,7 @@ ggplot(data = mpg,
 .pull-left45[
 
 <br>
-## `geom_bar`
+## `geom_bar()`
 <br>
 
 ```{r, out.width= "100%", echo = TRUE, fig.width = 6, fig.height = 4}
@@ -502,7 +502,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 <br>
-## `geom_count`
+## `geom_count()`
 <br>
 
 ```{r, out.width= "100%", echo = TRUE, fig.width = 6, fig.height = 4}
@@ -518,11 +518,11 @@ ggplot(data = mpg,
 
 ---
 
-# `aes`
+# `aes()`
 
 .pull-left45[
 
-`color` geoms according to a variable. 
+<high>`color`</high> geoms according to a variable. 
 
 ```{r, fig.width = 7, fig.height = 5.5, eval = FALSE}
 ggplot(data = mpg,
@@ -541,7 +541,7 @@ knitr::kable(mpg %>% sample_n(5) %>% select(displ, hwy, class, year), format = "
 
 ]
 
-.pull-right5[
+.pull-right45[
 
 <br>
 ```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
@@ -594,13 +594,13 @@ ggplot(data = mpg,
 
 ---
 
-# `geom_smooth`
+# `geom_smooth()`
 
 .pull-left45[
 
-`geom_smooth()` adds a smoothed (average) line.
+`geom_smooth()` adds a <high>smoothed line</high>.
 
-Change how the line is created with `method` (e.g.; method = 'lm').
+Change how the line is created with `method` (e.g., `method = lm`).
 
 Color the line with `col`.
 
@@ -630,13 +630,13 @@ ggplot(data = mpg,
 
 ---
 
-# `geom_smooth`
+# `geom_smooth()`
 
 .pull-left45[
 
-`geom_smooth()` adds a smoothed (average) line.
+`geom_smooth()` adds a <high>smoothed line</high>.
 
-Change how the line is created with `method` (e.g.; method = 'lm')
+Change how the line is created with `method` (e.g., `method = lm`).
 
 Color the line with `col`
 
@@ -738,11 +738,11 @@ ggplot(data = mpg,
 
 ---
 
-# `labs`
+# `labs()`
 
 .pull-left45[
 
-You can add labels to a plot with the `labs()` function
+You can add <high>labels</high> to a plot with the `labs()` function
 
 `labs()` arguments are ...
 
@@ -827,7 +827,7 @@ ggplot(data = mpg,
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -845,7 +845,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`<br>
 `theme_economist()`<br>
-*And many more!!*
+etc.
 
 ]
 
@@ -873,7 +873,7 @@ ggplot(data = mpg,
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -891,7 +891,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`<br>
 `theme_economist()`<br>
-*And many more!!*
+etc.
 
 
 
@@ -921,7 +921,7 @@ ggplot(data = mpg,
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -939,7 +939,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`<br>
 `theme_economist()`<br>
-*And many more!!*
+etc.
 
 
 
@@ -969,7 +969,7 @@ ggplot(data = mpg,
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -987,7 +987,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`<br>
 `theme_economist()`<br>
-*And many more!!*
+etc.
 
 
 
@@ -995,9 +995,8 @@ Themes from the `ggthemes` package
 
 .pull-right45[
 
-```{r, eval = F}
-library(ggthemes) # Contains many themes!
 
+```{r, eval = F}
 ggplot(...) + 
   theme_excel()
 ```
@@ -1020,7 +1019,7 @@ ggplot(data = mpg,
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -1038,7 +1037,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`<br>
 `theme_economist()`<br>
-*And many more!!*
+etc.
 
 
 ]
@@ -1046,8 +1045,6 @@ Themes from the `ggthemes` package
 .pull-right45[
 
 ```{r, eval = F}
-library(ggthemes) # Contains many themes!
-
 ggplot(...) + 
   theme_economist()
 ```
@@ -1069,11 +1066,37 @@ ggplot(data = mpg,
 
 ---
 
-## Final result!
+# Final result!
 
-```{r, fig.width = 6, fig.height = 4}
+
+.pull-left45[
+
+```{r, fig.width = 7, fig.height = 5.5, eval = F, echo = TRUE}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue", 
+              method = "lm")+
+  labs(x = "Engine Displ. in Liters",
+       y = "Highway miles per gallon",
+       title = "MPG data",
+       subtitle = "Cars with higher...",
+       caption = "Source: mpg data...") + 
+  theme_bw()
+
+```
+
+]
+
+
+.pull-right45[
+
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, 
+                     y = hwy, col = class)) +
   geom_point() + 
   geom_smooth(col = "blue", method = "lm")+
   labs(x = "Engine Displacement in Liters",
@@ -1085,17 +1108,20 @@ ggplot(data = mpg,
 
 ```
 
+]
+
+
 ---
 
-# `facet_wrap`
+# `facet_wrap()`
 
-.pull-left4[
+.pull-left45[
 
-Faceting = Create different plots for different groups
+Faceting = <high>same plot for different groups</high>.
 
 To facet plots, use `facet_wrap()`
 
-```{r, fig.width = 6, fig.height = 4, out.width = "70%", echo = TRUE, eval = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = F}
 # Without faceting
 ggplot(data = mpg, 
        mapping = aes(x = displ, 
@@ -1105,9 +1131,9 @@ ggplot(data = mpg,
 
 ]
 
-.pull-right55[
+.pull-right45[
 
-```{r, fig.width = 7, fig.height = 5, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 # Without faceting
 ggplot(data = mpg, 
        mapping = aes(x = displ, 
@@ -1119,15 +1145,15 @@ ggplot(data = mpg,
 
 ---
 
-# `facet_wrap`
+# `facet_wrap()`
 
 .pull-left4[
 
-Faceting = Create different plots for different groups
+Faceting = <high>same plot for different groups</high>.
 
 To facet plots, use `facet_wrap()`
 
-```{r, fig.width = 6, fig.height = 4, out.width = "70%", echo = TRUE, eval = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = FALSE}
 # With faceting
 ggplot(data = mpg, 
        mapping = aes(x = displ, 
@@ -1139,9 +1165,9 @@ ggplot(data = mpg,
 
 ]
 
-.pull-right55[
+.pull-right45[
 
-```{r, fig.width = 7, fig.height = 5, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 # With faceting
 ggplot(data = mpg, 
        mapping = aes(x = displ, 
@@ -1158,10 +1184,10 @@ ggplot(data = mpg,
 
 .pull-left4[
 
-1) ggplot returns an object of the class "gg".<br>
-2) You can assign the result of `ggplot` to an object.<br>
+1) ggplot returns an object of the class `gg`.<br>
+2) You can assign the result of `ggplot` to an <high>object</high>.<br>
 3) Evaluating the object will show the plot.<br>
-4) You can even edit existing `ggplot` objects.<br>
+4) You can even edit existing <high>`ggplot` objects</high>.<br>
 
 ```{r, fig.width = 8}
 # Create myplot
@@ -1175,9 +1201,9 @@ class(myplot)
 
 ]
 
-.pull-right5[
+.pull-right45[
 
-```{r, fig.width = 6, fig.height = 4}
+```{r, fig.width = 7, fig.height = 5.5}
 myplot # Evaluate myplot
 ```
 
@@ -1189,12 +1215,12 @@ myplot # Evaluate myplot
 
 .pull-left4[
 
-1) ggplot returns an object of the class "gg".<br>
+1) ggplot returns an object of the class `gg`.<br>
 2) You can assign the result of `ggplot` to an object.<br>
 3) Evaluating the object will show the plot.<br>
-4) You can even edit existing `ggplot` objects.<br>
+4) You can even edit existing <high>`ggplot` objects</high>.<br>
 
-```{r, fig.width = 6, fig.height = 4}
+```{r, fig.width = 7, fig.height = 5.5}
 # Create myplot
 myplot <- ggplot(data = mpg,
                  aes(x = displ,
@@ -1206,15 +1232,14 @@ class(myplot)
 
 ]
 
-.pull-right5[
+.pull-right45[
 
-```{r, fig.width = 6, fig.height = 4}
+```{r, fig.width = 7, fig.height = 5.5}
 myplot + 
   geom_smooth() # add geom
 ```
 
 ]
-
 
 
 ---
@@ -1223,7 +1248,7 @@ myplot +
 
 .pull-left5[
 
-To save plots to a file (e.g.; .jpg, .pdf, .png), use the `ggsave()` function.
+To <high>save plots</high> to a file (e.g., `.jpg`, `.pdf`, `.png`), use the `ggsave()` function.
 
 `ggsave()` main arguments are...
 
@@ -1258,8 +1283,6 @@ ggsave(filename = "myplot.pdf",
 
 
 ]
-
-
 
 
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Next steps"
-author: "The R Bootcamp <br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "July 2018"
+author: "Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "October 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -12,8 +12,6 @@ output:
       countIncrementalSlides: false
       ratio: '16:9'
 ---
-
-
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
@@ -26,8 +24,46 @@ options(width=110)
 options(digits = 4)
 ```
 
-# Next steps
 
+.pull-left3[
+  <br>
+  <p align = "left">
+  <font style="font-size:50px">After<br><high>2 days,<br>6 units,<br>16 hours</high><br>with R</font><br2><br><br>
+  <font style="font-size:50px"><i>You have<br>learned a <br>lot!</i></font>
+  </p>
+]
+
+
+.pull-right7[
+<p align = "center">
+<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="580" align="center">
+</p>
+
+]
+
+---
+
+.pull-left3[
+  <br>
+  <p align = "left">
+  <font style="font-size:50px">After<br><high>2 days,<br>6 units,<br>16 hours</high><br>with R</font><br2><br><br>
+  <font style="font-size:50px"><i>Your R<br>journey<br>continues!</i></font>
+  </p>
+]
+
+
+.pull-right7[
+<br><br>
+<p align = "center">
+<img src="https://78.media.tumblr.com/tumblr_macjsqTA8p1qcg119o1_r3_400.gif" height="500" align="center">
+</p>
+
+]
+
+
+---
+
+# Next steps
 
 .pull-left4[
 <font size = 4><i>What we would have liked to cover</i><br>
@@ -61,7 +97,7 @@ options(digits = 4)
 
 # Network analysis
 
-A <high>social graph</high> of package Co-authors using `tidyverse` plus `ggraph`, an extension for `ggplot2` for graphs (aka networks) and `igraph`, an extremely powerful network analysis library. Find the code and additional explanation [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
+A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) and [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and `igraph`, an extremely powerful network analysis library. Find the code and additional explanation [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
 
 .pull-left[
   <p align="center"><img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&w=450" width=450><br>
@@ -74,14 +110,6 @@ A <high>social graph</high> of package Co-authors using `tidyverse` plus `ggraph
   <img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&w=450" width=450><br><br><br>
   <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
   ]
-
----
-
-# Semantic networks - [www.swow.me](https://www.smallworldofwords.org/de)
-
-<p align="center"><a href="http://www.swow.me">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/semantic_space.png" width=720></a></p>
-
 
 ---
 
@@ -102,14 +130,6 @@ Another area were R has seen much development is <high>text analysis</high>. New
 
 ---
 
-# Text analysis: Applications - [hedonometer.org](http://hedonometer.org/books/v1/)
-<br2>
-<p align="center"><a href="http://hedonometer.org/books/v1/">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/harry_potter.png" width=900></a><br>
-  <font size=3>Link to <a href="https://arxiv.org/pdf/1606.07772.pdf">Paper</a></font><br>
-  <font size=3>View <a href="https://www.youtube.com/watch?v=oP3c1h8v2ZQ">Vonnegut's Shape of Stories</a></font></p>
-
----
 
 # Stats packages
 
@@ -257,28 +277,6 @@ ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 ]
 
 
-
----
-
-# Github & Dropbox
-
-An important part of programming is to <high>keep track of your project's progress</high> to potentially be able to go back to an earlier version. To achieve this, many programmers rely on <high>version-control</high> software such as [<high>GitHub</high>](www.github.com). R and, in particular, RStudio work have inbuilt software that allow you to <high>sync your project</high> with an <high>GitHub repository</high>. Via the package called `rdrop2`, R also interfaces with the popular cloud service [<high>Dropbox</high>](www.dropbox.com), which also allows for rudimentary version control.   
-
-.pull-left3[
-
-<p align="left">
-  <img src="http://forum.copernic.com/wp-content/uploads/2015/04/dropbox-logos_dropbox-vertical-blue.png" width=200></p>
-
-]
-
-.pull-right7[
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/github.png" width=265>
-
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudiogit.png" width=380></p>
-
-]
 
 
 ---
