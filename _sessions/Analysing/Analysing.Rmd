@@ -574,6 +574,9 @@ What have we not covered yet? Statistics!
 
 R is full of amazing statistical functions and packages
 
+Here are some common functions that come with the `stats` package
+
+
 |Function|Procedure|
 |:-----|:----|
 |`lm()`|regression|
@@ -622,6 +625,9 @@ income_lm$coefficients
 What have we not covered yet? Statistics!
 
 R is full of amazing statistical functions and packages
+
+Here are some common functions that come with the `stats` package
+
 
 |Function|Procedure|
 |:-----|:----|
