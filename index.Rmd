@@ -17,9 +17,9 @@ output: html_document
 |  | Day 1<br>Preparation| Day 2<br>Analysis| 
 |:--|:-------------|:-------------|
 |0| Welcome!<br>[slides](_sessions/Welcome/Welcome.html) | Recap<br>[slides](_sessions/RecapI/RecapI.html)|
-|1| Intro to R<br>[slides](_sessions/IntroToR/IntroToR.html), [practical](_sessions/IntroToR/IntroToR_interactive.R) | Analysing <br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) |
+|1| Intro to R<br>[slides](_sessions/IntroToR/IntroToR.html), [practical](_sessions/IntroToR/IntroToR_interactive.R) | Analysing <br>[slides](_sessions/Analysing/Analysing.html), [practical](_sessions/Analysing/Analysing_practical.html) |
 |2|  Data <br>[slides](_sessions/Objects/Objects.html), [practical](_sessions/Objects/Objects_practical.html)| Plotting<br>[slides](_sessions/Statistics/Statistics.html), [practical](_sessions/Statistics/Statistics_practical.html)|
-|3|   Wrangling<br>[slides](_sessions/DataIO/DataIO.html), [practical](_sessions/DataIO/DataIO_practical.html) |Case Studies<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)|
+|3|   Wrangling<br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) |Case Studies<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)|
 
 <br>
 
