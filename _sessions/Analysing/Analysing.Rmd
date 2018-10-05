@@ -254,7 +254,7 @@ df %>%
 
 <u>Statistical functions</u>
 
-| Function| asdf |
+| Function| Purpose |
 |:-------------|:---|
 | `n()`| Number of cases in each group|
 | `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
@@ -298,7 +298,7 @@ After grouping data, use `summarise()` to <high>calculate summary statistics</hi
 
 <u>Statistical functions</u>
 
-| Function| asdf |
+| Function| Purpose |
 |:-------------|:---|
 | `n()`| Number of cases in each group|
 | `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
