@@ -699,8 +699,8 @@ write_delim(data_object, file, ...)  # arbitrary-delimited
 <br><br><br>
 ```{r, eval=F}
 # Read with explicit column names
-baselers <- read_delim(file = ".../baselers.csv",
-                       delim = c(",")
+baselers <-read_delim(file = ".../baselers.csv",
+                      delim = c(","))
 ```
 
 ]
