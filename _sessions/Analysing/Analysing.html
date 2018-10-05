@@ -26,7 +26,6 @@ layout: true
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
 &lt;/span&gt;&lt;/div&gt; 
 
-
 ---
   
 
@@ -362,9 +361,11 @@ baselers %&gt;%
 ]
 
 ---
+
 # Test!
 
 .pull-left45[
+
 
 Here is part of the baselers dataframe
 
@@ -407,6 +408,7 @@ How do I calculate the following table?
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -462,6 +464,7 @@ baselers %&gt;%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -511,6 +514,7 @@ How do I calculate the following table?
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -569,6 +573,7 @@ baselers %&gt;%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -617,6 +622,7 @@ How do I calculate the following table?
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -643,7 +649,6 @@ baselers %&gt;%
 
 
 ]
-
 
 .pull-right5[
 
@@ -671,6 +676,192 @@ baselers %&gt;%
 ```
 
 ]
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+
+]
+
+
+.pull-right65[
+
+&lt;br&gt;
+
+Specify dependent and independent variables with &lt;high&gt;formula&lt;/high&gt;
+
+- `formula = DV ~ IV1 + IV2 + ...`
+
+Use `lm()` to create a regression object
+
+
+
+```r
+# Create regression model predicting income
+income_lm &lt;- lm(formula = income ~ age + height + children,
+                data = baselers)
+
+# What is in this object?
+names(income_lm)
+```
+
+```
+##  [1] "coefficients"  "residuals"     "effects"       "rank"          "fitted.values" "assign"       
+##  [7] "qr"            "df.residual"   "na.action"     "xlevels"       "call"          "terms"        
+## [13] "model"
+```
+
+```r
+# Print coefficients
+income_lm$coefficients
+```
+
+```
+## (Intercept)         age      height    children 
+##     574.740     149.302       1.720       7.727
+```
+
+
+]
+
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+
+]
+
+
+.pull-right65[
+
+&lt;br&gt;
+
+Specify dependent and independent variables with &lt;high&gt;formula&lt;/high&gt;
+
+- `formula = DV ~ IV1 + IV2 + ...`
+
+Use `t.test()` to create a hypothesis test object
+
+
+
+```r
+# T-test comparing height by sex
+height_ttest &lt;- t.test(formula = height ~ sex,
+                     data = baselers)
+
+# What is in this object?
+names(height_ttest)
+```
+
+```
+## [1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"    "null.value"  "alternative"
+## [8] "method"      "data.name"
+```
+
+```r
+height_ttest$statistic # Print test statistic
+```
+
+```
+##      t 
+## -66.59
+```
+
+```r
+height_ttest$conf.int # Print confidence interval
+```
+
+```
+## [1] -14.41 -13.59
+## attr(,"conf.level")
+## [1] 0.95
+```
+
+
+]
+
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+Here are some common functions that come with the `stats` package
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+]
+
+.pull-right65[
+&lt;br&gt;&lt;br&gt;
+&lt;high&gt;Tip!&lt;/high&gt;
+Use the `tidy()` function from the `broom` package to create nice looking tables from statistical objects 
+
+```r
+library(broom)
+
+# Create regression mdoel predicting income
+income_lm &lt;- lm(formula = income ~ age + height + children,
+                data = baselers)
+
+tidy(income_lm)
+```
+
+```
+## # A tibble: 4 x 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   575.     186.        3.08  0.00206
+## 2 age           149.       0.818   182.    0      
+## 3 height          1.72     1.05      1.64  0.102  
+## 4 children        7.73    12.9       0.601 0.548
+```
+
+
+]
+
+
 
 ---
 
@@ -744,23 +935,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
