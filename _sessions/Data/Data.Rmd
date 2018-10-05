@@ -17,7 +17,8 @@ layout: true
 
 <div class="my-footer"><span>
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
@@ -540,7 +541,7 @@ Functions have 3 elements:
 
 .pull-left5[
 
-R documentation (<high>help files</high> and <high>vignettes</high>) will become very to use once you are familiar with the basic R vocabulary. 
+R documentation (<high>help files</high> and <high>vignettes</high>) will become very easy to use once you are familiar with the basic R vocabulary. 
 
 Pay attention to...
 
@@ -673,7 +674,7 @@ write_delim(data_object, file, ...)  # arbitrary-delimited
 
 1 - <high>Find the file</high> on your hard drive. Should be in your data folder inside your project.
 
-2 - <high>Open the file</high> in RStudio (right-click on the file in the *Files* pane) a text viewer, e.g., *TextEdit* (Mac), *TextWranger* (Mac), *WordPad* (Windows).
+2 - <high>Open the file</high> in RStudio (right-click on the file in the *Files* pane) a text viewer, e.g., *TextEdit* (Mac), *TextWrangler* (Mac), *WordPad* (Windows).
 <br><br><br>
 <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/find_data.png">
 
@@ -699,8 +700,8 @@ write_delim(data_object, file, ...)  # arbitrary-delimited
 <br><br><br>
 ```{r, eval=F}
 # Read with explicit column names
-baselers <- read_delim(file = ".../baselers.csv",
-                       delim = c(",")
+baselers <-read_delim(file = ".../baselers.csv",
+                      delim = c(","))
 ```
 
 ]
@@ -865,7 +866,7 @@ R provides <high>all necessary tools to pull data from or directly work with</hi
 
 <p>
   <font size=6>
-    <a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Objects/Objects_practical.html"><b>Link to practical<b></a>
+    <a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Data/Data_practical.html"><b>Link to practical<b></a>
   </font>
 </p>
 
