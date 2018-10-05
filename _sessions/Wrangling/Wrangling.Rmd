@@ -18,8 +18,8 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, October 2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
@@ -971,7 +971,7 @@ After grouping data, use `summarise()` to <high>calculate summary statistics</hi
 
 <u>Statistical functions</u>
 
-| Function| asdf |
+| Function| Purpose |
 |:-------------|:---|
 | `n()`| Number of cases in each group|
 | `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
@@ -1106,7 +1106,7 @@ stock_l %>%
 ]
 
 .pull-right55[
-
+<br><br><br>
 ```{r, eval = FALSE}
 # Assign result to baslers_agg
 
@@ -1131,6 +1131,6 @@ baslers_agg <- baselers %>%
 
 <p>
   <font size=6>
-    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Wrangling/Wrangling_practical.html"><b>Link to practical<b></a>
+    <a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Wrangling/Wrangling_practical.html"><b>Link to practical<b></a>
   </font>
 </p>

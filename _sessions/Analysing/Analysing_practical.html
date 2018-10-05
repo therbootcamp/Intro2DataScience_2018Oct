@@ -330,8 +330,8 @@ baselers %&gt;%
 <ol start="4" style="list-style-type: decimal">
 <li>Using <code>print()</code>, <code>summary()</code>, and <code>head()</code>, explore the data to make sure it was loaded correctly.</li>
 </ol>
-<div id="a---recap" class="section level3">
-<h3>A - Recap</h3>
+<div id="b---recap" class="section level3">
+<h3>B - Recap</h3>
 <ol style="list-style-type: decimal">
 <li><p>Print the names of the <code>kc_house</code> data with <code>names()</code></p></li>
 <li><p>Change the following column names using <code>rename()</code></p></li>
@@ -390,8 +390,8 @@ baselers %&gt;%
                               XXX + XXX + XXX &gt; XXX ~ &quot;XXX&quot;,
                               XXXX + XXX + XXX &lt;= XXX ~ &quot;XXX&quot;))</code></pre>
 </div>
-<div id="h---calculate-grouped-statistics-with-group_by-and-summarise" class="section level3">
-<h3>H - Calculate grouped statistics with <code>group_by()</code> and <code>summarise()</code></h3>
+<div id="c---simple-summaries" class="section level3">
+<h3>C - Simple summaries</h3>
 <ol style="list-style-type: decimal">
 <li>Using the base-R <code>df$col</code> notation, calculate the mean price of all houses.</li>
 </ol>
@@ -405,21 +405,45 @@ baselers %&gt;%
   )</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>What is the <em>median</em> price of all houses? Use the <code>median()</code> function!</p></li>
-<li><p>What is the highest number of living square meters in the dataset? Use the <code>max()</code> function!</p></li>
-<li><p>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases:</p></li>
+<li><p>What was the highest selling price? Use the <code>max()</code> function!</p></li>
+<li><p>Using the following template, sort the dataframe in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?</p></li>
+</ol>
+<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
+  arrange(desc(XXX))
+
+kc_house</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>What percentage of houses sold for more than 1,000,000? Let’s answer this with <code>summarise()</code></li>
+</ol>
+<pre class="r"><code>kc_house %&gt;%
+  summarise(mil_p = mean(XXX &gt; 1000000))</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>For mansions <em>only</em>, calculate the mean number of floors and bathrooms (hint: before summarising the data, use <code>filter()</code> to only select mansions!)</li>
+</ol>
+<pre class="r"><code>kc_house %&gt;%
+  filter(XXX == XXX) %&gt;%
+  summarise(
+    floors_mean = XXX(XXX),
+    bathrooms_mean = XXX(XXX)
+  )</code></pre>
+</div>
+<div id="d---simple-grouped-summaries" class="section level3">
+<h3>D - Simple grouped summaries</h3>
+<ol style="list-style-type: decimal">
+<li>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases:</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   group_by(XXX) %&gt;%
   summarise(XXX = n())</code></pre>
-<ol start="6" style="list-style-type: decimal">
+<ol start="2" style="list-style-type: decimal">
 <li>What is the mean selling price of mansions versus non-mansions? To do this, just add another argument to your <code>summarise()</code> function!</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   group_by(mansion) %&gt;%
   summarise(N = n(),
             XXX = XXX(XXX))</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>Create the following table</li>
+<ol start="3" style="list-style-type: decimal">
+<li>Using <code>group_by()</code> and <code>summarise()</code>, create a dataframe showing the same results as the following table</li>
 </ol>
 <table>
 <thead>
@@ -451,7 +475,118 @@ baselers %&gt;%
 </tr>
 </tbody>
 </table>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Do houses built in later years tend to have more living space? To answer this, group the data by <code>built_yr</code>, and then calculate the mean number of living square meters. Be sure to also include the number of houses built in each year!</p></li>
+<li><p>Was that table too big? Try using the following code to get the results for each decade rather than each year!</p></li>
+</ol>
+<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
+  mutate(built_decade = floor(built_yr / 10)) %&gt;%
+  group_by(built_decade) %&gt;%
+  summarise(XX = XX,
+            XX = XX(XX))</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have</li>
+</ol>
 </div>
+<div id="e---multiple-groups" class="section level3">
+<h3>E - Multiple groups</h3>
+<ol style="list-style-type: decimal">
+<li>Your friend Brumhilda is interested in statistics on houses in the following 4 zipcodes only: 98001, 98109, 98117, 98199. Create a new dataframe called <code>brumhilda</code> that only contains data from houses in those zipcode (hint: use <code>filter()</code> combined with the <code>%in%</code> operator as follows:</li>
+</ol>
+<pre class="r"><code>brumhilda &lt;- kc_house %&gt;%
+  filter(XXX %in% c(XXX, XXX, XXX, XXX))</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>For each of the zip codes, calculate the mean and median selling price (as well as the number of houses) in each zip code.</p></li>
+<li><p>Now Brumhilda wants the same data separated by whether or not the house is a mansion or not. Include these results by also grouping the data by <code>mansion</code> (as well as <code>zipcode</code>), and calculating the same summary statistics as before.</p></li>
+<li><p>Ok that was good, but now she also wants to know what the maximum and minimum number of floors were in each group. Add these summary statistics!</p></li>
+</ol>
+</div>
+</div>
+<div id="f---challenges" class="section level2">
+<h2>F - Challenges</h2>
+<ol style="list-style-type: decimal">
+<li><p>Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using <code>mean()</code>, then sort the data in descending order)</p></li>
+<li><p>Which house had the highest price to living space ratio? To answer this, create a new variable called <code>price_to_living</code> that takes <code>price / living_sqm</code>. Then, sort the data in descending order of this variable, and select the first row with <code>slice()</code>!</p></li>
+<li><p>Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!</p></li>
+<li><p>What percent of houses in built in each decade were mansions? To answer this,</p></li>
+<li><p>Create the following table</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="right">built_yr</th>
+<th align="right">N</th>
+<th align="right">price_mean</th>
+<th align="right">price_max</th>
+<th align="right">living_sqm_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1990</td>
+<td align="right">320</td>
+<td align="right">563966</td>
+<td align="right">3640900</td>
+<td align="right">234</td>
+</tr>
+<tr class="even">
+<td align="right">1991</td>
+<td align="right">224</td>
+<td align="right">630441</td>
+<td align="right">5300000</td>
+<td align="right">244</td>
+</tr>
+<tr class="odd">
+<td align="right">1992</td>
+<td align="right">198</td>
+<td align="right">548169</td>
+<td align="right">2480000</td>
+<td align="right">223</td>
+</tr>
+<tr class="even">
+<td align="right">1993</td>
+<td align="right">202</td>
+<td align="right">556612</td>
+<td align="right">3120000</td>
+<td align="right">226</td>
+</tr>
+<tr class="odd">
+<td align="right">1994</td>
+<td align="right">249</td>
+<td align="right">486834</td>
+<td align="right">2880500</td>
+<td align="right">209</td>
+</tr>
+<tr class="even">
+<td align="right">1995</td>
+<td align="right">169</td>
+<td align="right">577771</td>
+<td align="right">3200000</td>
+<td align="right">224</td>
+</tr>
+<tr class="odd">
+<td align="right">1996</td>
+<td align="right">195</td>
+<td align="right">639534</td>
+<td align="right">3100000</td>
+<td align="right">240</td>
+</tr>
+<tr class="even">
+<td align="right">1997</td>
+<td align="right">177</td>
+<td align="right">606058</td>
+<td align="right">3800000</td>
+<td align="right">234</td>
+</tr>
+<tr class="odd">
+<td align="right">1998</td>
+<td align="right">239</td>
+<td align="right">594159</td>
+<td align="right">1960000</td>
+<td align="right">241</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="additional-resources" class="section level2">
 <h2>Additional Resources</h2>

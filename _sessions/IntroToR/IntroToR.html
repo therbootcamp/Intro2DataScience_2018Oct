@@ -460,7 +460,7 @@ mean()
 ```
 
 ```
-## Error in mean.default(): argument "x" is missing, with no default
+## Error in mean.default(): Argument "x" fehlt (ohne Standardwert)
 ```
 
 ```r
@@ -540,7 +540,7 @@ mean(c(1, 2, 3), na.rm = "test")
 ```
 
 ```
-## Error in if (na.rm) x &lt;- x[!is.na(x)]: argument is not interpretable as logical
+## Error in if (na.rm) x &lt;- x[!is.na(x)]: Argument kann nicht als logischer Wert interpretiert werden
 ```
 ]
 
@@ -661,7 +661,7 @@ lenth(1)
 ```
 
 ```
-## Error in lenth(1): could not find function "lenth"
+## Error in lenth(1): konnte Funktion "lenth" nicht finden
 ```
 
 
@@ -699,7 +699,7 @@ lenth(1)
 ```
 
 ```
-## Error in lenth(1): could not find function "lenth"
+## Error in lenth(1): konnte Funktion "lenth" nicht finden
 ```
 
 | Error | Description|
@@ -1086,7 +1086,7 @@ mean(subset((tibble(c('a','b'),runif(1000,
 ```r
 # create my data.frame
 my_data &lt;- tibble('group' = c('a','b'), 
-                  'value' = runif(1000,0,1))
+                  'value' = runif(1000, 0, 1))
 
 # subset data to group a
 # and compute average value

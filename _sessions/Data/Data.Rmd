@@ -866,7 +866,7 @@ R provides <high>all necessary tools to pull data from or directly work with</hi
 
 <p>
   <font size=6>
-    <a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Objects/Objects_practical.html"><b>Link to practical<b></a>
+    <a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Data/Data_practical.html"><b>Link to practical<b></a>
   </font>
 </p>
 
