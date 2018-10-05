@@ -175,9 +175,9 @@ knitr::include_graphics("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR
 .pull-right5[
 <br>
 
-  <iframe src="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting_practical.html" height="480px" width = "500px"></iframe>
+  <iframe src="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting_practical.html" height="480px" width = "500px"></iframe>
 
-  Example:<a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting_practical.html"> Plotting practical </a>
+  Example:<a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting_practical.html"> Plotting practical </a>
 
 ]
 
