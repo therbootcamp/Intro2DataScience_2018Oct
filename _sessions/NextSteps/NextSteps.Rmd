@@ -11,6 +11,21 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: '16:9'
+
+
+---
+
+layout: true
+
+<div class="my-footer"><span>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, October 2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
+</span></div> 
+
+
+
 ---
 
 ```{r setup, include=FALSE}
@@ -97,7 +112,7 @@ options(digits = 4)
 
 # Network analysis
 
-A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) and [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and `igraph`, an extremely powerful network analysis library. Find the code and additional explanation [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
+A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html), an extremely powerful library for network analysis. Find the code and additional explanations [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
 
 .pull-left[
   <p align="center"><img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&w=450" width=450><br>
@@ -115,12 +130,12 @@ A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cr
 
 # Text analysis
 
-Another area were R has seen much development is <high>text analysis</high>. New packages provide access to lightning fast <high>C++ string libraries</high>, 'new' data formats such as <high>`html`</high>, <high>xml</high>, and <high>json</high>, and also to the API of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
+Another area were R has seen much development is <high>text analysis</high>. New packages provide access to lightning fast <high>C++ string libraries</high>, typical data formats for text such as <high>`html`</high>, <high>xml</high>, and <high>json</high>, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
 <br><br>
 
 | Package| Description| 
 |:------|:------------|
-| `tm`, `tidytext`  | General text analysis packages  |
+| [`tm`](https://cran.r-project.org/web/packages/tm/index.html), [`tidytext`](https://cran.r-project.org/package=tidytext)  | General text analysis packages  |
 | `stringr`, `stringi`  | String operations and regular expressions. |
 | `rvest`, `XML`  | Scraping content of the internet|
 | `text2vec`| Create vector representation of words. |

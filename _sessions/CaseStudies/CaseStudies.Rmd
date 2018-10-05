@@ -37,7 +37,7 @@ options(digits = 4)
 
 # 2 Case Studies
 
-Work on one or both case studies designed to repeat the central elements of <high>Data I/O</high>, <high>Data Wrangling</high>, and <high>Analysing</high><br>
+Work on one or both case studies designed to repeat the central elements of <high>Data I/O</high>, <high>Data Wrangling</high>, <high>Analysing</high>, and <high>Plotting</high><br>
 
 .pull-left45[
 
