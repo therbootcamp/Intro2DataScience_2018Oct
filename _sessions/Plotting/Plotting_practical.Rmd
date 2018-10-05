@@ -1,6 +1,6 @@
 ---
 title: "Plotting"
-author: "BaselRBootcamp July 2018<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+author: "Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output:
   html_document:
     css: practical.css
@@ -166,7 +166,7 @@ ggplot(data = mpg,
 ```
 
 
-### References and Further Reading
+### References
 
 - The main `ggplot2` webpage at [http://ggplot2.tidyverse.org/](http://ggplot2.tidyverse.org/) has great tutorials and examples.
 
@@ -178,7 +178,7 @@ ggplot(data = mpg,
 
 ## A - Setup
 
-1. Open your `baselrbootcamp` R project. It should already have the folders `1_Data` and `2_Code`. Make sure that the data files listed in the `Datasets` section above are in your `1_Data` folder
+1. Open your `baselrbootcamp` R project. It should already have the folders `1_Data` and `2_Code`. Make sure that the data files listed in the `Datasets` section above are in your `1_Data` folder.
 
 ```{r}
 # Done!
@@ -198,21 +198,32 @@ library(XX)
 #...
 ```
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = TRUE}
+```{r}
 library(tidyverse)
 ```
 
-4. For this practical, we'll use the `mcondalds.csv` data which contains nutrition information about items from McDonalds. Using `read_csv()`, load the data into R and store it as a new object called `mcdonalds`.
+4. For this practical, we'll use the `mcondalds.csv` data set, which contains nutrition information about items from McDonalds. Using `read_csv()`, load the data into R and store it as a new object called `mcdonalds`.
 
-```{r, message = FALSE, echo = FALSE, eval = TRUE, warning = FALSE}
-library(tidyverse)
+```{r}
+mcdonalds <- read_csv("1_Data/mcondalds.csv")
 ```
 
 5. Take a look at the first few rows of the dataset(s) by printing them to the console.
 
-6. You'll notice that the `mcdonalds` data frame as many column names with spaces and 'bad' characters like parentheses. Run the following code to fix that!
+```{r}
+mcdonalds
+```
 
-```{r, echo = TRUE, eval = TRUE}
+6. You'll notice that the `mcdonalds` data frame has many column names with spaces and 'bad' characters like parentheses. Run the following code to fix that!
+
+```{r, echo = TRUE, eval = FALSE}
+# Clean up the names of mcdonalds
+mcdonalds <- mcdonalds %>%
+  select(-contains("% Daily Value")) %>%  # Remove all '% Daily Value' columns
+  rename_all(.funs = ~ gsub(" ", "", .))  # no more spaces!
+```
+
+```{r, echo = FALSE, eval = TRUE}
 # Clean up the names of mcdonalds
 mcdonalds <- mcdonalds %>%
   select(-contains("% Daily Value")) %>%  # Remove all '% Daily Value' columns
@@ -221,13 +232,16 @@ mcdonalds <- mcdonalds %>%
 
 7. Now print the dataset again, do the names look better?
 
+```{r}
+mcdonalds
+```
+
 ### B - Building a plot step-by-step
 
-In this section, you'll build the following plot step by step
+In this section, you'll build the following plot step by step.
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
-ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category
-                      )) +
+ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth(col = "black") +
   labs(title = "McDonalds Nutrition",
@@ -244,7 +258,7 @@ ggplot(data = mcdonalds,
        mapping = aes(x = XX, y = XX))
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat))
 ```
 
@@ -256,19 +270,19 @@ ggplot(data = mcdonalds,
   geom_point()
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat)) +
   geom_point()
 ```
 
-32. Using the `color` aesthetic mapping, color the points by their Category.
+3. Using the `color` aesthetic mapping, color the points by their `Category`.
 
 ```{r, echo = TRUE, eval = FALSE, fig.width = 6, fig.height = 4}
 ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
   geom_point() 
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point()
 ```
@@ -281,13 +295,13 @@ ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
   geom_smooth() 
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth()
 ```
 
-5. Oops! Did you get several smoothed lines instead of just one? Let's fix it by specifying that the line should have one color: "black". When you do, you should then only see one line.
+5. Oops! Did you get several smoothed lines instead of just one? Fix this by specifying that the line should have one color: `"black"`. When you do, you should then only see one line.
 
 ```{r, echo = TRUE, eval = FALSE, fig.width = 6, fig.height = 4}
 ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
@@ -295,14 +309,13 @@ ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
   geom_smooth(col = "XX") 
 ```
 
-
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth(col = "black")
 ```
 
-6. Add appropriate labels using the `labs()` function
+6. Add appropriate labels using the `labs()` function.
 
 ```{r, echo = TRUE, eval = FALSE, fig.width = 8, fig.height = 2}
 ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
@@ -313,7 +326,7 @@ ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
        caption = "XX")
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth(col = "black") +
@@ -322,7 +335,7 @@ ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
        caption = "Source: Kaggle.com")
 ```
 
-7. Set the limits of the x-axis to 0 and 1250 using `xlim()`
+7. Set the limits of the x-axis to `0` and `1250` using `xlim()`.
 
 ```{r, echo = TRUE, eval = FALSE, fig.width = 8, fig.height = 2}
 ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
@@ -334,7 +347,7 @@ ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
   xlim(XX, XX)
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth(col = "black") +
@@ -357,7 +370,7 @@ ggplot(mcdonalds, aes(x = XX, y = XX, col = XX)) +
   theme_minimal()
 ```
 
-```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 4}
 ggplot(mcdonalds, aes(x = Calories, y = SaturatedFat, col = Category)) +
   geom_point() +
   geom_smooth(col = "black") +
@@ -393,7 +406,7 @@ ggplot(data = mcdonalds, aes(x = Category, y = Calories, fill = Category)) +
 
 2. Include the additional argument `+ stat_summary(fun.y = "mean", geom = "point", col = "white", size = 4)` to include points showing the mean of each distribution
 
-```{r, eval = TRUE, echo = FALSE, fig.width = 8, fig.height = 3}
+```{r, fig.width = 8, fig.height = 3}
 ggplot(data = mcdonalds, aes(x = Category, y = Calories, fill = Category)) +
   geom_violin() +
   guides(fill = FALSE) +
@@ -404,7 +417,7 @@ ggplot(data = mcdonalds, aes(x = Category, y = Calories, fill = Category)) +
 
 3. Now add `+ geom_jitter(width = .1, alpha = .5)` to your plot, what do you see?
 
-```{r, eval = FALSE, echo = FALSE, fig.width = 8, fig.height = 3}
+```{r, fig.width = 8, fig.height = 3}
 ggplot(data = mcdonalds, aes(x = Category, y = Calories, fill = Category)) +
   geom_violin() +
   geom_jitter(width = .1, alpha = .5) +
@@ -416,13 +429,15 @@ ggplot(data = mcdonalds, aes(x = Category, y = Calories, fill = Category)) +
 
 4. Play around with your plotting arguments to see how the results change! Each time you make a change, run the plot again to see your new output!
 
-- Change the summary function in `stat_summary()` from "mean" to "median"
+- Change the summary function in `stat_summary()` from `"mean"` to `"median"`.
 - Change the size of the points in `stat_summary()` to something much bigger (or smaller).
-- Change the `width` argument in `geom_jitter()` to `width = 0`
-- Instead of using `geom_violin()`, try `geom_boxplot()`
+- Change the `width` argument in `geom_jitter()` to `width = 0`.
+- Instead of using `geom_violin()`, try `geom_boxplot()`.
 - Remove the `fill = Category` aesthetic entirely.
 
 ### D - Using facets
+
+1. Create the following plot showing the relationship between `Sodium` and `Calories`.
 
 ```{r, eval = FALSE, echo = TRUE}
 ggplot(XX, aes(x = XX, y = XX)) +
@@ -433,9 +448,7 @@ ggplot(XX, aes(x = XX, y = XX)) +
   theme_minimal()
 ```
 
-1. Create the following plot showing the relationship between Sodium and calories
-
-```{r, eval = TRUE, echo = FALSE}
+```{r, }
 ggplot(mcdonalds, aes(x = Sodium, y = Calories)) +
   geom_point(alpha = .2) +
   facet_wrap(~Category) +
@@ -445,10 +458,10 @@ ggplot(mcdonalds, aes(x = Sodium, y = Calories)) +
 ```
 
 
-2. Try the following ways to customise your plot
+2. Try the following ways to customise your plot:
 
-- Color the points by `Category`
-- Add a smoothed line to each plot with `geom_smooth()`
+- Color the points by `Category`.
+- Add a smoothed line to each plot with `geom_smooth()`.
 
 
 ### E - Adjusting colors
@@ -463,31 +476,30 @@ ggplot(mcdonalds, aes(x = Cholesterol,
        subtitle = "Using scale_colour_gradient()")
 ```
 
-1. Create a scatterplot showing the relationship between Cholesterol and Protein 
+1. Create a scatterplot showing the relationship between `Cholesterol` and `Protein` .
 
-2. Color the points according to their Calories by specifying the `col` aesthetic
+2. Color the points according to their Calories by specifying the `col` aesthetic.
 
-3. Change the colors by including the additional argument ` + scale_colour_gradient(low = "blue", high = "red")`
+3. Change the colors by including the additional argument ` + scale_colour_gradient(low = "blue", high = "red")`.
 
-4. Use a gray color palette by using `scale_color_grey()` instead of `scale_colour_gradient()`
+4. Use a gray color palette by using `scale_color_grey()` instead of `scale_colour_gradient()`.
 
-5. Customize!
-
-- Look at all of the named colors in R by running `colors()`. Then, use two new colors in your plot.
+5. Customize! Look at all of the named colors in R by running `colors()`. Then, use two new colors in your plot.
  
 
 ### F - Summary statistics
 
-1. Create the following plot showing the mean number of calories for each menu category using the following template
+1. Create the following plot showing the mean number of calories for each menu category using the following template:
 
 ```{r, eval = FALSE, echo = TRUE}
 ggplot(XX, aes(x = XX, y = X)) +
   stat_summary(geom = "bar", 
                fun.y = "mean") +
-  labs(title = "XX")
+  labs(title = "XX",
+       subtitle = "XX")
 ```
 
-```{r, eval = TRUE, echo = FALSE, fig.width = 10, fig.height = 4}
+```{r, eval = TRUE, fig.width = 10, fig.height = 4}
 ggplot(mcdonalds, aes(x = Category, y = Calories)) +
   stat_summary(geom = "bar", 
                fun.y = "mean") +
@@ -497,9 +509,9 @@ ggplot(mcdonalds, aes(x = Category, y = Calories)) +
 
 2. Customize your plot!
 
-- Instead of showing the mean, show the median.
+- Instead of showing the `"mean"`, show the `"median"`.
 - Give each bar a different color.
-- Add overlapping points showing the individual items using `geom_point()`, `geom_count()` or `geom_jitter()`
+- Add overlapping points showing the individual items using `geom_point()`, `geom_count()` or `geom_jitter()`.
 
 
 ### G - Saving plots
@@ -507,16 +519,16 @@ ggplot(mcdonalds, aes(x = Category, y = Calories)) +
 1. It's time to save your favorite plot to an image file! Pick your favorite plot you've created so far. Then, assign the plot to a new object called `mcdonalds_gg` using `mcdonalds_gg <- ggplot(...)`
 
 ```{r, eval = FALSE, echo = TRUE}
-mcdonalds_gg <- ggplot(...) # Include your plotting code here
+mcdonalds_gg <- ggplot(...) + ... # Include your plotting code here
 ```
 
 2. Evaluate your `mcdonalds_gg` object to see that it does indeed contain your plot.
 
-3. Save your plot to a pdf file called `mcdonalds.pdf` using `ggsave()`. When you finish, open your plot to see how it looks! 
+3. Save your plot to a .pdf-file called `mcdonalds.pdf` using `ggsave()`. When you finish, find your plot in `3_Figures` and open it to see how it looks! 
 
 ```{r, echo = TRUE, eval = FALSE}
 # Save mcdonalds_gg to a pdf file
-ggsave(filename = "mcdonalds", 
+ggsave(filename = "3_Figures/mcdonalds", 
        device = "pdf", 
        plot = mcdonalds_gg,
        width = 4, 
@@ -531,7 +543,7 @@ ggsave(filename = "mcdonalds",
 
 ### H - Adding labels
 
-Let's create the following plot with additional point labels using `geom_text():
+Let's create the following plot with additional point labels using `geom_text()`:
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 8, fig.height = 4}
 ggplot(mcdonalds, aes(x = Sugars, 
@@ -565,25 +577,24 @@ ggplot(mcdonalds, aes(x = XX,
 
 2. Try adding labels to the plot indicating which item each point represents by adding `+ geom_text()`.
 
-3. Where are the labels? Ah we didn't tell ggplot which column in the data represents the item descriptions. Fix this by specifying the `label` aesthetic in your first call to the `aes()` function. That is, include `label = Item` underneath `col = XX`. Now you should see lots of labels!
+3. Where are the labels? Ah, we didn't tell `ggplot` which column in the data represents the item descriptions. Fix this by specifying the `label` aesthetic in your first call to the `aes()` function. That is, include `label = Item` underneath the line `col = XX`. Now you should see lots of labels!
 
-4. Customize your `geom_text()` by including the arguments: `geom_text(col = "black", check_overlap = TRUE, hjust = "left")`
+4. Customize your `geom_text()` by including the arguments: `geom_text(col = "black", check_overlap = TRUE, hjust = "left")`.
 
-5. Using the `data` argument in `geom_text()` specify that the labels should only apply to items over 1100 calories (hint: `geom_point(data = mcdonalds %>% filter(XX > XX))`)
+5. Using the `data` argument in `geom_text()`, specify that the labels should only apply to items over 1100 calories (hint: `geom_point(data = mcdonalds %>% filter(XX > XX))`)
 
 6. Play around! 
 
 - Specify that the size of the points should correspond to their Calories. Do this with the `size` aesthetic.
-- Instead of mapping Category to the color aesthetic, try creating different facets for each Category with `facet_wrap(~ Category)`
+- Instead of mapping `Category` to the `color` aesthetic, try creating different facets for each `Category` with `facet_wrap(~ Category)`.
 - Try using a different plotting theme. For example, you can try `theme_excel()` included in the `ggthemes` package.
 
 ### I - Make your plots interactive with `plotly::ggplotly()`
 
-1. With the `ggplotly()` function from the `plotly` package, you can turn any ggplot object into an interactive plot like the one below! Run the following code to see it in action.
+1. With the `ggplotly()`-function from the `plotly` package, you can turn any `ggplot` object into an interactive plot like the one below! Run the following code to see it in action.
 
 ```{r, echo = TRUE, eval = TRUE, fig.width = 8, fig.height = 4}
 # Create a standard ggplot object
-
 MyPlot <- ggplot(data = mcdonalds,
                  aes(x = Calories, y = TotalFat, col = Category)) + 
   geom_point()
@@ -591,10 +602,9 @@ MyPlot <- ggplot(data = mcdonalds,
 
 # Make it interactive with ggplotly()!
 library(plotly)
-
 ggplotly(MyPlot)
 ```
 
 2. Play around with your plot! See what happens when you hover over the points with your mouse. You can even zoom in by dragging your mouse.
 
-3. Try turning one of your favorite previous plots into an interactive Plotly plot using the `ggplotly()` function!
+3. Try turning one of your favorite previous plots into an interactive `plotly` plot using the `ggplotly()` function!

@@ -21,7 +21,7 @@ class: center, middle, inverse, title-slide
 layout: true
 
 &lt;div class="my-footer"&gt;&lt;span&gt;
-&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Introduction to Data Science with R, July 2018&lt;/font&gt;&lt;/a&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Introduction to Data Science with R, October 2018&lt;/font&gt;&lt;/a&gt;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
@@ -190,7 +190,7 @@ This plot would take &lt;high&gt;a lot of code in Base R&lt;/high&gt; but &lt;hi
 
 .pull-left45[
 
-The Grammar of graphics breaks down plots into several key pieces:
+The &lt;high&gt;Grammar of graphics&lt;/high&gt; breaks down plots into several key pieces:
 
 | Aesthetics| Description|
 |:------|:----|
@@ -250,7 +250,7 @@ The Grammar of graphics breaks down plots into several key pieces:
 
 ---
 
-# `ggplot`
+# `ggplot()`
 
 
 .pull-left45[
@@ -279,7 +279,7 @@ ggplot(data = mpg)
 
 ---
 
-# `ggplot`
+# `ggplot()`
 
 
 .pull-left45[
@@ -314,7 +314,7 @@ ggplot(data = mpg,
 
 ---
 
-# Adding elements to plots with '+'
+# Adding elements to plots with `+`
 
 .pull-left45[
 
@@ -333,7 +333,7 @@ ggplot(data = mpg,
 ]
 
 
-.pull-right5[
+.pull-right45[
 
 
 &lt;img src="Plotting_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
@@ -365,9 +365,9 @@ Common geoms are...
 
 ]
 
-.pull-right5[
+.pull-right45[
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-18-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -380,7 +380,7 @@ Common geoms are...
 .pull-left45[
 
 &lt;br&gt;
-## `geom_boxplot`
+## `geom_boxplot()`
 &lt;br&gt;
 
 
@@ -391,7 +391,7 @@ ggplot(data = mpg,
   geom_boxplot()
 ```
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -399,7 +399,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 &lt;br&gt;
-## `geom_violin`
+## `geom_violin()`
 &lt;br&gt;
 
 
@@ -422,7 +422,7 @@ ggplot(data = mpg,
 .pull-left45[
 
 &lt;br&gt;
-## `geom_bar`
+## `geom_bar()`
 &lt;br&gt;
 
 
@@ -441,7 +441,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 &lt;br&gt;
-## `geom_count`
+## `geom_count()`
 &lt;br&gt;
 
 
@@ -460,11 +460,11 @@ ggplot(data = mpg,
 
 ---
 
-# `aes`
+# `aes()`
 
 .pull-left45[
 
-`color` geoms according to a variable. 
+&lt;high&gt;`color`&lt;/high&gt; geoms according to a variable. 
 
 
 ```r
@@ -478,21 +478,21 @@ ggplot(data = mpg,
 
 &lt;p align="center"&gt; `mpg`&lt;/p&gt;
 
-| displ| hwy|class      | year|
-|-----:|---:|:----------|----:|
-|   2.7|  20|suv        | 1999|
-|   2.7|  24|subcompact | 2008|
-|   4.6|  22|subcompact | 1999|
-|   5.2|  16|pickup     | 1999|
-|   4.6|  22|subcompact | 2008|
+| displ| hwy|class   | year|
+|-----:|---:|:-------|----:|
+|   2.8|  23|compact | 1999|
+|   4.7|  16|pickup  | 2008|
+|   5.4|  18|suv     | 2008|
+|   3.5|  25|midsize | 2008|
+|   3.7|  18|pickup  | 2008|
 
 
 ]
 
-.pull-right5[
+.pull-right45[
 
 &lt;br&gt;
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -519,13 +519,13 @@ ggplot(data = mpg,
 
 ---
 
-# `geom_smooth`
+# `geom_smooth()`
 
 .pull-left45[
 
-`geom_smooth()` adds a smoothed (average) line.
+`geom_smooth()` adds a &lt;high&gt;smoothed line&lt;/high&gt;.
 
-Change how the line is created with `method` (e.g.; method = 'lm').
+Change how the line is created with `method` (e.g., `method = lm`).
 
 Color the line with `col`.
 
@@ -550,13 +550,13 @@ ggplot(data = mpg,
 
 ---
 
-# `geom_smooth`
+# `geom_smooth()`
 
 .pull-left45[
 
-`geom_smooth()` adds a smoothed (average) line.
+`geom_smooth()` adds a &lt;high&gt;smoothed line&lt;/high&gt;.
 
-Change how the line is created with `method` (e.g.; method = 'lm')
+Change how the line is created with `method` (e.g., `method = lm`).
 
 Color the line with `col`
 
@@ -614,7 +614,7 @@ ggplot(data = mpg,
 
 # What's next?
 
-.pull-left5[
+.pull-left45[
 
 &lt;img src="Plotting_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -630,11 +630,11 @@ ggplot(data = mpg,
 
 ---
 
-# `labs`
+# `labs()`
 
 .pull-left45[
 
-You can add labels to a plot with the `labs()` function
+You can add &lt;high&gt;labels&lt;/high&gt; to a plot with the `labs()` function
 
 `labs()` arguments are ...
 
@@ -667,7 +667,7 @@ ggplot(...) +
 
 # What's next?
 
-.pull-left5[
+.pull-left45[
 
 &lt;img src="Plotting_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -684,7 +684,7 @@ ggplot(...) +
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -702,7 +702,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`&lt;br&gt;
 `theme_economist()`&lt;br&gt;
-*And many more!!*
+etc.
 
 ]
 
@@ -720,7 +720,7 @@ ggplot(...) +
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -738,7 +738,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`&lt;br&gt;
 `theme_economist()`&lt;br&gt;
-*And many more!!*
+etc.
 
 
 
@@ -758,7 +758,7 @@ ggplot(...) +
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -776,7 +776,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`&lt;br&gt;
 `theme_economist()`&lt;br&gt;
-*And many more!!*
+etc.
 
 
 
@@ -796,7 +796,7 @@ ggplot(...) +
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -814,7 +814,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`&lt;br&gt;
 `theme_economist()`&lt;br&gt;
-*And many more!!*
+etc.
 
 
 
@@ -823,9 +823,8 @@ Themes from the `ggthemes` package
 .pull-right45[
 
 
-```r
-library(ggthemes) # Contains many themes!
 
+```r
 ggplot(...) + 
   theme_excel()
 ```
@@ -837,7 +836,7 @@ ggplot(...) +
 
 ---
 
-# Themes with `theme_XX`
+# Themes with `theme_XX()`
 
 .pull-left45[
 
@@ -855,7 +854,7 @@ Themes from the `ggthemes` package
 
 `theme_excel()`&lt;br&gt;
 `theme_economist()`&lt;br&gt;
-*And many more!!*
+etc.
 
 
 ]
@@ -864,8 +863,6 @@ Themes from the `ggthemes` package
 
 
 ```r
-library(ggthemes) # Contains many themes!
-
 ggplot(...) + 
   theme_economist()
 ```
@@ -876,31 +873,45 @@ ggplot(...) +
 
 ---
 
-## Final result!
+# Final result!
+
+
+.pull-left45[
 
 
 ```r
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     col = class)) +
   geom_point() + 
-  geom_smooth(col = "blue", method = "lm")+
-  labs(x = "Engine Displacement in Liters",
+  geom_smooth(col = "blue", 
+              method = "lm")+
+  labs(x = "Engine Displ. in Liters",
        y = "Highway miles per gallon",
        title = "MPG data",
-       subtitle = "Cars with higher engine displacement tend to have lower highway mpg",
-       caption = "Source: mpg data in ggplot2") + 
+       subtitle = "Cars with higher...",
+       caption = "Source: mpg data...") + 
   theme_bw()
 ```
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-50-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right45[
+
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ---
 
-# `facet_wrap`
+# `facet_wrap()`
 
-.pull-left4[
+.pull-left45[
 
-Faceting = Create different plots for different groups
+Faceting = &lt;high&gt;same plot for different groups&lt;/high&gt;.
 
 To facet plots, use `facet_wrap()`
 
@@ -915,19 +926,19 @@ ggplot(data = mpg,
 
 ]
 
-.pull-right55[
+.pull-right45[
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-# `facet_wrap`
+# `facet_wrap()`
 
 .pull-left4[
 
-Faceting = Create different plots for different groups
+Faceting = &lt;high&gt;same plot for different groups&lt;/high&gt;.
 
 To facet plots, use `facet_wrap()`
 
@@ -944,9 +955,9 @@ ggplot(data = mpg,
 
 ]
 
-.pull-right55[
+.pull-right45[
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -956,10 +967,10 @@ ggplot(data = mpg,
 
 .pull-left4[
 
-1) ggplot returns an object of the class "gg".&lt;br&gt;
-2) You can assign the result of `ggplot` to an object.&lt;br&gt;
+1) ggplot returns an object of the class `gg`.&lt;br&gt;
+2) You can assign the result of `ggplot` to an &lt;high&gt;object&lt;/high&gt;.&lt;br&gt;
 3) Evaluating the object will show the plot.&lt;br&gt;
-4) You can even edit existing `ggplot` objects.&lt;br&gt;
+4) You can even edit existing &lt;high&gt;`ggplot` objects&lt;/high&gt;.&lt;br&gt;
 
 
 ```r
@@ -978,14 +989,14 @@ class(myplot)
 
 ]
 
-.pull-right5[
+.pull-right45[
 
 
 ```r
 myplot # Evaluate myplot
 ```
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-56-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -995,10 +1006,10 @@ myplot # Evaluate myplot
 
 .pull-left4[
 
-1) ggplot returns an object of the class "gg".&lt;br&gt;
+1) ggplot returns an object of the class `gg`.&lt;br&gt;
 2) You can assign the result of `ggplot` to an object.&lt;br&gt;
 3) Evaluating the object will show the plot.&lt;br&gt;
-4) You can even edit existing `ggplot` objects.&lt;br&gt;
+4) You can even edit existing &lt;high&gt;`ggplot` objects&lt;/high&gt;.&lt;br&gt;
 
 
 ```r
@@ -1017,7 +1028,7 @@ class(myplot)
 
 ]
 
-.pull-right5[
+.pull-right45[
 
 
 ```r
@@ -1025,10 +1036,9 @@ myplot +
   geom_smooth() # add geom
 ```
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-58-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-59-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 
 ---
@@ -1037,7 +1047,7 @@ myplot +
 
 .pull-left5[
 
-To save plots to a file (e.g.; .jpg, .pdf, .png), use the `ggsave()` function.
+To &lt;high&gt;save plots&lt;/high&gt; to a file (e.g., `.jpg`, `.pdf`, `.png`), use the `ggsave()` function.
 
 `ggsave()` main arguments are...
 
@@ -1075,14 +1085,12 @@ ggsave(filename = "myplot.pdf",
 ]
 
 
-
-
 ---
 
 
 # Practical
 
-&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting.html"&gt;Link to practical&lt;/a&gt;
+&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting.html"&gt;Link to practical&lt;/a&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
