@@ -1,8 +1,8 @@
 ---
-title: "Wrangling"
+title: "Analysing"
 subtitle: ""
-author: "Basel R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "July 2018"
+author: "Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "October 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -18,21 +18,18 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Basel, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
+
 ---
   
-```{r, eval = FALSE, echo = FALSE}
+```{r, eval = FALSE, echo = FALSE, message=FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D1S2_Wrangling/Wrangling.Rmd')
 baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
-
 ```
 
 ```{r setup, include=FALSE}
@@ -40,6 +37,7 @@ options(htmltools.dir.version = FALSE)
 options(width=110)
 options(digits = 4)
 library(tidyverse)
+library(baselers)
 ```
 
 .pull-left4[
@@ -54,39 +52,46 @@ library(tidyverse)
 
 4 - Calculate descriptive statistics on specific columns<br>
 
-<br><br><br>
-What's next?... <high>Wrangling!</high>
+5 - Wrangle
+    - Change column names
+    - Add new columns
+    - Filter
+    - Join multiple dataframes
+    - Change data format (wide v. long)
+
+What's next?... <high>Analysing!</high>
 
 ]
 
 .pull-right55[
 
-<br><br>
-
 ```{r, eval = FALSE}
-# Step 0) Load libraries
+# Load libraries
 
 library(tidyverse)
 
-# Step 1) Read file called baslers.txt 
-#  in a data folder with read_csv()
-#  and save as new object baslers
+# Read external file
 
 baslers <- read_csv(file = "data/baslers.txt")
 
-# Step 2) Explore data
+# Explore data
 
 View(baslers)   # Open in new window
 dim(baslers)    # Show number of rows and columns
 names(baslers)  # Show names
 
-# Step 3) Calculate descriptives on named colums
+# Calculate descriptives on named colums
 
 mean(baslers$age)   # What is the mean age?
 table(baslers$sex)  # How many of each sex?
 
-# Step 4) ...
+# Wrangle
 
+baselers <- baselers %>%
+  rename(age_y = age,          # New names
+         salary = income) %>%
+  mutate(age_m = age * 12) %>% # Create new column
+  filter(sex == "male")        # filter rows...
 ```
 
 ]
@@ -94,33 +99,67 @@ table(baslers$sex)  # How many of each sex?
 ---
 .pull-left45[
 
-# What is wrangling?
+# What do we mean by analysing??
 
-<font size = 5><high>Transform</high></font>
+<font size = 5><high>Create Groups</high></font>
 
-Change column names
+Group data by certain variables
 
-Add new columns
+- For all males (`sex == "male"`)
+- For all people in placebo conditoin (`condition == "placebo"`)
 
-<font size = 5><high>Organise</high></font>
+<font size = 5><high>Calculate summaries</high></font>
 
-Sort data by columns
+- Count number of cases
+- Calculate mean of age (`mean(age)`)
+- Calculate number of events (`sum(events)`)
 
-Merging data from two separate dataframes
-
-Move data between columns and rows
-
-<font size = ><high>Aggregate</high></font>
-
-Group data and summarise
 ]
 
 
-.pull-right5[
-<br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" height = "550px">
-</p>
+.pull-right55[
+
+Raw data (First 5 out of 1,000 rows)
+
+```{r, echo = FALSE, eval = FALSE}
+baselers %>%
+  select(id, sex, education, income, happiness) %>%
+  slice(1:5) %>%
+knitr::kable()
+```
+
+
+| id|sex    |education         | income| happiness|
+|--:|:------|:-----------------|------:|---------:|
+|  1|male   |SEK_III           |   6300|         5|
+|  2|male   |obligatory_school |  10900|         7|
+|  3|female |SEK_III           |   5100|         7|
+|  4|male   |SEK_III           |   4200|         7|
+|  5|male   |SEK_III           |   4000|         5|
+
+Aggregated data
+
+```{r, echo = FALSE, eval = FALSE}
+baselers %>%
+  group_by(education, sex) %>%
+  summarise(
+    N = n(),
+    Inc_mean = mean(income, na.rm = TRUE),
+    Hap_mean = mean(happiness, na.rm = TRUE)
+  ) %>%
+  knitr::kable(digits = 1)
+```
+
+|education         |sex    |    N| Inc_mean| Hap_mean|
+|:-----------------|:------|----:|--------:|--------:|
+|apprenticeship    |female | 2168|   7663.0|      6.9|
+|apprenticeship    |male   | 1818|   7388.9|      6.9|
+|obligatory_school |female |  714|   7746.1|      6.9|
+|obligatory_school |male   |  525|   7293.7|      6.8|
+|SEK_II            |female |  469|   7385.0|      6.9|
+|SEK_II            |male   |  272|   7254.7|      6.9|
+|SEK_III           |female | 1649|   7666.1|      7.0|
+|SEK_III           |male   | 2385|   7477.5|      6.9|
 
 ]
 
@@ -130,20 +169,17 @@ Group data and summarise
 
 .pull-left45[
 
-# `dplyr` & `tidyr`
+# `dplyr`
 
-To wrangle data in R, we will use the `dplyr` and `tidyr` packages.
+To calculate grouped summary analyses, we will use `dplyr` (again!)
 
 <br>
 ```{r, echo= TRUE, eval = FALSE}
-
 # Load packages individually
 
 # install.packages('dplyr')
-# install.packages('tidyr')
 
 library(dplyr)
-library(tidyr)
 
 # Or just use the tidyverse!
 

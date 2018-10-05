@@ -18,7 +18,7 @@ layout: true
 
 <div class="my-footer"><span>
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
@@ -128,7 +128,7 @@ We have an <high>ambitious schedule</high>!
 <high>All available online</high>. Follow along, and don't worry about memorizing
 
 <br><br>
-<a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/">This is a Link to our materials</a>.
+<a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/">This is a Link to our materials</a>.
 <br><br>
 
 <high>Be interactive! Ask questions!</high>
@@ -175,9 +175,9 @@ knitr::include_graphics("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR
 .pull-right5[
 <br>
 
-  <iframe src="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting_practical.html" height="480px" width = "500px"></iframe>
+  <iframe src="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting_practical.html" height="480px" width = "500px"></iframe>
 
-  Example:<a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting_practical.html"> Plotting practical </a>
+  Example:<a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting_practical.html"> Plotting practical </a>
 
 ]
 

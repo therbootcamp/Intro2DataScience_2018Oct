@@ -1,6 +1,6 @@
 ---
-title: "Wrangling"
-author: "Basel R Bootcamp July 2018<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+title: "Analysing"
+author: "Introduction to Data Science with R, October 2018<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output:
   html_document:
     css: practical.css
@@ -11,46 +11,39 @@ knitr::opts_chunk$set(comment = NA,
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = TRUE, 
-                      eval = TRUE, 
+                      echo = FALSE, 
+                      eval = FALSE, 
                       warning = FALSE)
 
 options(digits = 3)
 ```
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "70%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_functions.png")
-```
+<figure>
+<center>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Seattle_-_Craftsman_revival_houses.jpg/300px-Seattle_-_Craftsman_revival_houses.jpg" alt="Trulli" style="width:50%">
+  <figcaption>https://en.wikipedia.org/wiki/Seattle_box</figcaption>
+</figure>
 
 ## {.tabset}
 
 ### Overview
 
-In this practical you'll practice "data wrangling" with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
+In this practical you'll practice grouping and analysing data with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
 
 By the end of this practical you will know how to:
 
-1. Change column names, select specific columns
-2. Create new columns based on existing ones
-3. Select specific rows of data based on multiple criteria
-4. Group data and calculate summary statistics
-5. Combine multiple data sets through key columns
-6. Convert data between wide and long formats
+1. Group data and calculate summary statistics
 
 ### Datasets
 
-You'll need the following datasets for this practical:
-
 ```{r, eval = TRUE, message = FALSE}
 library(tidyverse)
-trial_act <- read_csv("../_data/baselrbootcamp_data/trial_act.csv")
-trial_act_demo <- read_csv("../_data/baselrbootcamp_data/trial_act_demo_fake.csv")
+kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data//baselrbootcamp_data/kc_house.csv")
 ```
 
-|File | Rows | Columns |
-|:----|:-----|:------|
-|[trial_act.csv](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/trial_act.csv) | 2139 | 27 |
-|[trial_act_demo_fake](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/trial_act_demo_fake.csv)| 2139 | 3|
+|File | Rows | Columns | Description |
+|:----|:-----|:------|:-----------------------------------------|
+|[kc_house.csv](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data//baselrbootcamp_data/kc_house.csv) | 21613 | 21|House sale prices for King County between May 2014 and May 2015. |
 
 ### Packages
 
@@ -91,48 +84,43 @@ trial_act_demo <- read_csv("../_data/baselrbootcamp_data/trial_act_demo_fake.csv
 library(tidyverse)    # Load tidyverse for dplyr and tidyr
 
 # Load baselers data
-baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
+baselers <- read_csv("1_Data/baselers.txt")
 
-# Perform many dplyr operations in a row
+# No grouping variables
 
-baselers %>%
-  
-  # Change some names
-  rename(age_y = age,
-         swimming = rhine) %>%
-  
-  # Only include people over 30
-  filter(age_y > 30) %>%
-  
-  # Calculate some new columns
-  mutate(weight_lbs = weight * 2.22,
-         height_m = height / 100,
-         BMI = weight / height_m ^ 2,
-         
-         # Make binary version of sex
-         sex_bin = case_when(
-                      sex == "male" ~ 0,
-                      sex == "female" ~ 1),
-
-        # Show when height is greater than 150
-        height_lt_150 = case_when(
-                                height < 150 ~ 1,
-                                height >= 150 ~ 0)) %>%
-  
-  # Sort in ascending order of sex, then
-  #  descending order of age
-  arrange(sex, desc(age_y)))
-
-
-# Calculate grouped summary statistics
-
-baselers_agg <- baselers %>%
-  group_by(sex, education) %>%
+bas <- baselers %>%
   summarise(
-    age_mean = mean(age_y, na.rm = TRUE),
+    age_mean = mean(age, na.rm = TRUE),
     income_median = median(income, na.rm = TRUE),
     N = n()
   )
+
+# One grouping variable
+bas_sex <- baselers %>%
+  group_by(sex) %>%
+  summarise(
+    age_mean = mean(age, na.rm = TRUE),
+    income_median = median(income, na.rm = TRUE),
+    N = n()
+  )
+
+bas_sex
+
+# Two grouping variables
+bas_sex_ed <- baselers %>%
+  group_by(sex, education) %>%
+  summarise(
+    age_mean = mean(age, na.rm = TRUE),
+    income_median = median(income, na.rm = TRUE),
+    N = n()
+  )
+
+# Advanced scoping
+
+# Calculate mean of ALL numeric variables
+baselers %>%
+  group_by(sex, education) %>%
+  summarise_if(is.numeric, mean, na.rm = TRUE)
 ```
 
 # Tasks
@@ -145,525 +133,182 @@ baselers_agg <- baselers %>%
 # Done!
 ```
 
-2. Open a new R script. At the top of the script, using comments, write your name and the date. Save it as a new file called `wrangling_practical.R` in the `2_Code` folder.  
+2. Open a new R script. At the top of the script, using comments, write your name and the date. Save it as a new file called `analysing_practical.R` in the `2_Code` folder.  
 3. Using `library()` load the set of packages for this practical listed in the packages section above.
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = TRUE}
 library(tidyverse)
 ```
 
-4. For this practical, we'll use the `trial_act` data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. Using the following template, load the data into R and store it as a new object called `trial_act`.
+3. For this practical, we'll use the `kc_house.csv` data. This dataset contains house sale prices for King County, Washington. It includes homes sold between May 2014 and May 2015. Using the following template, load the data into R and store it as a new object called `kc_house`.
 
 ```{r, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
-# Load trial_act.csv from the data folder in your working directory
-
-trial_act <- read_csv(file = "XX")
+kc_house <- read_csv(file = "XX")
 ```
-
-
-
-```{r, eval = FALSE}
-trial_act <- read_csv(file = "1_Data/trial_act.csv")
-```
-
-
-5. Using the same code structure, load the `trial_act_demo_fake.csv` data as a new dataframe called `trial_act_demo_fake`
-
-```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
-trial_act <- read_csv(file = "https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/trial_act.csv")
-
-trial_act_demo_fake <- read_csv(file = "https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/trial_act_demo_fake.csv")
-```
-
-```{r, eval = FALSE}
-trial_act_demo_fake <- read_csv(file = "1_Data/trial_act_demo_fake")
-```
-
-```{r, message = FALSE, echo = FALSE, eval = TRUE, warning = FALSE}
-library(tidyverse)
-```
-
-6. Take a look at the first few rows of the datasets by printing them to the console.
-
-```{r, eval = TRUE, echo = TRUE}
-# Print trial_act object
-trial_act
-```
-
-7. Use the the `summary()` function to get more details on the datasets.
 
 ```{r}
-summary(trial_act)
-summary(trial_act_demo_fake)
+kc_house <- read_csv(file = "1_Data/kc_house.csv")
 ```
 
-### B - Change column names with rename()
-
-1. Print the names of the `trial_act` data with `names()`
+4. Using `print()`, `summary()`, and `head()`, explore the data to make sure it was loaded correctly.
 
 ```{r}
-names(trial_act)
+kc_house
+summary(kc_house)
+head(kc_house)
 ```
 
-2. Using `rename()`, change the column name `wtkg` in the `trial_act` dataframe to `weight_kg`. Be sure to assign the result back to `trial_act` to change it!
+
+### A - Recap
+
+1. Print the names of the `kc_house` data with `names()`
+
+```{r}
+names(kc_house)
+```
+
+2. Change the following column names using `rename()`
+
+|New Name | Old Name|
+|:----|:----|
+|living_sqft|sqft_living |
+|lot_sqft|sqft_lot |
+|above_sqft|sqft_above |
+|basement_sqft|sqft_basement |
+|built_yr|yr_built |
+|renovated_yr|yr_renovated|
 
 ```{r, echo = TRUE, eval = FALSE}
-# Change the name to weight_kg from wtkg
-
-trial_act <- trial_act %>%
-  rename(XX = XX)
+kc_house <- kc_house %>%
+  rename(NEW = OLD,
+         NEW = OLD,
+         NEW = OLD)
 ```
 
-```{r}
-trial_act <- trial_act %>%
-  rename(weight_kg = wtkg)
+```{r, echo = FALSE, eval = TRUE}
+kc_house <- kc_house %>%
+  rename(living_sqft = sqft_living,
+         lot_sqft = sqft_lot,
+         above_sqft = sqft_above,
+         basement_sqft = sqft_basement,
+         built_yr = yr_built,
+         renovated_yr = yr_renovated)
 ```
 
-3. Look at the names of your `trial_act` dataframe again, do you now see the column `weight_kg`?
-
-```{r}
-names(trial_act)
-```
-
-4. Change the column name `age` to `age_y` (to specify that age is in years).
-
-```{r}
-trial_act <- trial_act %>%
-  rename(age_y = age)
-```
-
-### C - Select columns with select()
-
-1. Using the `select()` function, select only the column `age_y` and print the result (but don't assign it to anything). Do you see only the age column now?
-
-```{r}
-trial_act %>% 
-  select(age_y)
-```
-
-2. Create a new dataframe called `CD4_wide` that *only* contains the columns `pidnum`, `arms`, `cd40`, `cd420`, and `cd496`. The `cd40`, `cd420`, and `cd496` columns show patient's CD4 T cell counts at baseline, 20 weeks, and 96 weeks. Print the result to make sure it worked!
+3. Create new column(s) `living_sqm`, `lot_sqm`, `above_sqm` and `basement_sqm` which show  the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093)
 
 ```{r, echo = TRUE, eval = FALSE}
-XX <- trial_act %>% 
-  select(XX, XX, XX, XX, ...)
+kc_house <- kc_house %>%
+  mutate(living_sqm = XXX * XXX,
+         lot_sqm = XXX * XXX,
+         XXX = XXX,
+         XXX = XXX)
 ```
 
-```{r}
-CD4_wide <- trial_act %>%
-  select(`pidnum`, `arms`, `cd40`, `cd420`, `cd496`)
+```{r, eval = TRUE}
+kc_house <- kc_house %>%
+  mutate(living_sqm = living_sqft * 0.093,
+         lot_sqm = lot_sqft * 0.093,
+         above_sqm = above_sqft * 0.093,
+          basement_sqm  = basement_sqft * 0.093)
 ```
 
-3. Did you know you can easily select all columns that start with specific characters using `starts_with()`? Try adapting the following code to get the same result you got before.
+4. Add a new variable to the dataframe called `mansion` which is "Yes" when the *sum* of the house's living, above, and basement space is above 750 square meters
 
 ```{r, echo = TRUE, eval = FALSE}
-CD4_wide <- trial_act %>% 
-  select(pidnum, arms, starts_with("XXX"))
+kc_house <- kc_house %>%
+                mutate(XXX = case_when(
+                              XXX + XXX + XXX > XXX ~ "XXX",
+                              XXXX + XXX + XXX <= XXX ~ "XXX"))
 ```
 
-```{r, echo = TRUE, eval = FALSE}
-CD4_wide <- trial_act %>% 
-  select(pidnum, arms, starts_with("cd"))
+```{r, eval = TRUE}
+kc_house <- kc_house %>%
+                mutate(mansion = case_when(
+                              living_sqm + above_sqm +  basement_sqm > 750 ~ "Yes",
+                              living_sqm +above_sqm + basement_sqm <= 750 ~ "No"))
 ```
 
-### D - Add new columns with mutate()
 
-1. Using the `mutate()` function, add the column `age_m` which shows each patient's age in months instead of years (Hint: Just multiply `age_y` by 12!)
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>%
-  mutate(XX = XX * 12)
-```
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>%
-  mutate(age_m = age_y * 12)
-```
-
-2. Add the following new columns to `trial_act`. Try combining these into *one* call to the `mutate()` function!
-
-- `weight_lb`: Weight in lbs instead of kilograms. You can do this by multiplying `weight_kg` by 2.2.
-- `cd_change_20`: Change in CD4 T cell count from baseline to 20 weeks. You can do this by taking `cd420 - cd40`
-- `cd_change_960`: Change in CD4 T cell count from baseline to 96 weeks. You can do this by taking `cd496 - cd40`
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>% 
-  mutate(weight_lb = XXX,
-         cd_change_20 = XXX,
-         XX = XX)
-```
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>% 
-  mutate(weight_lb = weight_kg * 2.2,
-         cd_change_20 = cd420 - cd40,
-         cd_change_960 = cd496 - cd40)
-```
-
-3. If you look at the `gender` column, you will see that it is numeric. Change the column so it shows gender as a string, where 0 = "female" and 1 = "male". To do this, use a combination of `mutate()` and `case_when`:
-    
-```{r, echo = TRUE, eval = FALSE}
-# Create gender_char which shows gender as a stringh
-trial_act <- trial_act %>%
-  mutate(
-  gender_char = case_when(
-    gender == XX ~ "XX",
-    gender == XX ~ "XX"))
-```
-
-```{r, echo = TRUE, eval = TRUE}
-trial_act <- trial_act %>%
-  mutate(
-  gender_char = case_when(
-    gender == 0 ~ "female",
-    gender == 1 ~ "male"))
-```
-
-4. The column `arms` is also numeric and not very meaningful. Create a new column `arms_char` contains the names of the arms. Here is a table of the mapping
-
-|arms|arms_char|
-|:---|:-----|
-|0|zidovudine|
-|1|zidovudine and didanosine|
-|2|zidovudine and zalcitabine|
-|3|didanosine|
-
-```{r, echo = TRUE, eval = TRUE}
-trial_act <- trial_act %>%
-  mutate(
-  arms_char = case_when(
-    arms == 0 ~ "zidovudine",
-    arms == 1 ~ "zidovudine and didanosine",
-    arms == 2 ~ "zidovudine and zalcitabine",
-    arms == 3 ~ "didanosine"))
-```
-
-5. If you haven't already, put the code for your previous questions in one call to `mutate()`. That is, in one block of code, create `agem`, `weight_lb`, `cd_change_20`, `cd_change_960`, `gender_char` and `over50` using the `mutate()` function only once. Here's how your code should look:
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>%
-  mutate(
-    agem = XXX,
-    weight_lb = XXX,
-    cd_change_20 = XXX,
-    cd_change_960 = XXX,
-    gender_char = case_when(XXX),
-    arms_char = case_when(XXX)
-  )
-```
-
-```{r}
-trial_act <- trial_act %>%
-  mutate(
-    agem = age_y * 12,
-    weight_lb = weight_kg * 2.2,
-    cd_change_20 = cd420 - cd40,
-    cd_change_960 = cd496 - cd40,
-    gender_char = case_when(
-                      gender == 0 ~ "female",
-                      gender == 1 ~ "male"),
-   arms_char = case_when(
-    arms == 0 ~ "zidovudine",
-    arms == 1 ~ "zidovudine and didanosine",
-    arms == 2 ~ "zidovudine and zalcitabine",
-    arms == 3 ~ "didanosine")
-  )
-```
-
-### E - Arrange rows with arrange()
-
-1. Using the `arrange()`function, arrange the `trial_act` data in ascending order of `age_y` (from lowest to highest). After you do, look the data to make sure it worked!
-
-```{r}
-trial_act <- trial_act %>% 
- arrange(age_y)
-
-trial_act
-```
-
-2. Now arrange the data in *descending* order of `age_y` (from highest to lowest). After, look the data to make sure it worked. To arrange data in descending order, just include `desc()` around the variable. E.g.; `data %>% arrrange(desc(height))`
-
-```{r}
-trial_act <- trial_act %>% 
- arrange(desc(age_y))
-
-trial_act
-```
-
-3. You can sort the rows of dataframes with multiple columns by including many arguments to `arrange()`. Now sort the data by arms (`arms`) and then age (`age_y`).
-
-```{r}
-trial_act <- trial_act %>% 
- arrange(arms, age_y)
-
-trial_act
-```
-
-### F - Filter specific rows with `filter()`
-
-1. Using the `filter()` function, create a new dataframe called `trial_act_m` that only contains data from males (`gender_char == "male"`). After you finish, print your new dataframe to make sure it looks correct!
-
-```{r}
-trial_act_m <- trial_act %>%
-  filter(gender_char == "male")
-```
-
-2. A colleague of yours named Tracy wants a datafame only containing data from females over the age of 40. Create this dataframe with `filter()` and call it `trial_act_Tracy`
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act_Tracy <- trial_act %>%
-  filter(age_y > XX & gender == XX)
-```
-
-```{r}
-trial_act_Tracy <- trial_act %>%
-  filter(age_y > 40 & gender_char == "female")
-```
-
-### G - Combine dataframes with `left_join()`
-
-```{r, echo = FALSE, eval = FALSE, message = FALSE}
-trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv")
-
-trial_act_demo
-```
-
-1. The `trial_act_demo_fake.csv` file contains additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Use the `left_join()` function to combine the `trial_act` and `trial_act_demo_fake` datasets, set the `by` argument to the name of the column that is common in both data sets. Assign the result to `trial_act`. 
-
-```{r, echo = TRUE, eval = FALSE}
-trial_act <- trial_act %>%
-  left_join(XX, by = "XX")
-```
-
-```{r}
-trial_act <- trial_act %>%
-  left_join(trial_act_demo_fake, by = "pidnum")
-```
-
-2. Print your new `trial_act` dataframe. Do you now see the demographic data?
-
-```{r}
-trial_act
-```
 
 ### H - Calculate grouped statistics with `group_by()` and `summarise()`
 
-1. In this code we'll calculate summary statistics for each of the trial arms. Start with the `trial_act` dataframe. Then, group the data by `arms`. Then, for each arm, calculate the mean participant age (in years) as a new column called `age_mean`. Also, using `N = n()`, calculate the number of cases for each group. Assign the result to a new object called `trial_arm`.
-
-```{r, eval = FALSE, echo = TRUE}
-trial_arm <- trial_act %>% 
-  group_by(XX) %>%
-  summarise(
-    N = n(),
-    XX = mean(XX)
-  )
-```
-
-```{r}
-trial_arm <- trial_act %>% 
-  group_by(arms) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age_y)
-  )
-```
-
-2. Adjust your previous code to calculate the standard deviation of age *in addition* to the mean.
-
-```{r}
-trial_arm <- trial_act %>% 
-  group_by(arms) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age_y),
-    age_sd = sd(age_y)
-  )
-```
-
-3. Adjust your previous code to calculate the median number of days until the first major negative event (`days`) for each arm.
-
-```{r}
-trial_arm <- trial_act %>% 
-  group_by(arms) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age_y),
-    age_sd = sd(age_y),
-    days_med = median(days)
-  )
-```
-
-4. Create a new dataframe called `trial_sex` groups the data based on `gender` and calculates the same summary statistics as you did for `trial_arm`
-
-```{r}
-trial_gender <- trial_act %>% 
-  group_by(gender) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age_y),
-    age_sd = sd(age_y)
-  )
-
-trial_gender
-```
-
-5.  Create a new dataframe called `trial_arms_gender` that calculates the same summary statistics for all the groups `gender` and `arms`. Hint: Just add a second grouping variable!
-
-```{r}
-trial_arms_gender <- trial_act %>% 
-  group_by(gender, arms) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age_y),
-    age_sd = sd(age_y)
-  )
-
-trial_arms_gender
-```
-
-### I - Reshaping with gather() and spread()
-
-1. Remember the `CD4_wide` dataframe you created before? Currently it is in the wide format, where key data (different CD4 T cell counts) are in different columns. Now we will try to convert it to a long format. Our goal is to get the data in the 'long' format. Using the `spread()` function, create a new dataframe called `CD4_long` that shows the data in the 'long' format. To do this, use the following template. Set the grouping column to `time` and the new data column to `value`. 
+1. Using the base-R `df$col` notation, calculate the mean price of all houses.
 
 ```{r, echo = TRUE, eval = FALSE}
-CD4_long <- CD4_wide %>% 
-  gather(XX,  # New grouping column
-         XX,  # New data column
-         -pidnum, -arms)  # Names of columns to replicate
+mean(XXX$XXX)
 ```
 
 ```{r}
-CD4_long <- CD4_wide %>% 
-  gather(time,  # New grouping column
-         value,  # New data column
-         -pidnum, -arms)  # Names of columns to replicate
+mean(kc_house$price)
 ```
 
-2. Print your `CD4_long` dataframe and compare it to the original `CD4_wide`
-
-```{r}
-CD4_long
-```
-
-3. Now that your data are in the wide format, it should be easy to calculate grouped summary statistics! For each time point and trial arm, calculate the mean CD4 T cell count using `group_by()` and `summarise()`.
-
-```{r}
-CD4_long %>%
-  group_by(time, arms) %>%
-  summarise(count_mean = mean(value, na.rm = TRUE))
-```
-
-4. Now it's time to practice moving data from the long to the wide format. Using the following template, use the `spread()` function to convert `CD4_long` *back the wide format*. Assign the result to a new object called `CD4_wide_2`.
+2. Now, do the same using `summarise()` using the following template. Do you get the same answer? What is different about the output from `summarise()` versus using the dollar sign?
 
 ```{r, echo = TRUE, eval = FALSE}
-CD4_wide_2 <- CD4_long %>% 
-  spread(XX,   # old group column
-         XX)   # old target column
-```
-
-```{r}
-CD4_wide_2 <- CD4_long %>% 
-  spread(time,   # old group column
-         value)   # old target column
-```
-
-5. Compare `CD4_wide_2` to `CD4_wide` do they look the same?
-
-```{r}
-CD4_wide_2
-```
-
-# Advanced
-
-### X - Play around with "Scoped" functions
-
-1. Many common dplyr functions like `mutate()` and `summarise()` have 'scoped' versions with suffixes like `_if` and `_all`. that allow you do some pretty cool stuff easily (look at the help menu with `?scoped` for details). Try running the following chunk with `summarise_if()` and see what happens:
-
-```{r, eval = FALSE, echo = TRUE}
-# See how summarise_if() works!
-trial_act %>%
-  group_by(gender) %>%
-  summarise_if(is.numeric, mean)
-```
-
-```{r}
-# See how summarise_if() works!
-trial_act %>%
-  group_by(gender) %>%
-  summarise_if(is.numeric, mean)
-```
-
-2. Now, in the `trial_act` dataset, group the data by `arms` and calculate the mean of all numeric columns using `summarise_if()`. 
-
-```{r}
-trial_act %>%
-  group_by(arms) %>%
-  summarise_if(is.numeric, mean, na.rm = TRUE)
-```
-
-3. Here's another scoped function in action `mutate_if()`:
-
-```{r, eval = FALSE, echo = TRUE}
-# use mutate_if() to round all numeric variables to 2 digits
-trial_act %>%
-  mutate_if(is.numeric, round, 2)
-```
-
-3. Using `mutate_if()`, round all of your results from the previous question to 0 decimal places (to the nearest integer)
-
-```{r}
-trial_act %>%
-  group_by(arms) %>%
-  summarise_if(is.numeric, mean, na.rm = TRUE) %>%
-  mutate_if(is.numeric, round, 2)
-```
-
-
-
-### Y - Combine many functions
-
-1. For each arm, calculate the following:
-
-- Mean days until a a major negative event (`days`)
-- Mean CD4 T cell count at baseline. (`cd40`)
-- Mean CD4 T cell count at 20 weeks. (`cd420`)
-- Mean CD4 T cell count at 96 weeks. (`cd496`)
-- Mean *change* in CD4 T cell count between baseline and 96 weeks
-- Number of patients in each arm
-
-```{r}
-trial_act %>%
-  group_by(arms) %>%
+kc_house %>%
   summarise(
-    days_mean = mean(days),
-    cd4_bl = mean(cd40),
-    cd4_20 = mean(cd420),
-    cd4_96 = mean(cd496, na.rm = TRUE),
-    cd4_change = mean(cd496 - cd40, na.rm = TRUE),
-    N = n()
+    price_mean = mean(XXX)
   )
 ```
 
-2. Create the following dataframe that shows patient's mean CD8 T cell count (from columns `cd80` and `cd820`), where the data are grouped by time and trial arm. (Hint: use the following functions in order: select(), gather(), mutate(), group_by(), summarise())
+```{r}
+kc_house %>%
+  summarise(
+    price_mean = mean(price)
+  )
+```
 
-```{r, eval = TRUE}
-trial_act %>%
-  mutate(
-    arms_char = case_when(
-      arms == 0 ~ "Z",
-      arms == 1 ~ "ZD",
-      arms == 2 ~ "ZZ",
-      arms == 3 ~ "D"
-    )
-  ) %>% 
-  select(pidnum, arms_char, starts_with("cd8")) %>%
-  gather(time, measure, -pidnum, -arms_char) %>%
-  mutate(time = case_when(time == "cd80" ~ "baseline",
-                          time == "cd820" ~ "week 20")) %>%
-  group_by(time, arms_char) %>%
+3. What is the *median* price of all houses? Use the `median()` function!
+
+4. What is the highest number of living square meters in the dataset? Use the `max()` function!
+
+5. How many mansions are there? To do this, use `group_by()` to group the dataset by the `mansions` column, then use the `n()` function to count the number of cases:
+
+```{r, echo = TRUE, eval = FALSE}
+kc_house %>%
+  group_by(XXX) %>%
+  summarise(XXX = n())
+```
+
+```{r}
+kc_house %>%
+  group_by(mansion) %>%
+  summarise(N = n())
+```
+
+6. What is the mean selling price of mansions versus non-mansions? To do this, just add another argument to your `summarise()` function!
+
+```{r, echo = TRUE, eval = FALSE}
+kc_house %>%
+  group_by(mansion) %>%
   summarise(N = n(),
-            cd8_mean = mean(measure),
-            cd8_median = median(measure))
+            XXX = XXX(XXX))
 ```
+
+```{r}
+kc_house %>%
+  group_by(mansion) %>%
+  summarise(N = n(),
+            price_mean = mean(price))
+```
+
+7. Using `group_by()` and `summarise()`, create a dataframe showing the same results as the following table
+
+```{r, echo = FALSE, eval = TRUE, results = 'asis'}
+kc_house %>%
+  group_by(mansion) %>%
+  summarise(N = n(),
+            price_min = min(price),
+            price_mean = mean(price),
+            price_median = median(price),
+            price_max = max(price)) %>%
+  knitr::kable()
+```
+
+
+
+
 
 
 ## Additional Resources
