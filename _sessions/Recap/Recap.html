@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Recap I</title>
+    <title>Recap</title>
     <meta charset="utf-8">
-    <meta name="author" content="The R Bootcamp  www.therbootcamp.com @therbootcamp" />
+    <meta name="author" content="Introduction to Data Science with R www.therbootcamp.com @therbootcamp" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="baselrbootcamp.css" type="text/css" />
   </head>
@@ -11,8 +11,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Recap I
-### The R Bootcamp <br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+# Recap
+### Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
 ### October 2018
 
 ---
@@ -21,13 +21,12 @@ class: center, middle, inverse, title-slide
 layout: true
 
 &lt;div class="my-footer"&gt;&lt;span&gt;
-&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Basel, October 2018&lt;/font&gt;&lt;/a&gt;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Introduction to Data Science with R, October 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
 &lt;/span&gt;&lt;/div&gt; 
+
 
 
 ---
@@ -137,20 +136,131 @@ Pay attention to...
 &lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/help_cor.png" width="500"&gt;&lt;/p&gt;
 ]
 
+
 ---
 
-# The almighty `tidyverse`
+# Data Input/Output
 
-Among its many packages, R newly contains a collection of high-performance, user-friendly packages (libraries)  known as the [tidyverse](https://www.tidyverse.org/). The tidyverse includes:
-1. `ggplot2` -- creating graphics.
-2. `dplyr` -- data manipulation.
-3. `tidyr` -- tidying data.
-4. `readr` -- read wild data.
-5. `purrr` -- functional programming.
-6. `tibble` -- modern data frame.
+.pull-left45[
+
+Raw data can come in many shapes and sizes, but &lt;high&gt;R's got you covered&lt;/high&gt;.
 &lt;br&gt;&lt;br&gt;
+.pull-left65[
 
-&lt;img src="http://d33wubrfki0l68.cloudfront.net/0ab849ed51b0b866ef6895c253d3899f4926d397/dbf0f/images/hex-ggplot2.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/5f8c22ec53a1ac61684f3e8d59c623d09227d6b9/b15de/images/hex-tidyr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/9221ddead578362bd17bafae5b85935334984429/37a68/images/hex-purrr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b985e2547fe868e5e2b3f9621/720bb/images/hex-tibble.png" height="200px" /&gt;
+| Package     |   Description|
+|:----------------|:-------------------------------------------------------|
+| `readr`| `.csv`, `.txt`, etc. |
+| `haven`| `.sav`, `.sas7bdat`, `.dta`          |
+| `readxl`  | `.xls`, `.xlsx` |
+| `R.matlab` | `.mat` |
+| `jsonlite` | `.json` |
+| `rvest` | `.html` |
+| `XML`, `xml2` | `.xml` |
+
+]
+
+]
+
+.pull-right45[
+
+&lt;img src="http://blog.datasift.com/wp-content/uploads/2014/10/ms-files-3.jpg"&gt;
+
+]
+---
+
+# Finding the file path
+
+.pull-left4[
+
+1 - Identify the file path using the &lt;high&gt;auto-complete&lt;/high&gt;.  
+
+2 - Initiate auto-complete and browse through the folder structure by placing the cursor between two quotation marks and using the &lt;high&gt;tab key&lt;/high&gt;.
+
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tab.png" height="80px"&gt;&lt;/img&gt;
+&lt;/p&gt;
+
+3 - Auto-complete begins with the project folder - &lt;high&gt;place your data inside your project folder!&lt;/high&gt;
+
+] 
+
+.pull-right55[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/load_baselers_ss.jpg"&gt;&lt;/img&gt;
+
+]
+
+---
+.pull-left45[
+
+# What is wrangling?
+
+&lt;font size = 5&gt;&lt;high&gt;Transform&lt;/high&gt;&lt;/font&gt;
+
+Change column names
+
+Add new columns
+
+&lt;font size = 5&gt;&lt;high&gt;Organise&lt;/high&gt;&lt;/font&gt;
+
+Sort data by columns
+
+Merging data from two separate dataframes
+
+Move data between columns and rows
+
+&lt;font size = &gt;&lt;high&gt;Aggregate&lt;/high&gt;&lt;/font&gt;
+
+Group data and summarise
+]
+
+
+.pull-right5[
+&lt;br&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" height = "550px"&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+
+# The Pipe!  &lt;high&gt;`%&gt;%`&lt;/high&gt;
+
+.pull-left4[
+
+`dplyr` makes extensive use of a new operator called the "Pipe" &lt;high&gt;`%&gt;%`&lt;/high&gt;&lt;br&gt;
+
+Read the "Pipe" &lt;high&gt;`%&gt;%`&lt;/high&gt; as "And Then..."
+
+&lt;br&gt;
+
+
+```r
+# Start with data
+data %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+  
+DO_SOMETHING %&gt;% # AND THEN...
+```
+
+]
+
+.pull-right55[
+
+&lt;p align="center"&gt;
+  &lt;img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/MagrittePipe.jpg/300px-MagrittePipe.jpg" width = "450px"&gt;&lt;br&gt;
+  This is not a pipe (but %&gt;% is!)
+&lt;/p&gt;
+
+]
+
+
 
 ---
 
@@ -167,7 +277,7 @@ Among its many packages, R newly contains a collection of high-performance, user
 
 .pull-right6[
 
-&lt;img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Jul.png?raw=true" height="580" align="right"&gt;
+&lt;img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="580" align="center"&gt;
 
 
 ]
