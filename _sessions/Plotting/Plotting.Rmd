@@ -1267,7 +1267,7 @@ ggsave(filename = "myplot.pdf",
 
 # Practical
 
-<font size=6><b><a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting.html">Link to practical</a>
+<font size=6><b><a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting_practical.html">Link to practical</a>
 
 
 
