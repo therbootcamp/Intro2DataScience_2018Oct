@@ -213,9 +213,7 @@ knitr::include_graphics("http://www.repairedcomputer.com/i/68/c/14/quality-compu
 knitr::include_graphics("https://cdn.southampton.ac.uk/assets/imported/transforms/content-block/BoxGridWithImages_ImageBlock/D771F505B1D44CB9A9C34653E19EA026/_3JB3522.jpg_SIA_JPG_fit_to_width_MEDIUM.jpg")
 ```
 
-
 ]
-
 
 ---
 # Cheatsheets
