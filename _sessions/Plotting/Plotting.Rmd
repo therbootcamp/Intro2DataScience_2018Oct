@@ -1,8 +1,7 @@
 ---
 title: "Plotting"
-subtitle: "with ggplot2"
-author: "Basel R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "July 2018"
+author: "Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "October 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -17,20 +16,18 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">BaselRBootcamp, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
+
 
 ---
 
 
 ```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
 # Code to knit slides
-baselers <- readr::read_csv("../_data/complete/baselers.csv")
+baselers <- readr::read_csv("../_data/baselers.csv")
 ```
 
 
@@ -214,7 +211,7 @@ knitr::include_graphics("https://www.r-graph-gallery.com/wp-content/uploads/2014
 
 This plot would take <high>a lot of code in Base R</high> but <high>just 10 lines of code</high>, 5 of which controlling the labels, in `ggplot2`.
 
-```{r, echo = FALSE, fig.width=7, fig.height = 4}
+```{r, echo = FALSE, fig.width=5, fig.height = 3.9}
 # Add a regression line for all classes
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
   geom_point(size = 3, alpha = .9) + 
@@ -252,7 +249,7 @@ The Grammar of graphics breaks down plots into several key pieces:
 
 .pull-right45[
 
-```{r, echo = FALSE, fig.width=7}
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 # Add a regression line for all classes
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
   geom_point(size = 3, alpha = .9) + 
@@ -297,9 +294,9 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
 ]
 
 
-.pull-right5[
-<br>
-```{r, echo = FALSE, fig.width = 7, fig.height = 5}
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 # Add a regression line for all classes
 
 ggplot(data = mpg, 
@@ -337,7 +334,7 @@ To <high>create a ggplot2 object</high>, use the `ggplot()` function
 
 .pull-right45[
 
-```{r, fig.width=4, fig.height=3}
+```{r, fig.width = 7, fig.height = 5.5}
 ggplot(data = mpg)
 ```
 
@@ -369,7 +366,7 @@ Common aesthetics are...
 
 .pull-right5[
 
-```{r, out.width = "70%", fig.width = 4, fig.height = 4}
+```{r, fig.width = 6, fig.height = 4.5}
 ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy))
 ```
@@ -399,7 +396,7 @@ ggplot(data = mpg,
 .pull-right5[
 
 
-```{r, echo = FALSE, fig.width = 5, fig.height = 4, out.width = "90%"}
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy)) + 
   geom_point()
@@ -1261,47 +1258,7 @@ ggsave(filename = "myplot.pdf",
 ]
 
 
----
 
-
-.pull-left45[
-
-# `ggplot2` extensions
-
-ggplot2 has inspired <high>hundreds</high> of extension packages that make it even easier to make domain specific plots
-
-Check out: [`ggplot2` Extension Gallery](http://www.ggplot2-exts.org/gallery/)
-
-<br><br><br>
-```{r, fig.height = 4, fig.width = 4, out.width = "70%", eval = F}
-# Create a survival plot using ggsurvplot
-library(survminer)
-library(survival)
-
-fit <- survfit(Surv(time, status) ~ sex, 
-               data = lung)
-ggsurvplot(fit, data = lung)
-```
-
-
-]
-
-
-.pull-right5[
-
-<br><br>
-
-```{r, fig.height = 4, fig.width = 4, echo = F}
-# Create a survival plot using ggsurvplot
-library(survminer)
-library(survival)
-
-fit <- survfit(Surv(time, status) ~ sex, 
-               data = lung)
-ggsurvplot(fit, data = lung)
-```
-
-]
 
 ---
 

@@ -3,7 +3,7 @@
   <head>
     <title>Plotting</title>
     <meta charset="utf-8">
-    <meta name="author" content="Basel R Bootcamp www.therbootcamp.com @therbootcamp" />
+    <meta name="author" content="Introduction to Data Science with R www.therbootcamp.com @therbootcamp" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="baselrbootcamp.css" type="text/css" />
   </head>
@@ -12,9 +12,8 @@
 class: center, middle, inverse, title-slide
 
 # Plotting
-## with ggplot2
-### Basel R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
-### July 2018
+### Introduction to Data Science with R<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+### October 2018
 
 ---
 
@@ -22,13 +21,11 @@ class: center, middle, inverse, title-slide
 layout: true
 
 &lt;div class="my-footer"&gt;&lt;span&gt;
-&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;BaselRBootcamp, July 2018&lt;/font&gt;&lt;/a&gt;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Introduction to Data Science with R, July 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
 &lt;/span&gt;&lt;/div&gt; 
+
 
 ---
 
@@ -241,8 +238,8 @@ The Grammar of graphics breaks down plots into several key pieces:
 ]
 
 
-.pull-right5[
-&lt;br&gt;
+.pull-right45[
+
 &lt;img src="Plotting_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 
@@ -309,7 +306,7 @@ ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy))
 ```
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -337,7 +334,7 @@ ggplot(data = mpg,
 .pull-right5[
 
 
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Plotting_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -479,21 +476,13 @@ ggplot(data = mpg,
 
 &lt;p align="center"&gt; `mpg`&lt;/p&gt;
 
-| displ| hwy|class      | year|
-|-----:|---:|:----------|----:|
-<<<<<<< HEAD
-|   6.2|  26|2seater    | 2008|
-|   5.4|  17|suv        | 1999|
-|   1.6|  33|subcompact | 1999|
-|   2.0|  28|subcompact | 2008|
-|   3.0|  26|midsize    | 1999|
-=======
-|   4.0|  20|pickup     | 2008|
-|   2.2|  27|compact    | 1999|
-|   5.2|  17|pickup     | 1999|
-|   4.0|  24|subcompact | 2008|
-|   4.6|  21|subcompact | 1999|
->>>>>>> c27f4a99084727da7380c82dba27ad76198715ed
+| displ| hwy|class   | year|
+|-----:|---:|:-------|----:|
+|   2.5|  32|midsize | 2008|
+|   5.4|  18|suv     | 2008|
+|   2.8|  26|compact | 1999|
+|   2.2|  27|compact | 1999|
+|   3.5|  28|midsize | 2008|
 
 
 ]
@@ -941,7 +930,6 @@ Faceting = Create different plots for different groups
 To facet plots, use `facet_wrap()`
 
 
-
 ```r
 # With faceting
 ggplot(data = mpg, 
@@ -1085,40 +1073,7 @@ ggsave(filename = "myplot.pdf",
 ]
 
 
----
 
-
-.pull-left45[
-
-# `ggplot2` extensions
-
-ggplot2 has inspired &lt;high&gt;hundreds&lt;/high&gt; of extension packages that make it even easier to make domain specific plots
-
-Check out: [`ggplot2` Extension Gallery](http://www.ggplot2-exts.org/gallery/)
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-
-```r
-# Create a survival plot using ggsurvplot
-library(survminer)
-library(survival)
-
-fit &lt;- survfit(Surv(time, status) ~ sex, 
-               data = lung)
-ggsurvplot(fit, data = lung)
-```
-
-
-]
-
-
-.pull-right5[
-
-&lt;br&gt;&lt;br&gt;
-
-&lt;img src="Plotting_files/figure-html/unnamed-chunk-61-1.png" style="display: block; margin: auto;" /&gt;
-
-]
 
 ---
 
@@ -1144,12 +1099,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
