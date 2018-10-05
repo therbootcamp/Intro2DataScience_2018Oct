@@ -166,7 +166,6 @@ baselers %>%
 ---
 
 
-
 .pull-left45[
 
 # `dplyr`
@@ -236,474 +235,46 @@ DO_SOMETHING %>% # AND THEN...
 
 
 
----
-
-# The Pipe!  <high>`%>%`</high>
-
-.pull-left4[
-
-Task: Calculate the mean of a vector of `scores`
-
-```{r}
-# Create a vector score
-score <- c(8, 4, 6, 3, 7, 3)
-```
-
-Base-R method
-
-```{r}
-mean(x = score)
-```
-
-Pipe <high>%>%</high> method
-
-```{r}
-score %>%  # AND THEN 
-  mean()  
-```
-
-
-]
-
-.pull-right55[
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe_explanation_kn.png" height = "400px">
-</p>
-
-]
 
 ---
 
-# The Pipe! <high>`%>%`</high>
-
-.pull-left4[
-
-Task: Calculate the mean of a vector of `scores` and round to 1 digit.
-
-```{r}
-# Create a vector score
-score <- c(8, 4, 6, 3, 7, 3)
-```
-
-Base-R method
-
-```{r}
-round(x = mean(score), digits = 1)
-```
-
-Pipe <high>%>%</high> method
-
-```{r}
-score %>%        # AND THEN
-  mean() %>%       # AND THEN
-  round(digits = 1)
-```
-
-]
-
-.pull-right55[
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe_explanation_kn.png" height = "400px">
-</p>
-
-
-]
-
-
----
-
-.pull-left35[
-
-# `dplyr` Functions
-
-There are <high>dozens of wrangling functions</high> in `dplyr`.
-
-For an overview, check out <a href='http://dplyr.tidyverse.org/'>dplyr.tidyverse.org</a>
-
-<p align="center"> <a href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf'>
-  <img src="https://image.slidesharecdn.com/data-wrangling-cheatsheet-160705210122/95/data-wrangling-with-dplyr-and-tidyr-cheat-sheet-2-638.jpg?cb=1467752577g" height="270px"></a>
-  <a href= 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf'> Wrangling Cheat Sheet</a>
-</p>
-
-
-]
-
-.pull-right65[
-<br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_functions.png" height="420px">
-</p>
-
-]
-
-
----
-
-
-```{r, echo = FALSE}
-patients_df <- tibble(id = c(1, 2, 3, 4, 5),
-                      b = c(37, 65, 57, 34, 45),
-                      c = c(1, 2, 2, 1, 2))
-
-results_df <- tibble(id = c(4, 92, 1, 2, 99),
-                    t1 = c(100, 134, 123, 143, 102),
-                    t2 = c(105, 150, 135, 140,68))
-```
-
-
-# Transformation Functions
-
-.pull-left4[
-
-<br>
-
-| Function| Description|
-|:-------------|:----|
-| `rename()` | Change column names |
-| `mutate()`|   Create a new column from existing columns|
-| `case_when()`|  Recode values from a vector to another|
-| `left_join()` | Combine multiple dataframes| 
-
-]
-
-.pull-right55[
-<br>
-```{r}
-patients_df   # Demographic data
-```
-
-
-]
-
-
----
-
-
-# `rename` 
+# `summarise()`
 
 .pull-left45[
 
+Use `summarise()` to create new columns of <high>summary statistics</high>
 
-Change <high>column names</high> with `rename()`.
-
-```{r, eval = FALSE, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 df %>%
-  rename(NEW = OLD,
-         NEW = OLD)
-```
-
-```{r}
-patients_df  # Original
-```
-]
-
-.pull-right45[
-
-Change the old name "b" to "age", and "c" to "arm"
-
-```{r}
-# 0) Start with patients_df data
-patients_df %>% 
-
-# 1) Change column names with rename()
-  rename(age = b,  # New = Old
-         arm = c)  # New = Old
-```
-
-
-]
-
----
-
-# `mutate` 
-
-.pull-left35[
-
-Calculate <high>new columns</high>, or change existing ones, with `mutate()`.
-
-```{r, eval = FALSE}
-df %>%
-  mutate(
-   NEW1 = DEFINITION1,
-   NEW2 = DEFINITION2,
-   NEW3 = DEFINITION3,
-   ...
+  summarise(
+    NAME = FUN(A),
+    NAME = FUN(B)
   )
 ```
+
+<u>Statistical functions</u>
+
+| Function| asdf |
+|:-------------|:---|
+| `n()`| Number of cases in each group|
+| `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
 ]
 
-.pull-right6[
-
-Calculate two new columns `age_months` and `age_years`
-
-```{r, warning = FALSE}
-patients_df %>% 
-
-  rename(age = b, 
-         arm = c) %>%   # AND THEN...
-  
-# Create new columns with mutate()
-  mutate(age_months = age * 12,
-         age_decades = age / 10)
-```
-
-]
-
----
-
-# `case_when`
-
-.pull-left4[
-
-Use `case_when()` with `mutate()` to define <high>new columns based on logical conditions</high>.
-
-```{r, eval = FALSE}
-# Using mutate(case_when())
-df %>%
-  mutate(
-    NEW = case_when(
-      COND1 ~ VAL1,
-      COND2 ~ VAL2
-    ))
-
-```
-
-
-]
-
-.pull-right55[
+.pull-right5[
 
 ```{r}
-patients_df %>% 
-
-  rename(age = b, 
-         arm = c) %>%
-  
-  # Create column arm_char based on values of arm
-  
-  mutate(arm_char = case_when(arm == 1 ~ "placebo",
-                              arm == 2 ~ "drug"))
+# Calculate summary statistics
+baselers %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    height_median = median(height),
+    children_max = max(children)
+  )
 ```
 
 ]
 
-
----
-
-# Joining data
- 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/joining_data.png" height="450px">
-</p> 
-
-
----
-
-# `left_join`
-
-.pull-left35[
-
-Use `left_join()` to <high>combine two data frames</high> based on one or more key columns
-
-```{r, eval = FALSE}
-# Join df2 to df1
-#   using KEY as the key column
-df1 %>%
-  left_join(df2, 
-      by = c("KEY"))
-```
-
-<br2>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/joining_data.png" height="190px">
-</p> 
-
-]
-
-.pull-right6[
-
-```{r}
-# Join patients_df with results_df to create combined_df
-combined_df <- patients_df %>% 
-  rename(age = b, arm = c) %>%
-  mutate(arm_char = case_when(arm == 1 ~ "placebo",
-                              arm == 2 ~ "drug")) %>%
-  
-# Join with results_df with left_join()
-  left_join(results_df, by = "id")
-
-# Show a few columns
-combined_df %>%
-  select(id, arm, age, t1, t2)
-```
-
-]
-
----
-
-
-# Keep in mind
-
-.pull-left35[
-
-1 - Don't forget to start by assigning to a new (or existing) object with <-<br>
-
-2 - Keep adding new functions connected by the pipe <high>%>%</high><br>
-
-3 - Order matters! You can refer to new columns in later code
-<br><br>
-
-
-
-]
-
-.pull-right6[
-
-```{r, eval = FALSE}
-# 0) Start with patients_df data
-combined_df <- patients_df %>%
-  
-# 1) Change column names with rename()
-  rename(age = b,  
-         arm = c) %>%  # AND THEN...
-  
-# 2) Create new columns with mutate()
-  mutate(age_months = age * 12,
-         age_decades = age / 10,
-         arm_char = case_when(arm == 0 ~ "placebo",
-                              arm == 1 ~ "drug")
-         ) %>%  # AND THEN..
-  
-# 3) Add data from results_df with left_join()
-  left_join(results_df, by = "id")
-```
-
-
-]
-
----
-
-# Organisation Functions
-
-.pull-left35[
-
-Organisation functions help you shuffle your data by <high>sorting rows</high> by columns, <high>filter rows</high> based on criteria, <high>select columns</high> (etc).
-
-]
-
-.pull-right6[
-
-| Function| Purpose|Example|
-|:--------|:----|:-------------|
-| `arrange()` |Sort rows by columns|`df %>%`<br>`arrange(arm, age)`|
-| `slice()`|   Select rows by location|`df %>%`<br>`slice(1:10)`|
-| `filter()` | Select specific rows by criteria|`df %>%`<br>`filter(age > 50)`|
-| `select()`|   Select specific columns|`df %>%`<br>`select(arm, t1)`|
-
-]
-
----
-
-# `arrange()`
-
-.pull-left3[
-
-Use `arrange()` to <high>arrange (aka, sort) rows</high> in increasing or decreasing order of one (or more) columns.
-
-To sort in descending order, use `desc()`
-
-]
-
-.pull-right65[
-
-<font size = 5></font>
-
-```{r}
-# Sort combined_df by id 
-# then in descending order of age
-combined_df %>%
-  arrange(id, desc(age))
-```
-
-]
-
----
-
-# `filter()`
-
-
-.pull-left4[
-
-Use `filter()` to <high>select rows</high> (and remove others) based on criteria
-
-For complex conditions, chain multiple logical comparison operators with `&` (AND) and `|` (OR)
-
-<high>`==`</high> - is equal to<br>
-<high>`<`</high>, <high>`>`</high> - smaller/greater than<br>
-<high>`≤`</high>, <high>`≥`</high> - smaller/greater than or equal<br>
-<high>`&`</high>, <high>`&&`</high> - logical AND<br>
-<high>`|`</high>, <high>`||`</high> - logical OR<br>
-
-]
-
-.pull-right55[
-
-Select <i>only</i> patients over 30 given drug.
-
-```{r}
-# Filter patients older than 30 given drug
-combined_df %>%
-  arrange(id, desc(age)) %>%
-  filter(age > 30 & arm_char == "drug")
-```
-
-]
-
----
-
-# `select()`
-
-.pull-left4[
-
-Use `select()` to <high>select columns</high> (and remove all others)
-
-```{r, eval = FALSE}
-# Select columns id, age
-df %>% 
-  select(id, age)
-```
-
-<high>Remove columns</high> with `-`.
-
-```{r, eval = FALSE}
-# Select everything BUT sex and id
-df %>% 
-  select(-sex, -id)
-```
-
-
-]
-
-.pull-right55[
-
-Remove `age_months` and `age_decades` colummns.
-
-```{r}
-
-combined_df %>%
-  
-  arrange(id, desc(age)) %>%
-  
-  filter(arm_char == "drug" & age > 30) %>%
-  
-# Drop age and arm columns
-  select(-age, -arm)
-  
-```
-
-]
 
 
 ---
@@ -713,7 +284,6 @@ combined_df %>%
 <p align="center">
   <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/summarsed_data_diagram.png" height="470px">
 </p> 
-
 
 
 ---
@@ -734,116 +304,260 @@ After grouping data, use `summarise()` to <high>calculate summary statistics</hi
 | `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
 ]
 
-.pull-right45[
-
-```{r, echo = FALSE}
-combined_df <- combined_df %>%
-  select(id, age, arm_char, t1, t2) %>%
-  rename(arm = arm_char)
-```
-
+.pull-right5[
 
 ```{r}
 # Group data by arm, and calculate many
 #  summary statistics
-combined_df %>%
-  group_by(arm) %>%
+baselers %>%
+  group_by(sex) %>%
   summarise(
     N = n(),
     age_mean = mean(age),
-    t1_mean = mean(t1, na.rm = TRUE),
-    t2_mean = mean(t2, na.rm = TRUE)
+    height_median = median(height),
+    children_max = max(children)
   )
 ```
 
-
 ]
 
 
 ---
 
-# Reshaping data
+# Combine wrangling with analysing
+
+.pull-left3[
+<br><br>
+You can easily combine multiple wrangling (filtering, slicing, renaming) and analysing operations at once!
+
+Just use the pipe <high>%>%</high>
+
+
+
+]
+
+.pull-right65[
+
+```{r}
+baselers %>%
+  filter(sex == "male" & children > 0) %>%  # male parents only
+  group_by(confession) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_median = median(income, na.rm = TRUE)
+  )
+```
+
+]
+
+---
+# Test!
 
 .pull-left45[
 
-Two key functions that allow you to <high>`reshape`</high> a dataframe between 'wide'and 'long' formats.
+Here is part of the baselers dataframe
 
-Some functions require data to be in a certain shape.
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
 
-#### Two key tidyr functions
-
-| Function | Result |
-|:----------|:-------|
-|`gather()`|Move data from 'wide' to 'long' format|
-|`spread()`|Move data from 'long' to 'wide' format|
 
 ]
+
 
 .pull-right5[
 
-#### 'Wide' vs. 'Long' data
+How do I calculate the following table?
 
 ```{r, echo = FALSE}
-stock_w <- data.frame(id = c("a", "b", "c"),
-                 t1 = c(10, 20, 15),
-                 t2 = c(20, 26, 30))
-
-stock_l <- stock_w %>% 
-  gather(time, measure, -id)
-```
-
-```{r}
-# Wide format
-stock_w
-```
-
-```{r}
-# Long format
-stock_l
+baselers %>%
+  group_by(fasnacht) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
 ```
 
 ]
 
+
 ---
+# Test!
 
 .pull-left45[
 
-# `gather()`
+Here is part of the baselers dataframe
 
 ```{r}
-# Show wide data
-stock_w
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
 ```
 
-```{r}
-# "Gather" wide data to long
-stock_w %>% 
-  gather(time,    # New group column
-         measure, # New target column
-         -id)     # ID column
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = TRUE}
+baselers %>%
+  group_by(fasnacht) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
 ```
 
 ]
 
-.pull-right45[
 
-# `spread()`
+---
+# Test!
+
+.pull-left45[
+
+Here is part of the baselers dataframe
 
 ```{r}
-# Show long data
-stock_l
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
 ```
 
 
-```{r}
-# "Spread" long data to wide
-stock_l %>% 
-  spread(time,    # Old group column
-         measure) # Old target column
+]
+
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = FALSE}
+baselers %>%
+  group_by(fasnacht, sex) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
 ```
 
 ]
 
+
+
+---
+# Test!
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = TRUE}
+baselers %>%
+  group_by(fasnacht, sex) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
+```
+
+]
+
+
+---
+# Test!
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = FALSE}
+baselers %>%
+  filter(sex == "male") %>%
+  group_by(fasnacht, sex) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
+```
+
+]
+
+
+
+
+---
+# Test!
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = TRUE}
+baselers %>%
+  filter(sex == "male") %>%
+  group_by(fasnacht, sex) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    income_mean = mean(income, na.rm = TRUE)
+  )
+```
+
+]
 
 ---
 
@@ -851,13 +565,13 @@ stock_l %>%
 
 .pull-left4[
 
-1 - Start by assigning your result to a new object to save it!
+1 - To calculate summary statistics across all rows, use `summarise()`
 
-2 - "Keep the pipe <high>%>%</high> going" to continue working with your data frame.
+2 - To calculate grouped summary statistics, use `group_by()` and then `summarise()`
 
-3 - The output of dplyr functions will (almost) always be a <high>tibble</high>.
+3 - "Keep the pipe <high>%>%</high> going" to continue working with your data frame.
 
-4 - You can almost always include <high>multiple operations</high> within each function.
+4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating
 
 ]
 
@@ -895,6 +609,6 @@ baslers_agg <- baselers %>%
 
 <p>
   <font size=6>
-    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Wrangling/Wrangling_practical.html"><b>Link to practical<b></a>
+    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Analysing/Analysing_practical.html"><b>Link to practical<b></a>
   </font>
 </p>
