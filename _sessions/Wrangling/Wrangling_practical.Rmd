@@ -211,7 +211,6 @@ baselers <- baselers %>%
               filter(sex == "m")                  # Only include males
 ```
 
-
 ### B - Change column names with rename()
 
 1. Print the names of the `trial_act` data with `names(XXX)`
@@ -405,7 +404,6 @@ trial_act <- trial_act %>%
 
 1. Using the `arrange()` function, arrange the `trial_act` data in ascending order of `age_y` (from lowest to highest). After you do, print the data to make sure it worked!
 
-
 ```{r, echo = TRUE}
 trial_act <- trial_act %>% 
  arrange(XXX)
@@ -429,7 +427,6 @@ trial_act
 ```
 
 3. You can sort the rows of dataframes with multiple columns by including many arguments to `arrange()`. Now sort the data by arms (`arms`) and then age_y (`age_y`). Print the result to make sure it looks right!
-
 
 ```{r, echo = TRUE, eval = FALSE}
 trial_act <- trial_act %>% 
