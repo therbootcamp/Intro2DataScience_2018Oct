@@ -952,7 +952,7 @@ mean(subset((tibble(c('a','b'),runif(1000,
 ```{r, eval=F}
 # create my data.frame
 my_data <- tibble('group' = c('a','b'), 
-                  'value' = runif(1000,0,1))
+                  'value' = runif(1000, 0, 1))
 
 # subset data to group a
 # and compute average value
