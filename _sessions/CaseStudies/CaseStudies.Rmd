@@ -43,7 +43,7 @@ Work on one or both case studies designed to repeat the central elements of <hig
 
 ## Clinical trial
 
-Analyse a clinical trial comparing the effectiveness of drugs on reducing histamine.<br>
+Analyse a clinical trial comparing the effectiveness of clinical drugs.<br>
 
 ```{r, echo = FALSE}
 knitr::include_graphics("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_hbV6L48NKZ-eU39RAx0Lb02lb0LC6ftxSQcwOq6Lf0C6m9Fd")

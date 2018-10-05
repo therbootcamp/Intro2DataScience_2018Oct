@@ -182,7 +182,7 @@ biomarker_df <- read_csv("XXX/XXX")
 ```
 
 
-```{r, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
 ## read in datasets
 trial_df <- read_csv("_sessions/CaseStudies/1_Data/dimarta_trial.csv")
 demographics_df <- read_csv("_sessions/CaseStudies/1_Data/dimarta_demographics.csv")
@@ -202,15 +202,31 @@ biomarker_df
 
 1. Using `rename()`, change the name of the column `arm` in the `trial_df` data to `StudyArm`.
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
+trial_df <- XXX %>%
+  rename(XXX = XXX)
+```
+
+```{r, eval = TRUE}
 trial_df <- trial_df %>%
   rename(StudyArm = arm)
 ```
 
 2. Using the `table()` function, look at the values of the `StudyArm` column in `trial_df`. You'll notice the values are 1, 2, and 3. Using `mutate()` and `case_when()` change these values to the appropriate names of the study arms (look at the variable descriptions to see which is which!)
 
-```{r}
-table(trial_df$StudyArm)
+```{r, echo = TRUE, eval = FALSE}
+table(XXX$XXX)
+
+trial_df <- trial_df %>%
+  mutate(XXX = case_when(
+    XXX == 1 ~ "XXX",
+    XXX == 2 ~ "XXX",
+    XXX == 3 ~ "XXX"
+  ))
+```
+
+```{r, eval = TRUE}
+# table(trial_df$StudyArm)
 
 trial_df <- trial_df %>%
   mutate(StudyArm = case_when(
@@ -222,6 +238,15 @@ trial_df <- trial_df %>%
 
 
 3. In the `demographics_df` data, you'll see that gender is coded as 0 and 1. Using `mutate()` create a *new* column in `demographics_df` called `gender_c` that shows gender as a string, where 0 = "male", and 1 = "female".
+
+```{r, echo = TRUE, eval = FALSE}
+demographics_df <- demographics_df %>%
+  mutate(gender_c = case_when(
+              XXX == 0 ~ "XXX",
+              XXX == 1 ~ "XXX"
+            ))
+```
+
 
 ```{r}
 demographics_df <- demographics_df %>%
@@ -239,7 +264,7 @@ dimarta_df <- trial_df %>%
   left_join(XXX)
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
 # Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df <- trial_df %>%
   left_join(demographics_df)
@@ -247,17 +272,16 @@ dimarta_df <- trial_df %>%
 
 5. You'll notice that the `biomarker_df` dataframe is in the 'long' format, where each row is a patient's biomarker result. Using the code below, making use of the `spread()` function, create a new dataframe called `biomarker_wide_df` where each row is a patient, and the results from different biomarkers are in different columns. When you finish, look at `biomarker_wide_df` to see how it looks!
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = TRUE}
 # Convert biomarker_df to a wide format using spread()
 biomarker_wide_df <- biomarker_df %>%
   spread(Biomarker, BiomarkerStatus)
 
-biomarker_wide_df
 ```
 
 6. Now, using the `left_join` function, add the `biomarker_wide_df` data  to the `dimarta_df` data! Now you should have all of the data in a single dataframe called `dimarta_df`
 
-```{r}
+```{r, eval = TRUE, message = FALSE}
 dimarta_df <- dimarta_df %>% 
   left_join(biomarker_wide_df)
 ```
@@ -315,15 +339,11 @@ dimarta_df %>%
 
 12. Using `mutate()`, add a new column to the `dimarta_df` data called `histamine_change` that shows the *change* in patient's histamine levels from the start to the end of the trial (Hint: just subtract `histamine_start` from `histamine_end`!)
 
-```{r}
+```{r, eval = TRUE}
 dimarta_df <- dimarta_df %>%
   mutate(
     histamine_change = histamine_end - histamine_start
   )
-
-# Look at result
-dimarta_df %>% 
-  select(histamine_change)
 ```
 
 13. Using `mutate()` again, add a new column to `dimarta_df` called `qol_change` that shows the change in patient's quality of life.
@@ -412,7 +432,7 @@ dimarta_df %>%
 
 ## D - Plotting
 
-1. Run the following code block to visualise the relationship between study arm and histamine change. What do you find?
+1. Use the following template to create boxplots showing the relationship between study arm and histamine change.
 
 ```{r, echo = TRUE}
 ggplot(data = XXX,
@@ -424,7 +444,7 @@ ggplot(data = XXX,
        caption = "XX")
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 ggplot(data = dimarta_df,
        mapping = aes(x = StudyArm, 
                      y = histamine_change)) +
@@ -436,7 +456,7 @@ ggplot(data = dimarta_df,
 
 2. Try using `geom_jitter()` to add the raw points to the plot
 
-```{r}
+```{r, eval = TRUE}
 ggplot(data = dimarta_df,
        mapping = aes(x = StudyArm, 
                      y = histamine_change)) +
@@ -450,4 +470,28 @@ ggplot(data = dimarta_df,
 3. Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?
 
 4. Now create the same plot but show both gender and study arm in the same plot. One way to do this would be to color the points by gender!
+
+5. Is there a correlation between patient's starting and ending histamiine levels? Create a scatterplot with a regression line to find out!
+
+```{r, echo = TRUE}
+ggplot(data = XXX,
+       aes(x = XXX, y = XXX)) +
+  geom_XXX() + 
+  geom_XXX() +
+  labs(title = "XXX",
+       caption = "XXX")
+```
+
+
+
+```{r, eval = TRUE, message = FALSE}
+ggplot(data = dimarta_df,
+       aes(x = histamine_start, 
+           y = histamine_end)) +
+  geom_point() + 
+  geom_smooth() +
+  labs(title = "Histamine start and end correlation",
+       caption = "Dimarta")
+```
+
 
