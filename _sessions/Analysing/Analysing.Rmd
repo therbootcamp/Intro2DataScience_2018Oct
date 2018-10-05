@@ -23,7 +23,6 @@ layout: true
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
-
 ---
   
 ```{r, eval = FALSE, echo = FALSE, message=FALSE}
@@ -352,9 +351,11 @@ baselers %>%
 ]
 
 ---
+
 # Test!
 
 .pull-left45[
+
 
 Here is part of the baselers dataframe
 
@@ -386,6 +387,7 @@ baselers %>%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -420,6 +422,7 @@ baselers %>%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -455,6 +458,7 @@ baselers %>%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -489,6 +493,7 @@ baselers %>%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -526,6 +531,7 @@ baselers %>%
 
 
 ---
+
 # Test!
 
 .pull-left45[
@@ -540,7 +546,6 @@ baselers %>%
 
 
 ]
-
 
 .pull-right5[
 
@@ -558,6 +563,153 @@ baselers %>%
 ```
 
 ]
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+Here are some common functions that come with the `stats` package
+
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+
+]
+
+
+.pull-right65[
+
+<br>
+
+Specify dependent and independent variables with <high>formula</high>
+
+- `formula = DV ~ IV1 + IV2 + ...`
+
+Use `lm()` to create a regression object
+
+
+```{r}
+# Create regression model predicting income
+income_lm <- lm(formula = income ~ age + height + children,
+                data = baselers)
+
+# What is in this object?
+names(income_lm)
+
+# Print coefficients
+income_lm$coefficients
+```
+
+
+]
+
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+Here are some common functions that come with the `stats` package
+
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+
+]
+
+
+.pull-right65[
+
+<br>
+
+Specify dependent and independent variables with <high>formula</high>
+
+- `formula = DV ~ IV1 + IV2 + ...`
+
+Use `t.test()` to create a hypothesis test object
+
+
+```{r}
+# T-test comparing height by sex
+height_ttest <- t.test(formula = height ~ sex,
+                     data = baselers)
+
+# What is in this object?
+names(height_ttest)
+
+height_ttest$statistic # Print test statistic
+
+height_ttest$conf.int # Print confidence interval
+```
+
+
+]
+
+
+---
+
+.pull-left3[
+
+# Statistics
+
+What have we not covered yet? Statistics!
+
+R is full of amazing statistical functions and packages
+
+Here are some common functions that come with the `stats` package
+
+|Function|Procedure|
+|:-----|:----|
+|`lm()`|regression|
+|`t.test()`|t-test|
+|`cor.test()`|correlation test|
+
+Each of these functions returns a list object with many named elements
+
+]
+
+.pull-right65[
+<br><br>
+<high>Tip!</high>
+Use the `tidy()` function from the `broom` package to create nice looking tables from statistical objects 
+```{r}
+library(broom)
+
+# Create regression mdoel predicting income
+income_lm <- lm(formula = income ~ age + height + children,
+                data = baselers)
+
+tidy(income_lm)
+
+```
+
+
+]
+
+
 
 ---
 
