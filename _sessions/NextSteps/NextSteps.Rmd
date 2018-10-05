@@ -40,57 +40,18 @@ options(digits = 4)
 ```
 
 
-.pull-left3[
-  <br>
-  <p align = "left">
-  <font style="font-size:50px">After<br><high>2 days,<br>6 units,<br>16 hours</high><br>with R</font><br2><br><br>
-  <font style="font-size:50px"><i>You have<br>learned a <br>lot!</i></font>
-  </p>
-]
-
-
-.pull-right7[
-<p align = "center">
-<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="580" align="center">
-</p>
-
-]
-
----
-
-.pull-left3[
-  <br>
-  <p align = "left">
-  <font style="font-size:50px">After<br><high>2 days,<br>6 units,<br>16 hours</high><br>with R</font><br2><br><br>
-  <font style="font-size:50px"><i>Your R<br>journey<br>continues!</i></font>
-  </p>
-]
-
-
-.pull-right7[
-<br><br>
-<p align = "center">
-<img src="https://78.media.tumblr.com/tumblr_macjsqTA8p1qcg119o1_r3_400.gif" height="500" align="center">
-</p>
-
-]
-
-
----
-
 # Next steps
 
 .pull-left4[
 <font size = 4><i>What we would have liked to cover</i><br>
 <font size = 6>
 1. Networks<br>
-2. Bayesian stats<br>
-3. Text analysis<br>
-4. Statistics<br>
+2. Statistics<br>
+3. Machine learning<br>
+4. Text analysis<br>
 5. Rcpp<br>
 6. Forms<br>
-7. Github<br>
-8. R on servers<br>
+7. R on servers<br>
 </font>
 <br>
 
@@ -108,40 +69,6 @@ options(digits = 4)
 </p>
 ]
 
----
-
-# Network analysis
-
-A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html), an extremely powerful library for network analysis. Find the code and additional explanations [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
-
-.pull-left[
-  <p align="center"><img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&w=450" width=450><br>
-  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
-  ]
-
-.pull-right[
-<p align="center">
-<br><br>
-  <img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&w=450" width=450><br><br><br>
-  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
-  ]
-
----
-
-# Text analysis
-
-Another area were R has seen much development is <high>text analysis</high>. New packages provide access to lightning fast <high>C++ string libraries</high>, typical data formats for text such as <high>`html`</high>, <high>xml</high>, and <high>json</high>, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
-<br><br>
-
-| Package| Description| 
-|:------|:------------|
-| [`tm`](https://cran.r-project.org/web/packages/tm/index.html), [`tidytext`](https://cran.r-project.org/package=tidytext)  | General text analysis packages  |
-| `stringr`, `stringi`  | String operations and regular expressions. |
-| `rvest`, `XML`  | Scraping content of the internet|
-| `text2vec`| Create vector representation of words. |
-| `SentimentAnalysis`| Sentiment analysis.|
-| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
-| `Rfacebook`| Accessing the Facebook API. |
 
 ---
 
@@ -163,42 +90,6 @@ Another area were R has seen much development is <high>text analysis</high>. New
 | `rjags`, `rstan`| Bayesian graphical models.|
 | `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
 | `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
-
----
-
-# Deep learning
-
-<img src="https://cdn-images-1.medium.com/max/1600/1*R9Vd96dBUU2fJO9dnK0igA.png">
-
----
-
-# Deep learning: Tensorflow
-
-.pull-left5[
-```{r, eval = F}
-# Get Keras
-install.packages(keras)
-library(keras)
-install_keras()
-
-# Define model
-model <- keras_model_sequential() 
-model %>% 
-  layer_dense(units = 256,
-              activation = 'relu', 
-              input_shape = c(784)) %>% 
-  layer_dropout(rate = 0.4) %>% 
-  layer_dense(units = 128, 
-              activation = 'relu') %>%
-  layer_dropout(rate = 0.3) %>%
-  layer_dense(units = 10, 
-              activation = 'softmax')
-```
-]
-
-.pull-right45[
-<a href="https://tensorflow.rstudio.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TensorFlowLogo.svg/2000px-TensorFlowLogo.svg.png" height = 400></a>
-]
 
 
 ---
@@ -247,6 +138,84 @@ ttestBF(x, y)
 ```
 ]
 
+---
+
+# Machine learning
+
+
+---
+
+# Deep learning
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*R9Vd96dBUU2fJO9dnK0igA.png">
+
+---
+
+# Deep learning: Tensorflow
+
+.pull-left5[
+```{r, eval = F}
+# Get Keras
+install.packages(keras)
+library(keras)
+install_keras()
+
+# Define model
+model <- keras_model_sequential() 
+model %>% 
+  layer_dense(units = 256,
+              activation = 'relu', 
+              input_shape = c(784)) %>% 
+  layer_dropout(rate = 0.4) %>% 
+  layer_dense(units = 128, 
+              activation = 'relu') %>%
+  layer_dropout(rate = 0.3) %>%
+  layer_dense(units = 10, 
+              activation = 'softmax')
+```
+]
+
+.pull-right45[
+<a href="https://tensorflow.rstudio.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TensorFlowLogo.svg/2000px-TensorFlowLogo.svg.png" height = 400></a>
+]
+
+
+---
+
+# Text analysis
+
+Another area were R has seen much development is <high>text analysis</high>. New packages provide access to lightning fast <high>C++ string libraries</high>, typical data formats for text such as <high>`html`</high>, <high>xml</high>, and <high>json</high>, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
+<br><br>
+
+| Package| Description| 
+|:------|:------------|
+| [`tm`](https://cran.r-project.org/web/packages/tm/index.html), [`tidytext`](https://cran.r-project.org/package=tidytext)  | General text analysis packages  |
+| `stringr`, `stringi`  | String operations and regular expressions. |
+| `rvest`, `XML`  | Scraping content of the internet|
+| `text2vec`| Create vector representation of words. |
+| `SentimentAnalysis`| Sentiment analysis.|
+| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
+| `Rfacebook`| Accessing the Facebook API. |
+
+
+---
+
+# Network analysis
+
+A <high>social graph</high> of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html), an extremely powerful library for network analysis. Find the code and additional explanations [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
+
+.pull-left[
+  <p align="center"><img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&w=450" width=450><br>
+  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
+  ]
+
+.pull-right[
+<p align="center">
+<br><br>
+  <img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&w=450" width=450><br><br><br>
+  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
+  ]
+
 
 ---
 
@@ -267,7 +236,6 @@ By now one of the most referenced R packages is Rcpp - <high>R's interface to C+
   <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Rcpp.png" width=480><br><br2>
   <font size=2><a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf">Quick Reference Guide</a></p>
 ]
-
 
 
 ---
@@ -292,10 +260,7 @@ ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 ]
 
 
-
-
 ---
-
 
 # R on servers
 
@@ -314,6 +279,19 @@ With the need for more computing power for, e.g., machine learning, R is also mo
   <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rserver_square.png" width=330>
 
 ]
+
+---
+
+# Remote databases
+
+R provides <high>all necessary tools to pull data from or directly work with</high> remote databases such as, e.g., a `SQL` database. Find out more at:
+
+<br><br>
+<div class="center_text_2">
+  <span>
+  <a href="https://db.rstudio.com/">db.rstudio.com</a>
+  </span>
+</div> 
 
 
 ---
@@ -529,27 +507,26 @@ Feel free to contact us.
 
 .pull-left[
 
-
-## Introduction to Data Science with R
-
-<img src="image/data_science.png" height="260px" width="480px"></img>
-
-<high>Early October</high>, probably October 6 & 7
-
-<high>2 days</high> (covering roughly the first 2.5 days of the bootcamp)
-
-]
-
-.pull-right[
-
 ## Applied Machine Learning with R
 
 <img src="image/machine_learning.png" height="260px" width="480px"></img>
 
 <high>Mid January</high>, probably January 11-13
 
-<high>2-3 days</high> (covering ~ the first 2.5 days of the bootcamp)
+<high>2 days</high>
 
+]
+
+.pull-right[
+
+
+## Statistics with R
+
+<img src="https://therbootcamp.github.io/assets/img/statistics3.png" height="260px" width="480px"></img>
+
+<high>Early October</high>, probably October 6 & 7
+
+<high>2 days</high> 
 
 ]
 

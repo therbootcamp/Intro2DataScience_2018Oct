@@ -18,46 +18,21 @@ class: center, middle, inverse, title-slide
 ---
 
 
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Introduction to Data Science with R, October 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt; 
 
 
-
-.pull-left3[
-  &lt;br&gt;
-  &lt;p align = "left"&gt;
-  &lt;font style="font-size:50px"&gt;After&lt;br&gt;&lt;high&gt;2 days,&lt;br&gt;6 units,&lt;br&gt;16 hours&lt;/high&gt;&lt;br&gt;with R&lt;/font&gt;&lt;br2&gt;&lt;br&gt;&lt;br&gt;
-  &lt;font style="font-size:50px"&gt;&lt;i&gt;You have&lt;br&gt;learned a &lt;br&gt;lot!&lt;/i&gt;&lt;/font&gt;
-  &lt;/p&gt;
-]
-
-
-.pull-right7[
-&lt;p align = "center"&gt;
-&lt;img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Oct_Intro2DS.png?raw=true" height="580" align="center"&gt;
-&lt;/p&gt;
-
-]
 
 ---
 
-.pull-left3[
-  &lt;br&gt;
-  &lt;p align = "left"&gt;
-  &lt;font style="font-size:50px"&gt;After&lt;br&gt;&lt;high&gt;2 days,&lt;br&gt;6 units,&lt;br&gt;16 hours&lt;/high&gt;&lt;br&gt;with R&lt;/font&gt;&lt;br2&gt;&lt;br&gt;&lt;br&gt;
-  &lt;font style="font-size:50px"&gt;&lt;i&gt;Your R&lt;br&gt;journey&lt;br&gt;continues!&lt;/i&gt;&lt;/font&gt;
-  &lt;/p&gt;
-]
 
 
-.pull-right7[
-&lt;br&gt;&lt;br&gt;
-&lt;p align = "center"&gt;
-&lt;img src="https://78.media.tumblr.com/tumblr_macjsqTA8p1qcg119o1_r3_400.gif" height="500" align="center"&gt;
-&lt;/p&gt;
-
-]
-
-
----
 
 # Next steps
 
@@ -65,13 +40,12 @@ class: center, middle, inverse, title-slide
 &lt;font size = 4&gt;&lt;i&gt;What we would have liked to cover&lt;/i&gt;&lt;br&gt;
 &lt;font size = 6&gt;
 1. Networks&lt;br&gt;
-2. Bayesian stats&lt;br&gt;
-3. Text analysis&lt;br&gt;
-4. Statistics&lt;br&gt;
+2. Statistics&lt;br&gt;
+3. Machine learning&lt;br&gt;
+4. Text analysis&lt;br&gt;
 5. Rcpp&lt;br&gt;
 6. Forms&lt;br&gt;
-7. Github&lt;br&gt;
-8. R on servers&lt;br&gt;
+7. R on servers&lt;br&gt;
 &lt;/font&gt;
 &lt;br&gt;
 
@@ -89,40 +63,6 @@ class: center, middle, inverse, title-slide
 &lt;/p&gt;
 ]
 
----
-
-# Network analysis
-
-A &lt;high&gt;social graph&lt;/high&gt; of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html), an extremely powerful library for network analysis. Find the code and additional explanations [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
-
-.pull-left[
-  &lt;p align="center"&gt;&lt;img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&amp;w=450" width=450&gt;&lt;br&gt;
-  &lt;font size=2&gt;source &lt;a href="https://www.r-bloggers.com/exploring-the-cran-social-network/"&gt;R-bloggers.com&lt;/a&gt;&lt;/p&gt;
-  ]
-
-.pull-right[
-&lt;p align="center"&gt;
-&lt;br&gt;&lt;br&gt;
-  &lt;img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&amp;w=450" width=450&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;font size=2&gt;source &lt;a href="https://www.r-bloggers.com/exploring-the-cran-social-network/"&gt;R-bloggers.com&lt;/a&gt;&lt;/p&gt;
-  ]
-
----
-
-# Text analysis
-
-Another area were R has seen much development is &lt;high&gt;text analysis&lt;/high&gt;. New packages provide access to lightning fast &lt;high&gt;C++ string libraries&lt;/high&gt;, typical data formats for text such as &lt;high&gt;`html`&lt;/high&gt;, &lt;high&gt;xml&lt;/high&gt;, and &lt;high&gt;json&lt;/high&gt;, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
-&lt;br&gt;&lt;br&gt;
-
-| Package| Description| 
-|:------|:------------|
-| [`tm`](https://cran.r-project.org/web/packages/tm/index.html), [`tidytext`](https://cran.r-project.org/package=tidytext)  | General text analysis packages  |
-| `stringr`, `stringi`  | String operations and regular expressions. |
-| `rvest`, `XML`  | Scraping content of the internet|
-| `text2vec`| Create vector representation of words. |
-| `SentimentAnalysis`| Sentiment analysis.|
-| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
-| `Rfacebook`| Accessing the Facebook API. |
 
 ---
 
@@ -144,6 +84,56 @@ Another area were R has seen much development is &lt;high&gt;text analysis&lt;/h
 | `rjags`, `rstan`| Bayesian graphical models.|
 | `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
 | `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
+
+
+---
+
+# Bayesian statistics
+
+.pull-left5[
+Recent years several convenient and efficient packages for &lt;high&gt;Bayesian statistics&lt;/high&gt; have been developed, facilitating a shift to a more informative and consistent statistical framework. &lt;br&gt;&lt;br2&gt;
+Using these packages is oftentimes &lt;high&gt;as easy as using their Frequentist counterparts&lt;/high&gt;. See in particular the [BayesFactor](http://bayesfactorpcl.r-forge.r-project.org/) package.  
+
+&lt;br&gt;
+&lt;p align="center"&gt;
+  &lt;img src="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg" width=350&gt;&lt;br&gt;
+  &lt;font size=2&gt;source &lt;a href="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg/"&gt;labtimes.org&lt;/a&gt;&lt;/p&gt;
+  ]
+
+.pull-right45[
+
+```r
+# load package
+library(BayesFactor)
+
+# define data
+x &lt;- rnorm(100, 0, 1)
+y &lt;- rnorm(100, 1, 1)
+
+# run Frequentist analysis
+t.test(x, y)
+
+# run Bayesian analysis
+ttestBF(x, y)
+```
+
+
+```
+## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 : 1.147e+10 ±0%
+## 
+## Against denominator:
+##   Null, mu1-mu2 = 0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+```
+]
+
+---
+
+# Machine learning
+
 
 ---
 
@@ -185,47 +175,39 @@ model %&gt;%
 
 ---
 
-# Bayesian statistics
+# Text analysis
 
-.pull-left5[
-Recent years several convenient and efficient packages for &lt;high&gt;Bayesian statistics&lt;/high&gt; have been developed, facilitating a shift to a more informative and consistent statistical framework. &lt;br&gt;&lt;br2&gt;
-Using these packages is oftentimes &lt;high&gt;as easy as using their Frequentist counterparts&lt;/high&gt;. See in particular the [BayesFactor](http://bayesfactorpcl.r-forge.r-project.org/) package.  
+Another area were R has seen much development is &lt;high&gt;text analysis&lt;/high&gt;. New packages provide access to lightning fast &lt;high&gt;C++ string libraries&lt;/high&gt;, typical data formats for text such as &lt;high&gt;`html`&lt;/high&gt;, &lt;high&gt;xml&lt;/high&gt;, and &lt;high&gt;json&lt;/high&gt;, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
+&lt;br&gt;&lt;br&gt;
 
-&lt;br&gt;
-&lt;p align="center"&gt;
-  &lt;img src="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg" width=350&gt;&lt;br&gt;
-  &lt;font size=2&gt;source &lt;a href="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg/"&gt;labtimes.org&lt;/a&gt;&lt;/p&gt;
+| Package| Description| 
+|:------|:------------|
+| [`tm`](https://cran.r-project.org/web/packages/tm/index.html), [`tidytext`](https://cran.r-project.org/package=tidytext)  | General text analysis packages  |
+| `stringr`, `stringi`  | String operations and regular expressions. |
+| `rvest`, `XML`  | Scraping content of the internet|
+| `text2vec`| Create vector representation of words. |
+| `SentimentAnalysis`| Sentiment analysis.|
+| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
+| `Rfacebook`| Accessing the Facebook API. |
+
+
+---
+
+# Network analysis
+
+A &lt;high&gt;social graph&lt;/high&gt; of package Co-authors using [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) plus [`ggraph`](https://cran.r-project.org/web/packages/ggraph/index.html), an extension for [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html) for graphs (aka networks) and [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html), an extremely powerful library for network analysis. Find the code and additional explanations [here](https://www.r-bloggers.com/exploring-the-cran-social-network/).
+
+.pull-left[
+  &lt;p align="center"&gt;&lt;img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&amp;w=450" width=450&gt;&lt;br&gt;
+  &lt;font size=2&gt;source &lt;a href="https://www.r-bloggers.com/exploring-the-cran-social-network/"&gt;R-bloggers.com&lt;/a&gt;&lt;/p&gt;
   ]
 
-.pull-right45[
-
-```r
-# load package
-library(BayesFactor)
-
-# define data
-x &lt;- rnorm(100, 0, 1)
-y &lt;- rnorm(100, 1, 1)
-
-# run Frequentist analysis
-t.test(x, y)
-
-# run Bayesian analysis
-ttestBF(x, y)
-```
-
-
-```
-## Bayes factor analysis
-## --------------
-## [1] Alt., r=0.707 : 90747624 ±0%
-## 
-## Against denominator:
-##   Null, mu1-mu2 = 0 
-## ---
-## Bayes factor type: BFindepSample, JZS
-```
-]
+.pull-right[
+&lt;p align="center"&gt;
+&lt;br&gt;&lt;br&gt;
+  &lt;img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&amp;w=450" width=450&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;font size=2&gt;source &lt;a href="https://www.r-bloggers.com/exploring-the-cran-social-network/"&gt;R-bloggers.com&lt;/a&gt;&lt;/p&gt;
+  ]
 
 
 ---
@@ -247,7 +229,6 @@ By now one of the most referenced R packages is Rcpp - &lt;high&gt;R's interface
   &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Rcpp.png" width=480&gt;&lt;br&gt;&lt;br2&gt;
   &lt;font size=2&gt;&lt;a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf"&gt;Quick Reference Guide&lt;/a&gt;&lt;/p&gt;
 ]
-
 
 
 ---
@@ -273,10 +254,7 @@ ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 ]
 
 
-
-
 ---
-
 
 # R on servers
 
@@ -295,6 +273,19 @@ With the need for more computing power for, e.g., machine learning, R is also mo
   &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rserver_square.png" width=330&gt;
 
 ]
+
+---
+
+# Remote databases
+
+R provides &lt;high&gt;all necessary tools to pull data from or directly work with&lt;/high&gt; remote databases such as, e.g., a `SQL` database. Find out more at:
+
+&lt;br&gt;&lt;br&gt;
+&lt;div class="center_text_2"&gt;
+  &lt;span&gt;
+  &lt;a href="https://db.rstudio.com/"&gt;db.rstudio.com&lt;/a&gt;
+  &lt;/span&gt;
+&lt;/div&gt; 
 
 
 ---
@@ -510,27 +501,26 @@ Feel free to contact us.
 
 .pull-left[
 
-
-## Introduction to Data Science with R
-
-&lt;img src="image/data_science.png" height="260px" width="480px"&gt;&lt;/img&gt;
-
-&lt;high&gt;Early October&lt;/high&gt;, probably October 6 &amp; 7
-
-&lt;high&gt;2 days&lt;/high&gt; (covering roughly the first 2.5 days of the bootcamp)
-
-]
-
-.pull-right[
-
 ## Applied Machine Learning with R
 
 &lt;img src="image/machine_learning.png" height="260px" width="480px"&gt;&lt;/img&gt;
 
 &lt;high&gt;Mid January&lt;/high&gt;, probably January 11-13
 
-&lt;high&gt;2-3 days&lt;/high&gt; (covering ~ the first 2.5 days of the bootcamp)
+&lt;high&gt;2 days&lt;/high&gt;
 
+]
+
+.pull-right[
+
+
+## Statistics with R
+
+&lt;img src="https://therbootcamp.github.io/assets/img/statistics3.png" height="260px" width="480px"&gt;&lt;/img&gt;
+
+&lt;high&gt;Early October&lt;/high&gt;, probably October 6 &amp; 7
+
+&lt;high&gt;2 days&lt;/high&gt; 
 
 ]
 

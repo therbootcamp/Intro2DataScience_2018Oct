@@ -16,10 +16,10 @@ output: html_document
 
 |  | Day 1<br>Preparation| Day 2<br>Analysis| 
 |:--|:-------------|:-------------|
-|0| Welcome!<br>[slides](_sessions/Welcome/Welcome.html) | Recap<br>[slides](_sessions/RecapI/RecapI.html)|
+|0| Welcome!<br>[slides](_sessions/Welcome/Welcome.html) | Recap<br>[slides](_sessions/Recap/Recap.html)|
 |1| Intro to R<br>[slides](_sessions/IntroToR/IntroToR.html), [practical](_sessions/IntroToR/IntroToR_interactive.R) | Analysing <br>[slides](_sessions/Analysing/Analysing.html), [practical](_sessions/Analysing/Analysing_practical.html) |
 |2|  Data <br>[slides](_sessions/Data/Data.html), [practical](_sessions/Data/Data_practical.html)| Plotting<br>[slides](_sessions/Statistics/Statistics.html), [practical](_sessions/Statistics/Statistics_practical.html)|
-|3|   Wrangling<br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) |Case Studies<br>[slides](_sessions/CaseStudies/CaseStudies.html)<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)|
+|3|   Wrangling<br>[slides](_sessions/Wrangling/Wrangling.html), [practical](_sessions/Wrangling/Wrangling_practical.html) |Case Studies<br>[Intro](_sessions/CaseStudies/CaseStudies.html)<br>[1: Clinical Trial](_sessions/CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/CaseStudies/Financial_Data_Case_Study.html)|
 
 <br>
 
