@@ -1153,64 +1153,6 @@ combined_df %&gt;%
 ]
 
 
----
-
-# Grouped Aggregation
-
-&lt;p align="center"&gt;
-  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/summarsed_data_diagram.png" height="470px"&gt;
-&lt;/p&gt; 
-
-
-
----
-
-# `group_by()`, `summarise()`
-
-.pull-left45[
-
-Use `group_by()` to &lt;high&gt;group data&lt;/high&gt; according to one or more columns
-
-After grouping data, use `summarise()` to &lt;high&gt;calculate summary statistics&lt;/high&gt; across groups of data
-
-&lt;u&gt;Statistical functions&lt;/u&gt;
-
-| Function| Purpose |
-|:-------------|:---|
-| `n()`| Number of cases in each group|
-| `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
-]
-
-.pull-right45[
-
-
-
-
-
-```r
-# Group data by arm, and calculate many
-#  summary statistics
-combined_df %&gt;%
-  group_by(arm) %&gt;%
-  summarise(
-    N = n(),
-    age_mean = mean(age),
-    t1_mean = mean(t1, na.rm = TRUE),
-    t2_mean = mean(t2, na.rm = TRUE)
-  )
-```
-
-```
-## # A tibble: 2 x 5
-##   arm         N age_mean t1_mean t2_mean
-##   &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 drug        3     55.7    143      140
-## 2 placebo     2     35.5    112.     120
-```
-
-
-]
-
 
 ---
 
@@ -1412,23 +1354,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -949,59 +949,6 @@ combined_df %>%
 ]
 
 
----
-
-# Grouped Aggregation
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/summarsed_data_diagram.png" height="470px">
-</p> 
-
-
-
----
-
-# `group_by()`, `summarise()`
-
-.pull-left45[
-
-Use `group_by()` to <high>group data</high> according to one or more columns
-
-After grouping data, use `summarise()` to <high>calculate summary statistics</high> across groups of data
-
-<u>Statistical functions</u>
-
-| Function| Purpose |
-|:-------------|:---|
-| `n()`| Number of cases in each group|
-| `mean()`, `median()`, `max()`, `min()` `sum()` | Summary stats|
-]
-
-.pull-right45[
-
-```{r, echo = FALSE}
-combined_df <- combined_df %>%
-  select(id, age, arm_char, t1, t2) %>%
-  rename(arm = arm_char)
-```
-
-
-```{r}
-# Group data by arm, and calculate many
-#  summary statistics
-combined_df %>%
-  group_by(arm) %>%
-  summarise(
-    N = n(),
-    age_mean = mean(age),
-    t1_mean = mean(t1, na.rm = TRUE),
-    t2_mean = mean(t2, na.rm = TRUE)
-  )
-```
-
-
-]
-
 
 ---
 
