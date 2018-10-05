@@ -17,9 +17,11 @@ layout: true
 
 <div class="my-footer"><span>
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Introduction to Data Science with R, July 2018</font></a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
+
 
 
 ---
@@ -211,7 +213,7 @@ knitr::include_graphics("https://www.r-graph-gallery.com/wp-content/uploads/2014
 
 This plot would take <high>a lot of code in Base R</high> but <high>just 10 lines of code</high>, 5 of which controlling the labels, in `ggplot2`.
 
-```{r, echo = FALSE, fig.width=5, fig.height = 3.9}
+```{r, echo = FALSE, fig.width=7, fig.height = 4.5}
 # Add a regression line for all classes
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
   geom_point(size = 3, alpha = .9) + 
@@ -346,7 +348,7 @@ ggplot(data = mpg)
 # `ggplot`
 
 
-.pull-left4[
+.pull-left45[
 
 An <high>aesthetic mapping</high> is a visual property of the objects in your plot. 
 
@@ -364,7 +366,7 @@ Common aesthetics are...
 
 ]
 
-.pull-right5[
+.pull-right45[
 
 ```{r, fig.width = 6, fig.height = 4.5}
 ggplot(data = mpg,
@@ -375,7 +377,7 @@ ggplot(data = mpg,
 
 ---
 
-# Adding elements to plots with '+'
+# Adding elements to plots with `+`
 
 .pull-left45[
 
@@ -393,7 +395,7 @@ ggplot(data = mpg,
 ]
 
 
-.pull-right5[
+.pull-right45[
 
 
 ```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
@@ -429,9 +431,9 @@ Common geoms are...
 
 ]
 
-.pull-right5[
+.pull-right45[
 
-```{r, echo = FALSE, fig.width = 5, fig.height = 4, out.width = "90%"}
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy)) + 
   geom_point()
@@ -451,7 +453,7 @@ ggplot(data = mpg,
 ## `geom_boxplot`
 <br>
 
-```{r, out.width= "100%", fig.width = 6, fig.height = 4}
+```{r, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
   mapping = aes(x = class,
                 y = hwy)) + 
@@ -522,7 +524,7 @@ ggplot(data = mpg,
 
 `color` geoms according to a variable. 
 
-```{r, out.width = "100%", fig.width = 6, fig.height = 4, eval = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, eval = FALSE}
 ggplot(data = mpg,
        mapping = aes(x = displ,
                      y = hwy,
@@ -542,7 +544,7 @@ knitr::kable(mpg %>% sample_n(5) %>% select(displ, hwy, class, year), format = "
 .pull-right5[
 
 <br>
-```{r, out.width = "100%", fig.width = 6, fig.height = 4, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy, color = class)) + 
   geom_point()
@@ -558,7 +560,7 @@ ggplot(data = mpg,
 
 .pull-left45[
 
-```{r, fig.width = 7, height = 7, echo = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = F}
 ggplot(data = mpg,
        mapping = aes(x = displ, 
                      y = hwy, 
@@ -572,7 +574,7 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-```{r, fig.width = 7, height = 7, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 # Add a regression line for all classes
 
 ggplot(data = mpg, 
@@ -603,7 +605,7 @@ Change how the line is created with `method` (e.g.; method = 'lm').
 Color the line with `col`.
 
 <br>
-```{r, fig.width = 7, height = 7, eval = F}
+```{r, fig.width = 7, fig.height = 5.5, eval = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy,
                      col = class)) +
@@ -616,7 +618,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 
-```{r, fig.width = 7, height = 7, echo = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy,
                      col = class)) +
@@ -639,7 +641,7 @@ Change how the line is created with `method` (e.g.; method = 'lm')
 Color the line with `col`
 
 <br>
-```{r, fig.width = 7, height = 7, eval = F}
+```{r, fig.width = 7, fig.height = 5.5, eval = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy,
                      col = class)) +
@@ -653,7 +655,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 
-```{r, fig.width = 7, height = 7, echo = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, col = class)) +
   geom_point() + 
@@ -674,7 +676,7 @@ If you add additional plotting aesthetics, they will <high>override</high> the g
 This is what happens, when you don't override...
 
 <br>
-```{r, fig.width = 7, height = 7, eval = F}
+```{r, fig.width = 7, fig.height = 5.5, eval = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy,
                      col = class)) +
@@ -687,7 +689,7 @@ ggplot(data = mpg,
 .pull-right45[
 
 
-```{r, fig.width = 7, height = 7, echo = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = F}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, col = class)) +
   geom_point() + 
@@ -701,9 +703,9 @@ ggplot(data = mpg,
 
 # What's next?
 
-.pull-left5[
+.pull-left45[
 
-```{r, fig.width = 7, height = 6, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, col = class)) +
   geom_point() + 
@@ -716,7 +718,7 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-```{r, fig.width = 7, height = 7, echo = F}
+```{r, fig.width = 7, fig.height = 5.5, echo = F}
 # Add a regression line for all classes
 
 ggplot(data = mpg, 
@@ -763,7 +765,7 @@ ggplot(...) +
 
 .pull-right45[
 
-```{r, echo = FALSE, fig.width = 7, height = 7}
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
@@ -784,9 +786,9 @@ ggplot(data = mpg,
 
 # What's next?
 
-.pull-left5[
+.pull-left45[
 
-```{r, fig.width = 7, height = 6, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -804,7 +806,7 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-```{r, echo = FALSE, fig.width = 7, height = 7}
+```{r, echo = FALSE, fig.width = 7, fig.height = 5.5}
 # Add a regression line for all classes
 
 ggplot(data = mpg, 
@@ -854,7 +856,7 @@ ggplot(...) +
   theme_gray() # The Default theme
 ```
 
-```{r, fig.width = 8, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -902,7 +904,7 @@ ggplot(...) +
   theme_light()
 ```
 
-```{r, fig.width = 8, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -950,7 +952,7 @@ ggplot(...) +
   theme_void()
 ```
 
-```{r, fig.width = 8, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -1000,7 +1002,7 @@ ggplot(...) +
   theme_excel()
 ```
 
-```{r, fig.width = 8, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -1050,7 +1052,7 @@ ggplot(...) +
   theme_economist()
 ```
 
-```{r, fig.width = 8, echo = FALSE}
+```{r, fig.width = 7, fig.height = 5.5, echo = FALSE}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, 
                      col = class)) +
@@ -1069,7 +1071,7 @@ ggplot(data = mpg,
 
 ## Final result!
 
-```{r, fig.width = 7, fig.height = 4, out.width = "40%"}
+```{r, fig.width = 6, fig.height = 4}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, col = class)) +
   geom_point() + 
@@ -1265,7 +1267,7 @@ ggsave(filename = "myplot.pdf",
 
 # Practical
 
-<font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018July/_sessions/Plotting/Plotting.html">Link to practical</a>
+<font size=6><b><a href="https://therbootcamp.github.io/Intro2DataScience_2018Oct/_sessions/Plotting/Plotting.html">Link to practical</a>
 
 
 
