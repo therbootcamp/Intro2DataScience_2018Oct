@@ -28,11 +28,12 @@ options(digits = 3)
 
 ### Overview
 
-In this practical you'll practice grouping and analysing data with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
+In this practical, you'll practice grouping and analysing data with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
 
 By the end of this practical you will know how to:
 
 1. Group data and calculate summary statistics
+2. Run simple statistical analyses.
 
 ### Datasets
 
@@ -53,6 +54,8 @@ kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootc
 
 ### Glossary
 
+*Wrangling*
+
 | Function| Package | Description |
 |:---|:------|:---------------------------------------------|
 |     `rename()`|`dplyr`|    Rename columns| 
@@ -65,6 +68,14 @@ kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootc
 |     `left_join()`|`dplyr`|   Combine multiple data sets using a key column|
 |     `spread()`|`tidyr`|    Convert long data to wide format - from rows to columns| 
 |     `gather()`|`tidyr`|    Convert wide data to long format - from columns to rows|
+
+*Statistical Tests*
+
+| Function| Hypothesis Test|
+|:------|:-------------------|
+|     `t.test()`|    One and two sample t-test|
+|     `cor.test()`|    Correlation test|
+|     `glm()`, `lm()`|    Generalized linear model and linear model|
 
 ### Cheatsheet
 
@@ -121,6 +132,49 @@ bas_sex_ed <- baselers %>%
 baselers %>%
   group_by(sex, education) %>%
   summarise_if(is.numeric, mean, na.rm = TRUE)
+
+
+# Examples of hypothesis tests on the diamonds -------------
+
+library(tidyverse)
+library(broom)
+library(rsq)
+
+# First few rows of the diamonds data
+
+diamonds
+
+
+# 2-sample t- test ---------------------------
+
+# Q: Is there a difference in the carats of color = E and color = I diamonds?
+
+htest_B <- t.test(formula = carat ~ color,     # DV ~ IV
+                   alternative = "two.sided",  # Two-sided test
+                   data = diamonds,         # The data
+                   subset = color %in% c("E", "I")) # Compare Diet 1 and Diet 2
+
+htest_B  # Print result
+
+
+# Regression ----------------------------
+
+
+# Q: Create regression equation predicting price by carat, depth, table, and x
+
+price_glm <- glm(formula = price ~ carat + depth + table + x,
+                  data = diamonds)
+
+# Print coefficients
+price_glm$coefficients
+
+# Tidy version
+tidy(price_glm)
+
+# Extract R-Squared
+rsq(price_glm)
+
+
 ```
 
 # Tasks
@@ -509,7 +563,7 @@ price_glm$coefficients
 summary(price_glm)
 ```
 
-### F - Challenges
+### X - Challenges
 
 1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order) with `arrange()`, then select the first row with `slice()`. Once you find it, try searching for that zipcode on Google Maps and see if it's location makes sense!
 
