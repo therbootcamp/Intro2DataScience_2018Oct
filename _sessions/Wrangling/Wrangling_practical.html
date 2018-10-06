@@ -557,7 +557,7 @@ CD4_long</code></pre>
 10  10229     0 cd40    221
 # ... with 6,407 more rows</code></pre>
 <ol style="list-style-type: decimal">
-<li>Using the <code>spread()</code> function, create a new dataframe called <code>CD4_long</code> that shows the <code>CD4_wide</code> data in the ‘long’ format. To do this, use the following template. Set the grouping column to <code>time</code> and the new data column to <code>value</code>.</li>
+<li>Using the <code>gather()</code> function, create a new dataframe called <code>CD4_long</code> that shows the <code>CD4_wide</code> data in the ‘long’ format. To do this, use the following template. Set the grouping column to <code>time</code> and the new data column to <code>value</code>.</li>
 </ol>
 <pre class="r"><code>CD4_long &lt;- CD4_wide %&gt;% 
   gather(XX,  # New grouping column
