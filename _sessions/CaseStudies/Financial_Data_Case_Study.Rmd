@@ -98,7 +98,7 @@ library(tidyverse)
 
 2. Once you know what string value indicates missing data, us the `read_csv()` function to load in the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from your `1_Data` folder. In so doing, set an explicit `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" use a specific character string to represent missings in the data.  
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # Load index data from local data folder 
 dow <- read_csv(file = '1_Data/^DJI.csv')
 dax <- read_csv(file = '1_Data/^GDAXI.csv', na = 'XXX')  # 'XXX' means missing!
@@ -127,7 +127,7 @@ eur_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/euro-dollar.txt', del
 yen_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/yen-dollar.txt', delim = '\t')
 ```
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = FALSE}
 # Load exchange rate data from local data folder 
 eur_usd <- read_delim(file = 'XXX/XXX', 
                       delim = '\t')
@@ -140,7 +140,7 @@ yen_usd <- read_delim(file = 'XXX/XXX',
 
 5. There's something wrong, right? First, we want the columns to be called `Date` and `Rate` (and not be taken from the first row). To fix this, load the data again with the `col_names`-argument and assign to it a vector that contains the correct variable names. 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 eur_usd <- read_delim(file = 'XXX/XXX', 
                       delim = '\t',
                       col_names = c('XXX', 'XXX'))
@@ -181,7 +181,7 @@ yen_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/yen-dollar.txt', deli
 - Pipe (i.e., using `%>%`) together several `inner_join()`-functions, joining the data sets one-by-one using the `Date` variable. Note, in joining two data sets you can control the naming of overlapping variable names using the `suffix`-argument of the `inner_join()`-function. Observe that `inner_join()` takes care of the fact that different dates are available in each of the data sets by only retaining dates for which all data sets provide data on.  
 - At the end, rename the variables appropriately using the `rename()`-function. 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # Combine all datasets into one dataframe
 financial <- dow %>% 
   select(Date, Close) %>% 
@@ -206,7 +206,7 @@ financial <- dow %>%
 
 3. Create new variables containing the change in index price and exchange rate for each variable using the `mutate`-function(). To compute the change, use the `diff()`-function. Since `diff()` will return `n - 1` change values, add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # create variables representing day-to-day changes
 financial <- financial %>% 
   mutate(
@@ -234,7 +234,7 @@ financial <- financial %>%
 
 4. Create a variable containing only the year of the date variable using `mutate()` and `year()` from the `lubridate`-package (which is part of the `tidyverse`).
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # load lubridate
 library(lubridate)
 
@@ -254,7 +254,7 @@ financial <- financial %>%
 
 5. Currently your data is in the "wide" format. Let's convert it to the long format, in which variables occupy different rows rather than columns, using the `gather()`-function from the `tidyr`-package (also part of the `tidyverse`). To do this use the command below to create the `financial_long` data frame. You may have to (or want to) change the object/variable names. The first two arguments (given we used *pipes*) to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variable containing the dates and years with a leading hyphen. (Check out the example in the `?gather`-help file).
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # create long version of data frame
 financial_long <- financial %>% 
                 gather(XXX, 
@@ -302,7 +302,7 @@ ggplot(data = temp_data,
 
 2. Calculate the overall stock index price change per year. To do this, ise `group_by()`, `summarise()`, and `sum()` on the stock index change variables. Remember there were `NA`'s in two of the stock index price variables. When was the biggest drop in stock index prices?
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = FALSE}
 # calculate aggregate change per year
 aggregate_change <- financial %>% 
   group_by(XXX) %>% 
@@ -331,7 +331,7 @@ aggregate_change
 
 3. Now that you know when the biggest drop occured, let's find out which stock index suffered the biggest loss? To do this, compare the overall losses to the index price on the first trading day of that year. To do this, first identify the first date available for that year and then `filter()` the data based on the respective character string to retrieve that day's closing prices. Then divide the overall stock price change by that years first closing price. Which stock index suffered the greatest relative loss?  
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = FALSE}
 aggregate_change %>% 
   filter(year == 2008) %>% 
   select(-1) / data %>% 
@@ -349,7 +349,7 @@ aggregate_change %>%
 
 4. One driver behind the results observed for the last two tasks is that modern financial markets are closely intertwined, to the extent that a change in one market can bring about a change in the markets. Evaluate this aspect of financial markets by correlating the stock index change variables among each other using `cor()`. Note that `cor()` can take a data frame as an argument to produce the full correlation matrix among all variables. Also, don't forget about the `NA`s - there is an argument for `cor()` to deal with them. How closely are the stock indices related and which ones are most closely related?  
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = FALSE}
 financial %>% 
   select(XXX, XXX, XXX) %>%
   cor(., use = 'complete.obs')
@@ -363,7 +363,7 @@ financial %>%
 
 5. Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. Note that here have to specify each pairwise correlation separately in order to `summarise()` the correlation for each year (rather than computing the entire correlation matrix). 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 
 financial %>% 
   group_by(XXX) %>% 
@@ -387,7 +387,7 @@ financial %>%
 
 6. Another important index of the financial markets is the exchange rate to other currencies. Generally, it is assumed that a strong economy translates in both a strong stock index and a strong currency relative to other currencies. First, evaluate whether changes in exchange rates correlate with each other the same way that stock indices do. 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 financial %>% 
   select(XXX, XXX) %>%
   cor(., use = 'complete.obs')
@@ -401,7 +401,7 @@ financial %>%
 
 7. Now evaluate whether exchange rates vary as a function of the difference between stock indices. For example, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theory has also produced an alternative hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exchange them for their own currency to maintain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 XXX %>% 
   summarize(
     cor_dow_dax = cor(XXX - XXX, XXX, use = 'complete.obs'),
@@ -419,7 +419,7 @@ financial %>%
 
 8. Now, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 XXX %>% 
   group_by(XXX) %>% 
   summarize(
