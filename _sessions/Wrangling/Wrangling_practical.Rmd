@@ -442,7 +442,7 @@ trial_act
 
 ### F - Filter specific rows with `filter()`
 
-1. Using the `filter()` funcion, filter only the rows from males (Hint: `gender_char == "male"`)
+1. Using the `filter()` function, filter only the rows from males (Hint: `gender_char == "male"`)
 
 ```{r, echo = TRUE}
 trial_act %>%

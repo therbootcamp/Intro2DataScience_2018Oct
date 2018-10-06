@@ -579,7 +579,7 @@ Here are some common functions that come with the `stats` package
 
 |Function|Procedure|
 |:-----|:----|
-|`lm()`|regression|
+|`glm()`|regression|
 |`t.test()`|t-test|
 |`cor.test()`|correlation test|
 
@@ -595,21 +595,22 @@ Each of these functions returns a list object with many named elements
 
 Specify dependent and independent variables with <high>formula</high>
 
-- `formula = DV ~ IV1 + IV2 + ...`
+- `formula = y ~ x1 + x2 + ...`
+- `formula = y ~ .` (use *all* variables in `data`)
 
-Use `lm()` to create a regression object
+Use `glm()` (or `lm()`) to create a linear model (regression) object
 
 
 ```{r}
 # Create regression model predicting income
-income_lm <- lm(formula = income ~ age + height + children,
+income_glm <- glm(formula = income ~ age + height + children,
                 data = baselers)
 
 # What is in this object?
-names(income_lm)
+names(income_glm)[1:10] # only showing first 10
 
 # Print coefficients
-income_lm$coefficients
+income_glm$coefficients
 ```
 
 
@@ -631,7 +632,7 @@ Here are some common functions that come with the `stats` package
 
 |Function|Procedure|
 |:-----|:----|
-|`lm()`|regression|
+|`glm()`|regression|
 |`t.test()`|t-test|
 |`cor.test()`|correlation test|
 
@@ -647,7 +648,8 @@ Each of these functions returns a list object with many named elements
 
 Specify dependent and independent variables with <high>formula</high>
 
-- `formula = DV ~ IV1 + IV2 + ...`
+- `formula = y ~ x1 + x2 + ...`
+- `formula = y ~ .` (use *all* variables in `data`)
 
 Use `t.test()` to create a hypothesis test object
 
@@ -655,7 +657,7 @@ Use `t.test()` to create a hypothesis test object
 ```{r}
 # T-test comparing height by sex
 height_ttest <- t.test(formula = height ~ sex,
-                     data = baselers)
+                       data = baselers)
 
 # What is in this object?
 names(height_ttest)
@@ -683,7 +685,7 @@ Here are some common functions that come with the `stats` package
 
 |Function|Procedure|
 |:-----|:----|
-|`lm()`|regression|
+|`glm()`|regression|
 |`t.test()`|t-test|
 |`cor.test()`|correlation test|
 
@@ -699,11 +701,10 @@ Use the `tidy()` function from the `broom` package to create nice looking tables
 library(broom)
 
 # Create regression mdoel predicting income
-income_lm <- lm(formula = income ~ age + height + children,
-                data = baselers)
+income_glm <- glm(formula = income ~ age + height + children,
+                  data = baselers)
 
-tidy(income_lm)
-
+tidy(income_glm) # Return a 'tidy' dataframe
 ```
 
 
@@ -724,6 +725,8 @@ tidy(income_lm)
 3 - "Keep the pipe <high>%>%</high> going" to continue working with your data frame.
 
 4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating
+
+5 - Use `glm()` for regression,
 
 ]
 
