@@ -384,6 +384,38 @@ brumhilda <- kc_house %>%
 
 4. Ok that was good, but now she also wants to know what the maximum and minimum number of floors were in each group. Add these summary statistics!
 
+### F - Statistics
+
+1. Let's see if there is a significant difference between the selling prices of houses on the waterfront versus those not on the waterfront. To do this, we'll conduct a t-test using the `t.test()` function and assign the result to `waterfront_htest`. Fill in the XXXs in the code below, such that the dependent variable is `price` and the independent variable is `waterfront`
+
+```{r, echo = TRUE, eval = FALSE}
+waterfront_htest <- t.test(formula = XXX ~ XXX,
+                           data = XXX)
+```
+
+2. Print your `waterfront_htest` object to see a printout of the main results
+
+3. Look at the names of your `waterfront_htest` object with `names()`
+
+4. Using the `$`, print the test statistic (`statistic`) from your `waterfront_htest` object.
+
+5. Now using `$`, print only the p-value (`p.value`) from the object.
+
+6. Which of the variables `bedrooms`, `bathrooms`, `living_sqm`,  `waterfront`, `lat` and `long` best predict a house's price (`price`)? Answer this by conducting a regression analysis using the `glm()` function and assign the result to `price_glm`. Fill in the XXXs in the code below 
+
+```{r, echo = TRUE, eval = FALSE}
+price_glm <- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX,
+                 data = XXX)
+```
+
+7. Print your `price_glm` object. What do you see?
+
+8. Look at the names of your `price_glm` object with `names()`
+
+9. Using `$` print the coefficients from your analysis.
+
+10. Using the `summary()` function, show summary results from your `price_glm` object.
+
 ### F - Challenges
 
 1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order)
@@ -392,9 +424,7 @@ brumhilda <- kc_house %>%
 
 3. Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!
 
-4. What percent of houses in built in each decade were mansions? To answer this, 
-
-5. Create the following table
+4. Create the following table
 
 ```{r, eval = FALSE, echo = FALSE}
 kc_house %>%
@@ -419,6 +449,7 @@ kc_house %>%
 |     1997| 177|     606058|   3800000|             234|
 |     1998| 239|     594159|   1960000|             241|
 
+5. Create a regression object predicting the amount of living space (`living_sqm`) as a function of `bedrooms`, `bathrooms`, `waterfront`, and `built_yr`. Explore the object with `names()` and `summary()`. Which variables seem to predict living space?
 
 ## Additional Resources
 
