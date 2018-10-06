@@ -152,7 +152,7 @@ trial_act <- read_csv(file = "XX")
 trial_act <- read_csv(file = "1_Data/trial_act.csv")
 ```
 
-5. Using the same code structure, load the `trial_act_demo.csv` data as a new dataframe called `trial_act_demo`
+5. Using the same code structure, load the `trial_act_demo_fake.csv` data as a new dataframe called `trial_act_demo`
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 trial_act <- read_csv(file = "https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/trial_act.csv")
