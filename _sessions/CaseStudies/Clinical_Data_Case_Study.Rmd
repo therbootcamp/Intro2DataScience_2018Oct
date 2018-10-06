@@ -482,8 +482,6 @@ ggplot(data = XXX,
        caption = "XXX")
 ```
 
-
-
 ```{r, eval = TRUE, message = FALSE}
 ggplot(data = dimarta_df,
        aes(x = histamine_start, 
@@ -494,4 +492,12 @@ ggplot(data = dimarta_df,
        caption = "Dimarta")
 ```
 
+6. Now create the same plot as above, but have different colored points for different study arms (but only one regression line).
 
+## D - Statistics
+
+1. Create a regression model predicting final histamine levels as a function of all variables. Which variables predict final histamine levels?
+
+2. Now do the same predicing histamine *change*, but *don't* include final histamine levels. Do you get the same results as above? 
+
+3. Try running the same model as above but *do* include final histamine levels. What do you find?
