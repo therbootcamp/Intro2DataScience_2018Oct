@@ -861,8 +861,6 @@ c(2, 6, 10)
 # Integers from 0 to 5
 0:5
 
-# Every 10th integer
-seq(0, 50, by = 10)
 ```
 
 
