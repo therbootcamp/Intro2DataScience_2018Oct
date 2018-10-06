@@ -190,7 +190,8 @@ reg_results$coefficients[,c(1,3)]
 
 ```{r, echo = F, message=F}
 require(tibble)
-options(tibble.width = 48, tibble.max_extra_cols = 0, tibble.print_max = 1)
+options(tibble.width = 45, tibble.max_extra_cols = 0, tibble.print_max = 5,
+        tibble.print_min = 5)
 ```
 
 ```{r, eval = T}
