@@ -259,13 +259,34 @@ kc_house %>%
 
 3. What is the *median* price of all houses? Use the `median()` function!
 
+```{r}
+kc_house %>%
+  summarise(
+    price_median = median(price)
+  )
+```
+
 4. What was the highest selling price? Use the `max()` function!
+
+```{r}
+kc_house %>%
+  summarise(
+    price_max = max(price)
+  )
+```
 
 5. Using the following template, sort the dataframe in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house <- kc_house %>%
   arrange(desc(XXX))
+
+kc_house
+```
+
+```{r}
+kc_house <- kc_house %>%
+  arrange(desc(price))
 
 kc_house
 ```
@@ -378,11 +399,44 @@ brumhilda <- kc_house %>%
   filter(XXX %in% c(XXX, XXX, XXX, XXX))
 ```
 
+```{r}
+brumhilda <- kc_house %>%
+  filter(zipcode %in% c(98001, 98109, 98117, 98199))
+```
+
 2. For each of the zip codes, calculate the mean and median selling price (as well as the number of houses) in each zip code.
+
+```{r}
+brumhilda %>%
+  group_by(zipcode) %>%
+  summarise(price_mean = mean(price),
+           price_median = median(price),
+           N = n())
+```
 
 3. Now Brumhilda wants the same data separated by whether or not the house is a mansion or not. Include these results by also grouping the data by `mansion` (as well as `zipcode`), and calculating the same summary statistics as before.
 
+```{r}
+brumhilda %>%
+  group_by(zipcode, mansion) %>%
+  summarise(price_mean = mean(price),
+           price_median = median(price),
+           N = n())
+```
+
+
 4. Ok that was good, but now she also wants to know what the maximum and minimum number of floors were in each group. Add these summary statistics!
+
+```{r}
+brumhilda %>%
+  group_by(zipcode) %>%
+  summarise(price_mean = mean(price),
+           price_median = median(price),
+           floors_min = min(floors),
+           floors_max = max(floors),
+           N = n())
+```
+
 
 ### F - Statistics
 
@@ -393,36 +447,103 @@ waterfront_htest <- t.test(formula = XXX ~ XXX,
                            data = XXX)
 ```
 
+```{r}
+waterfront_htest <- t.test(formula = price ~ waterfront,
+                           data = kc_house)
+```
+
 2. Print your `waterfront_htest` object to see a printout of the main results
+
+```{r}
+waterfront_htest
+```
 
 3. Look at the names of your `waterfront_htest` object with `names()`
 
+```{r}
+names(waterfront_htest)
+```
+
+
 4. Using the `$`, print the test statistic (`statistic`) from your `waterfront_htest` object.
 
+```{r}
+waterfront_htest$statistic
+```
+
+
 5. Now using `$`, print only the p-value (`p.value`) from the object.
+
+```{r}
+waterfront_htest$p.value
+```
 
 6. Which of the variables `bedrooms`, `bathrooms`, `living_sqm`,  `waterfront`, `lat` and `long` best predict a house's price (`price`)? Answer this by conducting a regression analysis using the `glm()` function and assign the result to `price_glm`. Fill in the XXXs in the code below 
 
 ```{r, echo = TRUE, eval = FALSE}
-price_glm <- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX,
+price_glm <- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX + XXX,
                  data = XXX)
+```
+
+```{r}
+price_glm <- glm(formula = price ~ bedrooms + bathrooms + living_sqm + waterfront + lat + long,
+                 data = kc_house)
 ```
 
 7. Print your `price_glm` object. What do you see?
 
+```{r}
+price_glm
+```
+
 8. Look at the names of your `price_glm` object with `names()`
+
+```{r}
+names(price_glm)
+```
 
 9. Using `$` print the coefficients from your analysis.
 
+```{r}
+price_glm$coefficients
+```
+
 10. Using the `summary()` function, show summary results from your `price_glm` object.
+
+```{r}
+summary(price_glm)
+```
 
 ### F - Challenges
 
-1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order)
+1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order) with `arrange()`, then select the first row with `slice()`. Once you find it, try searching for that zipcode on Google Maps and see if it's location makes sense!
 
-2. Which house had the highest price to living space ratio? To answer this, create a new variable called `price_to_living` that takes `price / living_sqm`. Then, sort the data in descending order of this variable, and select the first row with `slice()`!
+```{r}
+kc_house %>%
+  group_by(zipcode) %>%
+  summarise(waterfront_p = mean(waterfront)) %>%
+  arrange(desc(waterfront_p)) %>%
+  slice(1)
+```
+
+2. Which house had the highest price to living space ratio? To answer this, create a new variable called `price_to_living` that takes `price / living_sqm`. Then, sort the data in descending order of this variable, and select the first row with `slice()`! What id value do you get?
+
+```{r}
+kc_house %>%
+  mutate(price_to_living = price / living_sqm) %>%
+  arrange(desc(price_to_living)) %>%
+  slice(1)
+```
 
 3. Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!
+
+```{r}
+kc_house %>%
+  group_by(zipcode) %>%
+  summarise(price_mean = mean(price)) %>%
+  arrange(desc(price_mean)) %>%
+  slice(1:10)
+```
 
 4. Create the following table
 
@@ -449,7 +570,28 @@ kc_house %>%
 |     1997| 177|     606058|   3800000|             234|
 |     1998| 239|     594159|   1960000|             241|
 
-5. Create a regression object predicting the amount of living space (`living_sqm`) as a function of `bedrooms`, `bathrooms`, `waterfront`, and `built_yr`. Explore the object with `names()` and `summary()`. Which variables seem to predict living space?
+```{r}
+kc_house %>%
+  filter(built_yr >= 1990 & built_yr < 1999) %>%
+  group_by(built_yr) %>%
+  summarise(N = n(),
+            price_mean = mean(price),
+            price_max = max(price),
+            living_sqm_mean = mean(living_sqm)) %>%
+  knitr::kable(digits = 0)
+```
+
+5. Create a regression object called `living_glm` predicting the amount of living space (`living_sqm`) as a function of `bedrooms`, `bathrooms`, `waterfront`, and `built_yr`. Explore the object with `names()` and `summary()`. Which variables seem to predict living space?
+
+```{r}
+living_glm <- glm(formula = living_sqm ~ bedrooms + bathrooms + waterfront + built_yr,
+                  data = kc_house)
+
+names(living_glm)
+
+summary(living_glm)
+```
+
 
 ## Additional Resources
 

@@ -515,7 +515,7 @@ kc_house</code></pre>
 <li><p>Now using <code>$</code>, print only the p-value (<code>p.value</code>) from the object.</p></li>
 <li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below</p></li>
 </ol>
-<pre class="r"><code>price_glm &lt;- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX,
+<pre class="r"><code>price_glm &lt;- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX + XXX,
                  data = XXX)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li><p>Print your <code>price_glm</code> object. What do you see?</p></li>
@@ -527,8 +527,8 @@ kc_house</code></pre>
 <div id="f---challenges" class="section level3">
 <h3>F - Challenges</h3>
 <ol style="list-style-type: decimal">
-<li><p>Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using <code>mean()</code>, then sort the data in descending order)</p></li>
-<li><p>Which house had the highest price to living space ratio? To answer this, create a new variable called <code>price_to_living</code> that takes <code>price / living_sqm</code>. Then, sort the data in descending order of this variable, and select the first row with <code>slice()</code>!</p></li>
+<li><p>Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using <code>mean()</code>, then sort the data in descending order) with <code>arrange()</code>, then select the first row with <code>slice()</code>. Once you find it, try searching for that zipcode on Google Maps and see if it’s location makes sense!</p></li>
+<li><p>Which house had the highest price to living space ratio? To answer this, create a new variable called <code>price_to_living</code> that takes <code>price / living_sqm</code>. Then, sort the data in descending order of this variable, and select the first row with <code>slice()</code>! What id value do you get?</p></li>
 <li><p>Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!</p></li>
 <li><p>Create the following table</p></li>
 </ol>
@@ -609,7 +609,7 @@ kc_house</code></pre>
 </tbody>
 </table>
 <ol start="5" style="list-style-type: decimal">
-<li>Create a regression object predicting the amount of living space (<code>living_sqm</code>) as a function of <code>bedrooms</code>, <code>bathrooms</code>, <code>waterfront</code>, and <code>built_yr</code>. Explore the object with <code>names()</code> and <code>summary()</code>. Which variables seem to predict living space?</li>
+<li>Create a regression object called <code>living_glm</code> predicting the amount of living space (<code>living_sqm</code>) as a function of <code>bedrooms</code>, <code>bathrooms</code>, <code>waterfront</code>, and <code>built_yr</code>. Explore the object with <code>names()</code> and <code>summary()</code>. Which variables seem to predict living space?</li>
 </ol>
 </div>
 </div>
