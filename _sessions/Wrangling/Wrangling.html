@@ -867,9 +867,9 @@ Organisation functions help you shuffle your data by &lt;high&gt;sorting rows&lt
 
 ---
 
-.pull-left4[
-
 # `arrange()`
+
+.pull-left4[
 
 Use `arrange()` to &lt;high&gt;arrange (aka, sort) rows&lt;/high&gt; in increasing or decreasing order of one (or more) columns.
 
@@ -891,7 +891,7 @@ df %&gt;%
 
 .pull-right55[
 
-&lt;font size = 5&gt;Sort by arm&lt;/font&gt;
+Sort by `arm`.
 
 
 ```r
@@ -911,7 +911,36 @@ combined_df %&gt;%
 ```
 
 
-&lt;font size = 5&gt;Sort by arm and then age&lt;/font&gt;
+]
+
+---
+
+# `arrange()`
+
+.pull-left4[
+
+Use `arrange()` to &lt;high&gt;arrange (aka, sort) rows&lt;/high&gt; in increasing or decreasing order of one (or more) columns.
+
+
+```r
+df %&gt;%
+  arrange(A, B)
+```
+
+To sort in descending order, use `desc()`
+
+
+```r
+df %&gt;%
+  arrange(desc(A), B)
+```
+
+]
+
+.pull-right55[
+
+
+Sort by `arm` and then `age`.
 
 
 ```r
@@ -933,11 +962,12 @@ combined_df %&gt;%
 ]
 
 
+
 ---
 
-.pull-left4[
-
 # `slice()`
+
+.pull-left4[
 
 Use `slice()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) by row number.
 
@@ -976,7 +1006,7 @@ seq(0, 50, by = 10)
 
 .pull-right55[
 
-Select rows &lt;i&gt;3, 6, and 10&lt;/i&gt;
+Select rows `3`, `6`, and `10`.
 
 
 ```r
@@ -994,7 +1024,44 @@ combined_df %&gt;%
 ```
 
 
-Select rows&lt;i&gt; 1 through 5&lt;/i&gt;
+]
+
+---
+
+# `slice()`
+
+.pull-left4[
+
+Use `slice()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) by row number.
+
+Use functions like `c()`, `a:b` and `seq()` to create row numbers
+
+
+```r
+# Specific numbers
+c(2, 6, 10)
+```
+
+```
+## [1]  2  6 10
+```
+
+```r
+# Integers from 0 to 5
+0:5
+```
+
+```
+## [1] 0 1 2 3 4 5
+```
+
+
+]
+
+.pull-right55[
+
+
+Select rows `1` through `5`.
 
 
 ```r
@@ -1016,12 +1083,13 @@ combined_df %&gt;%
 
 ]
 
----
 
-.pull-left4[
+
+---
 
 # `filter()`
 
+.pull-left4[
 
 Use `filter()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) based on criteria
 
@@ -1037,11 +1105,11 @@ For complex conditions, chain multiple logical comparison operators with `&amp;`
 
 .pull-right55[
 
-Select &lt;i&gt;only&lt;/i&gt; patients over 30
+Select &lt;i&gt;only&lt;/i&gt; patients over `30`.
 
 
 ```r
-# Filter patients older than 30 given drug
+# Filter patients older than 30
 combined_df %&gt;%
   filter(age &gt; 30)
 ```
@@ -1057,7 +1125,30 @@ combined_df %&gt;%
 ## 5     5    45     2 drug        NA    NA
 ```
 
-Select &lt;i&gt;only&lt;/i&gt; patients over 30 given drug.
+]
+
+
+---
+
+# `filter()`
+
+.pull-left4[
+
+Use `filter()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) based on criteria
+
+For complex conditions, chain multiple logical comparison operators with `&amp;` (AND) and `|` (OR)
+
+&lt;high&gt;`==`&lt;/high&gt; - is equal to&lt;br&gt;
+&lt;high&gt;`&lt;`&lt;/high&gt;, &lt;high&gt;`&gt;`&lt;/high&gt; - smaller/greater than&lt;br&gt;
+&lt;high&gt;`≤`&lt;/high&gt;, &lt;high&gt;`≥`&lt;/high&gt; - smaller/greater than or equal&lt;br&gt;
+&lt;high&gt;`&amp;`&lt;/high&gt;, &lt;high&gt;`&amp;&amp;`&lt;/high&gt; - logical AND&lt;br&gt;
+&lt;high&gt;`|`&lt;/high&gt;, &lt;high&gt;`||`&lt;/high&gt; - logical OR&lt;br&gt;
+
+]
+
+.pull-right55[
+
+Select &lt;i&gt;only&lt;/i&gt; patients over `30` given drug.
 
 
 ```r
@@ -1077,11 +1168,12 @@ combined_df %&gt;%
 
 ]
 
+
 ---
 
-.pull-left4[
-
 # `select()`
+
+.pull-left4[
 
 Use `select()` to &lt;high&gt;select columns&lt;/high&gt; (and remove all others)
 
@@ -1125,7 +1217,39 @@ combined_df %&gt;%
 ## 5     5     2
 ```
 
-Select everything *except* id
+]
+
+
+---
+
+# `select()`
+
+.pull-left4[
+
+Use `select()` to &lt;high&gt;select columns&lt;/high&gt; (and remove all others)
+
+
+```r
+# Select columns A, B
+df %&gt;% 
+  select(A, B)
+```
+
+&lt;high&gt;Remove columns&lt;/high&gt; with `-`.
+
+
+```r
+# Select everything BUT A
+df %&gt;% 
+  select(-A)
+```
+
+
+]
+
+.pull-right55[
+
+Select everything &lt;i&gt;except&lt;/i&gt; id
 
 
 ```r
@@ -1145,7 +1269,6 @@ combined_df %&gt;%
 ```
 
 ]
-
 
 
 
@@ -1382,7 +1505,7 @@ Some functions require data to be in a certain shape.
 
 .pull-right5[
 
-#### 'Wide' vs. 'Long' data
+&lt;high&gt;Wide vs. Long&lt;/high&gt; data
 
 
 
@@ -1561,12 +1684,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
