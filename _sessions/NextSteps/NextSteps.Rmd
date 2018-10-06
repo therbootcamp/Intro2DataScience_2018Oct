@@ -24,8 +24,6 @@ layout: true
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
-
-
 ---
 
 ```{r setup, include=FALSE}

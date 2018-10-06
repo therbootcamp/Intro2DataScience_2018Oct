@@ -384,7 +384,7 @@ brumhilda <- kc_house %>%
 
 4. Ok that was good, but now she also wants to know what the maximum and minimum number of floors were in each group. Add these summary statistics!
 
-## F - Challenges
+### F - Challenges
 
 1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order)
 
@@ -393,8 +393,6 @@ brumhilda <- kc_house %>%
 3. Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!
 
 4. What percent of houses in built in each decade were mansions? To answer this, 
-
-
 
 5. Create the following table
 
