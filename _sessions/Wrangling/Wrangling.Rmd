@@ -404,7 +404,7 @@ df %>%
 
 .pull-right6[
 
-Calculate two new columns `age_months` and `age_years`
+Calculate two new columns `age_months` and `age_decades`
 
 ```{r, warning = FALSE}
 patients_df %>% 
@@ -870,7 +870,7 @@ seq(0, 50, by = 10)
 
 .pull-right55[
 
-Select rows `3`, `6`, and `10`.
+Select rows `3` and `5`.
 
 ```{r}
 # Rows 3 and 5 only
