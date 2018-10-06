@@ -39,9 +39,9 @@ In this case study, you will analyse historic data of three major stock indices,
 2. How correlated is the development between the stock markets? 
 3. What is the relationship between stock market returns and exchange rates? 
 
-To address these questions, you will import several data files, while tuning import parameters to match the idiosyncrasies of the data. You will merge the data files into a single data frame, and mutate the data to reflect changes in index price and exchange rate. You will analyze correlations of stock indices among themselves and to exchange rates and create illustrative plots for each of the analyses.
+To address these questions, you will import several data files, using various function parameters to match the idiosyncrasies of the data. You will merge the data files into a single data frame, and mutate the data to reflect changes in index price and exchange rate. You will analyze correlations of stock indices among themselves and to exchange rates and create illustrative plots for each of the analyses.
 
-Below you will find several tasks that will guide you through these steps. For the most part these tasks require you to make use of what you have learned in the sessions **Data I/O**, **Data Wrangling**, and **Statistics**. However, they will also go beyond what you have learned, in particular when it comes to plotting. In those cases, the tasks will provide the necessary code and guidance.  
+Below you will find several tasks that will guide you through these steps. For the most part these tasks require you to make use of what you have learned in the sessions **Data**, **Wrangling**, **Analysing**, and **Plotting**. 
 
 ### Datasets
 
@@ -92,9 +92,9 @@ library(haven)
 library(tidyverse)
 ```
 
-## B - Data I/O
+## B - Data
 
-1. In this practical, you will load three external datasets `\^DJI.csv`, `\^GDAXI.csv`, and `\^N225.csv`. However, two of these data files are a bit messy. Specifically, `\^GDAXI.csv` and `\^N225.csv` use a specific character string to represent missings in the data. To identify the NA-character string in the data open one of them in a text viewer, (via RStudio or via, e.g., *textedit*). Do you see the string value that indicates missing data? Look hard!
+1. In this practical, you will load three external datasets `\^DJI.csv`, `\^GDAXI.csv`, and `\^N225.csv`. However, two of these data files are not tidy. Specifically, `\^GDAXI.csv` and `\^N225.csv` use a specific character string to represent missings in the data. To identify the NA-character string in the data open one of them in a text viewer, (via RStudio or via, e.g., *textedit*). Do you see the string value that indicates missing data? Look hard!
 
 2. Once you know what string value indicates missing data, us the `read_csv()` function to load in the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from your `1_Data` folder. In so doing, set an explicit `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" use a specific character string to represent missings in the data.  
 
@@ -174,7 +174,7 @@ yen_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/yen-dollar.txt', deli
 
 
 
-## C - Data Wrangling
+## C - Wrangling
 
 1. Now it's time to create a single data frame called `financial` that contains the data from all five datasets including only the variables containing the dates (`Date`), the stock index (unadjusted) closing prices (`Close`), and the exchange rates. Do this in two steps:
 
