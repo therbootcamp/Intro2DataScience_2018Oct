@@ -541,7 +541,7 @@ CD4_long <- CD4_wide %>%
 CD4_long
 ```
 
-1. Using the `spread()` function, create a new dataframe called `CD4_long` that shows the `CD4_wide` data in the 'long' format. To do this, use the following template. Set the grouping column to `time` and the new data column to `value`. 
+1. Using the `gather()` function, create a new dataframe called `CD4_long` that shows the `CD4_wide` data in the 'long' format. To do this, use the following template. Set the grouping column to `time` and the new data column to `value`. 
 
 ```{r, echo = TRUE, eval = FALSE}
 CD4_long <- CD4_wide %>% 
