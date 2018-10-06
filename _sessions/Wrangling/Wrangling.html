@@ -945,18 +945,18 @@ Sort by `arm` and then `age`.
 
 ```r
 combined_df %&gt;%
-  arrange(arm, desc(age))  # Sort by arm then age
+  arrange(arm, age)  # Sort by arm then age
 ```
 
 ```
 ## # A tibble: 5 x 6
 ##      id   age   arm arm_char    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1 placebo    123   135
-## 2     4    34     1 placebo    100   105
-## 3     2    65     2 drug       143   140
+## 1     4    34     1 placebo    100   105
+## 2     1    37     1 placebo    123   135
+## 3     5    45     2 drug        NA    NA
 ## 4     3    57     2 drug        NA    NA
-## 5     5    45     2 drug        NA    NA
+## 5     2    65     2 drug       143   140
 ```
 
 ]
@@ -1684,23 +1684,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

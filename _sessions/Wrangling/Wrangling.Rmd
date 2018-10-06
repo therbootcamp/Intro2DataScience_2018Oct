@@ -837,7 +837,7 @@ Sort by `arm` and then `age`.
 
 ```{r}
 combined_df %>%
-  arrange(arm, desc(age))  # Sort by arm then age
+  arrange(arm, age)  # Sort by arm then age
 ```
 
 ]
