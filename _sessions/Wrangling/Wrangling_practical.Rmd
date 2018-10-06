@@ -513,7 +513,7 @@ trial_act <- trial_act %>%
 trial_act
 ```
 
-### I - Reshaping with gather() and spread()
+### H - Reshaping with gather() and spread()
 
 Remember the `CD4_wide` dataframe you created before? Currently it is in the *wide* format, where each row is a patient, where key data (different CD4 T cell counts) are in different columns like this:
 
