@@ -94,9 +94,9 @@ library(tidyverse)
 
 ## B - Data
 
-1. In this practical, you will load three external datasets `\^DJI.csv`, `\^GDAXI.csv`, and `\^N225.csv`. However, two of these data files are not tidy. Specifically, `\^GDAXI.csv` and `\^N225.csv` use a specific character string to represent missings in the data. To identify the NA-character string in the data open one of them in a text viewer, (via RStudio or via, e.g., *textedit*). Do you see the string value that indicates missing data? Look hard!
+1. In this practical, you will load three external datasets `\^DJI.csv`, `\^GDAXI.csv`, and `\^N225.csv`. However, two of these data files are not yet tidy. Specifically, `\^GDAXI.csv` and `\^N225.csv` include a specific character string to represent missings in the data and is not identify by R as such. To identify the `NA`-character string in the data open one of them in a text viewer, (via RStudio or via, e.g., *textedit*). Do you see the string value that indicates missing data? 
 
-2. Once you know what string value indicates missing data, us the `read_csv()` function to load in the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from your `1_Data` folder. In so doing, set an explicit `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" use a specific character string to represent missings in the data.  
+2. Once you have identified the character string for missing data, us the `read_csv()` function to load in the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from your `1_Data` folder. In so doing, set an explicit `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" use a specific character string to represent missings in the data.  
 
 ```{r, echo = FALSE, eval = FALSE}
 # Load index data from local data folder 
@@ -105,26 +105,19 @@ dax <- read_csv(file = '1_Data/^GDAXI.csv', na = 'XXX')  # 'XXX' means missing!
 nik <- read_csv(file = '1_Data/^N225.csv', na = 'XXX')   # 'XXX' means missing!
 ```
 
-```{r, echo = FALSE}
-# Load index data from local data folder 
-dow <- read_csv(file = '_sessions/CaseStudies/1_Data/^DJI.csv')
-dax <- read_csv(file = '_sessions/CaseStudies/1_Data/^GDAXI.csv', na = 'null')
-nik <- read_csv(file = '_sessions/CaseStudies/1_Data/^N225.csv', na = 'null')
-```
-
-```{r, eval = FALSE}
+```{r}
 # Load index data from local data folder 
 dow <- read_csv(file = '1_Data/^DJI.csv')
 dax <- read_csv(file = '1_Data/^GDAXI.csv', na = 'null')
 nik <- read_csv(file = '1_Data/^N225.csv', na = 'null')
 ```
 
-3. Load in the exchange rate data sets, `euro-dollar.txt` and `yen-dollar.txt`, from the `1_Data` folder as two new objects called `eur_usd` and `yen_usd`. To do this, use the `read_delim()`-function and `\t` as the `delim`-argument. This tells R that the data is tab-delimited. 
+3. Load in the exchange rate data sets, `euro-dollar.txt` and `yen-dollar.txt`, from the `1_Data` folder as two new objects called `eur_usd` and `yen_usd`. To do this, use the `read_delim()`-function and `\t` as the `delim`-argument, telling R that the data is tab-delimited. 
 
-```{r, echo = FALSE}
+```{r}
 # Load exchange rate data from local data folder 
-eur_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/euro-dollar.txt', delim = '\t')
-yen_usd <- read_delim(file = '_sessions/CaseStudies/1_Data/yen-dollar.txt', delim = '\t')
+eur_usd <- read_delim(file = '1_Data/euro-dollar.txt', delim = '\t')
+yen_usd <- read_delim(file = '1_Data/yen-dollar.txt', delim = '\t')
 ```
 
 ```{r, eval = FALSE, echo = FALSE}
