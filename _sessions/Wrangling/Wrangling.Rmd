@@ -404,7 +404,7 @@ df %>%
 
 .pull-right6[
 
-Calculate two new columns `age_months` and `age_years`
+Calculate two new columns `age_months` and `age_decades`
 
 ```{r, warning = FALSE}
 patients_df %>% 
