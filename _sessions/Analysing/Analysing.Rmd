@@ -320,7 +320,6 @@ baselers %>%
 
 ]
 
-
 ---
 
 # Combine wrangling with analysing
@@ -330,7 +329,6 @@ baselers %>%
 You can easily combine multiple wrangling (filtering, slicing, renaming) and analysing operations at once!
 
 Just use the pipe <high>%>%</high>
-
 
 
 ]
@@ -352,7 +350,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 1
 
 .pull-left45[
 
@@ -388,7 +386,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 1
 
 .pull-left45[
 
@@ -423,7 +421,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 2
 
 .pull-left45[
 
@@ -459,7 +457,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 2
 
 .pull-left45[
 
@@ -494,7 +492,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 3
 
 .pull-left45[
 
@@ -532,7 +530,7 @@ baselers %>%
 
 ---
 
-# Test!
+# Quiz 3
 
 .pull-left45[
 
@@ -553,7 +551,7 @@ How do I calculate the following table?
 
 ```{r, echo = TRUE}
 baselers %>%
-  filter(sex == "male") %>%
+  filter(sex == "male") %>%    # male patients only
   group_by(fasnacht, sex) %>%
   summarise(
     N = n(),
@@ -563,6 +561,77 @@ baselers %>%
 ```
 
 ]
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
+
+
+]
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = FALSE}
+baselers %>%
+  group_by(education) %>%
+  summarise(
+    N = n(),
+    income_mean = mean(income, na.rm = TRUE)
+  ) %>%
+  arrange(desc(income_mean))
+```
+
+]
+
+
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(sex, fasnacht, age, income) %>%
+  slice(1:5)
+```
+
+
+]
+
+.pull-right5[
+
+How do I calculate the following table?
+
+```{r, echo = TRUE}
+baselers %>%
+  group_by(education) %>%
+  summarise(
+    N = n(),
+    income_mean = mean(income, na.rm = TRUE)
+  ) %>%
+  arrange(desc(income_mean))
+```
+
+]
+
 
 ---
 

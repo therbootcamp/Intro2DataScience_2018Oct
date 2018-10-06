@@ -1,0 +1,11 @@
+---
+title: "Untitled"
+author: "Nathaniel Phillips"
+date: "10/6/2018"
+output: html_document
+---
+
+```{r}
+getwd()
+```
+

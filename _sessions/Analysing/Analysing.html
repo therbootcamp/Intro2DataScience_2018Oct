@@ -317,7 +317,6 @@ baselers %&gt;%
 
 ]
 
-
 ---
 
 # Combine wrangling with analysing
@@ -327,7 +326,6 @@ baselers %&gt;%
 You can easily combine multiple wrangling (filtering, slicing, renaming) and analysing operations at once!
 
 Just use the pipe &lt;high&gt;%&gt;%&lt;/high&gt;
-
 
 
 ]
@@ -362,7 +360,7 @@ baselers %&gt;%
 
 ---
 
-# Test!
+# Quiz 1
 
 .pull-left45[
 
@@ -409,7 +407,7 @@ How do I calculate the following table?
 
 ---
 
-# Test!
+# Quiz 1
 
 .pull-left45[
 
@@ -465,7 +463,7 @@ baselers %&gt;%
 
 ---
 
-# Test!
+# Quiz 2
 
 .pull-left45[
 
@@ -515,7 +513,7 @@ How do I calculate the following table?
 
 ---
 
-# Test!
+# Quiz 2
 
 .pull-left45[
 
@@ -574,7 +572,7 @@ baselers %&gt;%
 
 ---
 
-# Test!
+# Quiz 3
 
 .pull-left45[
 
@@ -623,7 +621,7 @@ How do I calculate the following table?
 
 ---
 
-# Test!
+# Quiz 3
 
 .pull-left45[
 
@@ -657,7 +655,7 @@ How do I calculate the following table?
 
 ```r
 baselers %&gt;%
-  filter(sex == "male") %&gt;%
+  filter(sex == "male") %&gt;%    # male patients only
   group_by(fasnacht, sex) %&gt;%
   summarise(
     N = n(),
@@ -676,6 +674,113 @@ baselers %&gt;%
 ```
 
 ]
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(sex, fasnacht, age, income) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##   sex    fasnacht   age income
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 male   no          44   6300
+## 2 male   no          65  10900
+## 3 female no          31   5100
+## 4 male   no          27   4200
+## 5 male   no          24   4000
+```
+
+
+]
+
+.pull-right5[
+
+How do I calculate the following table?
+
+
+```
+## # A tibble: 4 x 3
+##   education             N income_mean
+##   &lt;chr&gt;             &lt;int&gt;       &lt;dbl&gt;
+## 1 SEK_III            4034       7555.
+## 2 obligatory_school  1239       7551.
+## 3 apprenticeship     3986       7538.
+## 4 SEK_II              741       7338.
+```
+
+]
+
+
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(sex, fasnacht, age, income) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##   sex    fasnacht   age income
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 male   no          44   6300
+## 2 male   no          65  10900
+## 3 female no          31   5100
+## 4 male   no          27   4200
+## 5 male   no          24   4000
+```
+
+
+]
+
+.pull-right5[
+
+How do I calculate the following table?
+
+
+```r
+baselers %&gt;%
+  group_by(education) %&gt;%
+  summarise(
+    N = n(),
+    income_mean = mean(income, na.rm = TRUE)
+  ) %&gt;%
+  arrange(desc(income_mean))
+```
+
+```
+## # A tibble: 4 x 3
+##   education             N income_mean
+##   &lt;chr&gt;             &lt;int&gt;       &lt;dbl&gt;
+## 1 SEK_III            4034       7555.
+## 2 obligatory_school  1239       7551.
+## 3 apprenticeship     3986       7538.
+## 4 SEK_II              741       7338.
+```
+
+]
+
 
 ---
 

@@ -496,6 +496,8 @@ df %&gt;%
 
 .pull-right55[
 
+Create `arm_char`, which shows arm as a meaningful character rather than an integer.
+
 
 ```r
 patients_df %&gt;% 
@@ -631,7 +633,7 @@ combined_df &lt;- patients_df %&gt;%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 1
 
 Do these two chunks do the same thing?
 
@@ -666,7 +668,7 @@ baselers &lt;- baselers %&gt;%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 1
 
 Do these two chunks do the same thing?
 
@@ -705,7 +707,7 @@ baselers &lt;- baselers %&gt;%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 2
 
 Do these two chunks do the same thing?
 
@@ -741,7 +743,7 @@ baselers &lt;- baselers %&gt;%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 2
 
 Do these two chunks do the same thing?
 
@@ -775,11 +777,10 @@ baselers &lt;- baselers %&gt;%
 ]
 
 
-
 ---
 
 .pull-left5[
-# Test!
+# Quiz 3
 
 Do these two chunks do the same thing?
 
@@ -808,15 +809,12 @@ baselers &lt;- baselers %&gt;%
 
 ]
 
-
-
 ---
 
 .pull-left5[
-# Test!
+# Quiz 3
 
 Do these two chunks do the same thing?
-
 
 ### Chunk A
 
@@ -844,9 +842,6 @@ baselers &lt;- baselers %&gt;%
 *This actually changes the baselers dataframe because we used assignment &lt;- !*
 
 ]
-
-
-
 
 
 ---
@@ -943,7 +938,6 @@ combined_df %&gt;%
 .pull-left4[
 
 # `slice()`
-
 
 Use `slice()` to &lt;high&gt;select rows&lt;/high&gt; (and remove others) by row number.
 
@@ -1153,6 +1147,219 @@ combined_df %&gt;%
 ]
 
 
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(id, sex, age, height) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##      id sex      age height
+##   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1     1 male      44   174.
+## 2     2 male      65   180.
+## 3     3 female    31   168.
+## 4     4 male      27   209 
+## 5     5 male      24   177.
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest Baselers?
+
+
+```
+## # A tibble: 5 x 3
+##      id height sex  
+##   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+## 1  9676   219. male 
+## 2  5623   213. male 
+## 3  7214   213. male 
+## 4  7059   212. male 
+## 5  9538   210. male
+```
+
+]
+
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(id, sex, age, height) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##      id sex      age height
+##   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1     1 male      44   174.
+## 2     2 male      65   180.
+## 3     3 female    31   168.
+## 4     4 male      27   209 
+## 5     5 male      24   177.
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest Baselers?
+
+
+```r
+baselers %&gt;%
+  arrange(desc(height)) %&gt;%
+  select(id, height, sex) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 3
+##      id height sex  
+##   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+## 1  9676   219. male 
+## 2  5623   213. male 
+## 3  7214   213. male 
+## 4  7059   212. male 
+## 5  9538   210. male
+```
+
+]
+
+
+
+
+---
+
+# Quiz 5
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(id, sex, age, height) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##      id sex      age height
+##   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1     1 male      44   174.
+## 2     2 male      65   180.
+## 3     3 female    31   168.
+## 4     4 male      27   209 
+## 5     5 male      24   177.
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest *female* Baselers?
+
+
+```
+## # A tibble: 5 x 3
+##      id height sex   
+##   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; 
+## 1  6936   198. female
+## 2  8450   196. female
+## 3   385   196. female
+## 4  3203   195. female
+## 5  4392   194  female
+```
+
+]
+
+---
+
+# Quiz 5
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+
+```r
+baselers %&gt;%
+  select(id, sex, age, height) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 4
+##      id sex      age height
+##   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1     1 male      44   174.
+## 2     2 male      65   180.
+## 3     3 female    31   168.
+## 4     4 male      27   209 
+## 5     5 male      24   177.
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest *female* Baselers?
+
+
+```r
+baselers %&gt;%
+  filter(sex == "female") %&gt;%
+  arrange(desc(height)) %&gt;%
+  select(id, height, sex) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 3
+##      id height sex   
+##   &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; 
+## 1  6936   198. female
+## 2  8450   196. female
+## 3   385   196. female
+## 4  3203   195. female
+## 5  4392   194  female
+```
+
+]
 
 ---
 

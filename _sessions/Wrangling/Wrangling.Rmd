@@ -30,6 +30,7 @@ layout: true
 xaringan::inf_mr('_sessions/D1S2_Wrangling/Wrangling.Rmd')
 baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 
+
 ```
 
 ```{r setup, include=FALSE}
@@ -37,6 +38,7 @@ options(htmltools.dir.version = FALSE)
 options(width=110)
 options(digits = 4)
 library(tidyverse)
+baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 ```
 
 .pull-left4[
@@ -441,6 +443,8 @@ df %>%
 
 .pull-right55[
 
+Create `arm_char`, which shows arm as a meaningful character rather than an integer.
+
 ```{r}
 patients_df %>% 
 
@@ -550,7 +554,7 @@ combined_df <- patients_df %>%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 1
 
 Do these two chunks do the same thing?
 
@@ -583,7 +587,7 @@ baselers <- baselers %>%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 1
 
 Do these two chunks do the same thing?
 
@@ -620,7 +624,7 @@ baselers <- baselers %>%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 2
 
 Do these two chunks do the same thing?
 
@@ -654,7 +658,7 @@ baselers <- baselers %>%
 ---
 
 .pull-left5[
-# Test!
+# Quiz 2
 
 Do these two chunks do the same thing?
 
@@ -686,11 +690,10 @@ baselers <- baselers %>%
 ]
 
 
-
 ---
 
 .pull-left5[
-# Test!
+# Quiz 3
 
 Do these two chunks do the same thing?
 
@@ -717,15 +720,12 @@ baselers <- baselers %>%
 
 ]
 
-
-
 ---
 
 .pull-left5[
-# Test!
+# Quiz 3
 
 Do these two chunks do the same thing?
-
 
 ### Chunk A
 ```{r, eval = FALSE, echo = TRUE}
@@ -751,9 +751,6 @@ baselers <- baselers %>%
 *This actually changes the baselers dataframe because we used assignment <- !*
 
 ]
-
-
-
 
 
 ---
@@ -824,7 +821,6 @@ combined_df %>%
 .pull-left4[
 
 # `slice()`
-
 
 Use `slice()` to <high>select rows</high> (and remove others) by row number.
 
@@ -949,6 +945,139 @@ combined_df %>%
 ]
 
 
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(id, sex, age, height) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest Baselers?
+
+```{r, echo = FALSE}
+baselers %>%
+  arrange(desc(height)) %>%
+  select(id, height, sex) %>%
+  slice(1:5)
+```
+
+]
+
+
+
+---
+
+# Quiz 4
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(id, sex, age, height) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest Baselers?
+
+```{r, echo = TRUE}
+baselers %>%
+  arrange(desc(height)) %>%
+  select(id, height, sex) %>%
+  slice(1:5)
+```
+
+]
+
+
+
+
+---
+
+# Quiz 5
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(id, sex, age, height) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest *female* Baselers?
+
+```{r, echo = FALSE}
+baselers %>%
+    filter(sex == "female") %>%
+
+  arrange(desc(height)) %>%
+  select(id, height, sex) %>%
+  slice(1:5)
+```
+
+]
+
+---
+
+# Quiz 5
+
+.pull-left45[
+
+Here is part of the baselers dataframe
+
+```{r}
+baselers %>%
+  select(id, sex, age, height) %>%
+  slice(1:5)
+```
+
+
+]
+
+
+.pull-right5[
+
+How do I calculate the following table of the top 5 tallest *female* Baselers?
+
+```{r, echo = TRUE}
+baselers %>%
+  filter(sex == "female") %>%
+  arrange(desc(height)) %>%
+  select(id, height, sex) %>%
+  slice(1:5)
+```
+
+]
 
 ---
 
