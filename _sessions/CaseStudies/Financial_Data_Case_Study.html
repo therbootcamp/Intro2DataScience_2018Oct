@@ -275,33 +275,10 @@ library(tidyverse)</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>In this practical, you will load three external datasets <code>\^DJI.csv</code>, <code>\^GDAXI.csv</code>, and <code>\^N225.csv</code>. However, two of these data files are a bit messy. Specifically, <code>\^GDAXI.csv</code> and <code>\^N225.csv</code> use a specific character string to represent missings in the data. To identify the NA-character string in the data open one of them in a text viewer, (via RStudio or via, e.g., <em>textedit</em>). Do you see the string value that indicates missing data? Look hard!</p></li>
 <li><p>Once you know what string value indicates missing data, us the <code>read_csv()</code> function to load in the stock index data sets, “^DJI.csv”, “^GDAXI.csv”, and “^N225.csv”, from your <code>1_Data</code> folder. In so doing, set an explicit <code>na</code>-argument to account for the fact that “^GDAXI.csv” “^N225.csv” use a specific character string to represent missings in the data.</p></li>
-</ol>
-<pre class="r"><code># Load index data from local data folder 
-dow &lt;- read_csv(file = '1_Data/^DJI.csv')
-dax &lt;- read_csv(file = '1_Data/^GDAXI.csv', na = 'XXX')  # 'XXX' means missing!
-nik &lt;- read_csv(file = '1_Data/^N225.csv', na = 'XXX')   # 'XXX' means missing!</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Load in the exchange rate data sets, <code>euro-dollar.txt</code> and <code>yen-dollar.txt</code>, from the <code>1_Data</code> folder as two new objects called <code>eur_usd</code> and <code>yen_usd</code>. To do this, use the <code>read_delim()</code>-function and <code>\t</code> as the <code>delim</code>-argument. This tells R that the data is tab-delimited.</li>
-</ol>
-<pre class="r"><code># Load exchange rate data from local data folder 
-eur_usd &lt;- read_delim(file = 'XXX/XXX', 
-                      delim = '\t')
-
-yen_usd &lt;- read_delim(file = 'XXX/XXX',
-                      delim = '\t')</code></pre>
-<ol start="4" style="list-style-type: decimal">
+<li><p>Load in the exchange rate data sets, <code>euro-dollar.txt</code> and <code>yen-dollar.txt</code>, from the <code>1_Data</code> folder as two new objects called <code>eur_usd</code> and <code>yen_usd</code>. To do this, use the <code>read_delim()</code>-function and <code>\t</code> as the <code>delim</code>-argument. This tells R that the data is tab-delimited.</p></li>
 <li><p>Print the <code>eur_usd</code> and <code>yen_usd</code> objects. Are all the data types and variable names correct?</p></li>
 <li><p>There’s something wrong, right? First, we want the columns to be called <code>Date</code> and <code>Rate</code> (and not be taken from the first row). To fix this, load the data again with the <code>col_names</code>-argument and assign to it a vector that contains the correct variable names.</p></li>
-</ol>
-<pre class="r"><code>eur_usd &lt;- read_delim(file = 'XXX/XXX', 
-                      delim = '\t',
-                      col_names = c('XXX', 'XXX'))
-
-yen_usd &lt;- read_delim(file = 'XXX/XXX', 
-                      delim = '\t', 
-                      col_names = c('XXX', 'XXX'))</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Finally you want to make sure that the variable <code>Date</code> is actually of type <code>date</code>. Fix this using the <code>parse_date()</code> function with <code>format = '%d %b %Y'</code>. This specifies the exact format the dates are formatted in. Overwrite the existing <code>Date</code>-variable.</li>
+<li><p>Finally you want to make sure that the variable <code>Date</code> is actually of type <code>date</code>. Fix this using the <code>parse_date()</code> function with <code>format = '%d %b %Y'</code>. This specifies the exact format the dates are formatted in. Overwrite the existing <code>Date</code>-variable.</p></li>
 </ol>
 <pre class="r"><code># change Date to date type in both datasets
 
@@ -324,46 +301,11 @@ yen_usd &lt;- yen_usd %&gt;%
 </li>
 <li>At the end, rename the variables appropriately using the <code>rename()</code>-function.</li>
 </ul>
-<pre class="r"><code># Combine all datasets into one dataframe
-financial &lt;- dow %&gt;% 
-  select(Date, Close) %&gt;% 
-  inner_join(XXX %&gt;% select(Date, Close), by = 'Date', suffix = c('_dow','_dax')) %&gt;%
-  inner_join(XXX %&gt;% select(XXX, XXX), by = 'XXX') %&gt;%
-  inner_join(XXX, by = 'XXX') %&gt;%
-  inner_join(XXX, by = 'XXX', suffix = c('_eur', '_yen')) %&gt;%
-  rename(Close_nik = Close)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Create new variables containing the change in index price and exchange rate for each variable using the <code>mutate</code>-function(). To compute the change, use the <code>diff()</code>-function. Since <code>diff()</code> will return <code>n - 1</code> change values, add an <code>NA</code> at the first position of the change variable à la <code>c(NA, diff(my_variable))</code>.</li>
-</ol>
-<pre class="r"><code># create variables representing day-to-day changes
-financial &lt;- financial %&gt;% 
-  mutate(
-  Close_dow_change = c(NA, diff(XXX)),
-  Close_dax_change = c(NA, diff(XXX)),
-  Close_nik_change = c(NA, diff(XXX)),
-  Rate_eur_change = c(NA, diff(XXX)),
-  Rate_yen_change = c(NA, diff(XXX))
-)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Create a variable containing only the year of the date variable using <code>mutate()</code> and <code>year()</code> from the <code>lubridate</code>-package (which is part of the <code>tidyverse</code>).</li>
-</ol>
-<pre class="r"><code># load lubridate
-library(lubridate)
-
-# create year variable
-financial &lt;- financial %&gt;% 
-  mutate(year = year(XXX))</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Currently your data is in the “wide” format. Let’s convert it to the long format, in which variables occupy different rows rather than columns, using the <code>gather()</code>-function from the <code>tidyr</code>-package (also part of the <code>tidyverse</code>). To do this use the command below to create the <code>financial_long</code> data frame. You may have to (or want to) change the object/variable names. The first two arguments (given we used <em>pipes</em>) to the <code>gather</code>-function specify the names of the new variables, the third and fourth specify the names of the variable containing the dates and years with a leading hyphen. (Check out the example in the <code>?gather</code>-help file).</li>
-</ol>
-<pre class="r"><code># create long version of data frame
-financial_long &lt;- financial %&gt;% 
-                gather(XXX, 
-                       XXX, 
-                       -XXX, 
-                       -XXX)</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Print your <code>financial_long</code> object. How does it compare to your original <code>financial</code> object?</li>
+<li><p>Create new variables containing the change in index price and exchange rate for each variable using the <code>mutate</code>-function(). To compute the change, use the <code>diff()</code>-function. Since <code>diff()</code> will return <code>n - 1</code> change values, add an <code>NA</code> at the first position of the change variable à la <code>c(NA, diff(my_variable))</code>.</p></li>
+<li><p>Create a variable containing only the year of the date variable using <code>mutate()</code> and <code>year()</code> from the <code>lubridate</code>-package (which is part of the <code>tidyverse</code>).</p></li>
+<li><p>Currently your data is in the “wide” format. Let’s convert it to the long format, in which variables occupy different rows rather than columns, using the <code>gather()</code>-function from the <code>tidyr</code>-package (also part of the <code>tidyverse</code>). To do this use the command below to create the <code>financial_long</code> data frame. You may have to (or want to) change the object/variable names. The first two arguments (given we used <em>pipes</em>) to the <code>gather</code>-function specify the names of the new variables, the third and fourth specify the names of the variable containing the dates and years with a leading hyphen. (Check out the example in the <code>?gather</code>-help file).</p></li>
+<li><p>Print your <code>financial_long</code> object. How does it compare to your original <code>financial</code> object?</p></li>
 </ol>
 </div>
 <div id="d---statistics-plotting" class="section level2">
@@ -380,65 +322,14 @@ ggplot(data = temp_data,
   geom_line() + 
   facet_grid(~variable)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Calculate the overall stock index price change per year. To do this, ise <code>group_by()</code>, <code>summarise()</code>, and <code>sum()</code> on the stock index change variables. Remember there were <code>NA</code>’s in two of the stock index price variables. When was the biggest drop in stock index prices?</li>
+<li><p>Calculate the overall stock index price change per year. To do this, ise <code>group_by()</code>, <code>summarise()</code>, and <code>sum()</code> on the stock index change variables. Remember there were <code>NA</code>’s in two of the stock index price variables. When was the biggest drop in stock index prices?</p></li>
+<li><p>Now that you know when the biggest drop occured, let’s find out which stock index suffered the biggest loss? To do this, compare the overall losses to the index price on the first trading day of that year. To do this, first identify the first date available for that year and then <code>filter()</code> the data based on the respective character string to retrieve that day’s closing prices. Then divide the overall stock price change by that years first closing price. Which stock index suffered the greatest relative loss?</p></li>
+<li><p>One driver behind the results observed for the last two tasks is that modern financial markets are closely intertwined, to the extent that a change in one market can bring about a change in the markets. Evaluate this aspect of financial markets by correlating the stock index change variables among each other using <code>cor()</code>. Note that <code>cor()</code> can take a data frame as an argument to produce the full correlation matrix among all variables. Also, don’t forget about the <code>NA</code>s - there is an argument for <code>cor()</code> to deal with them. How closely are the stock indices related and which ones are most closely related?</p></li>
+<li><p>Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. Note that here have to specify each pairwise correlation separately in order to <code>summarise()</code> the correlation for each year (rather than computing the entire correlation matrix).</p></li>
+<li><p>Another important index of the financial markets is the exchange rate to other currencies. Generally, it is assumed that a strong economy translates in both a strong stock index and a strong currency relative to other currencies. First, evaluate whether changes in exchange rates correlate with each other the same way that stock indices do.</p></li>
+<li><p>Now evaluate whether exchange rates vary as a function of the difference between stock indices. For example, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theory has also produced an alternative hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exchange them for their own currency to maintain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.</p></li>
+<li><p>Now, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.</p></li>
 </ol>
-<pre class="r"><code># calculate aggregate change per year
-aggregate_change &lt;- financial %&gt;% 
-  group_by(XXX) %&gt;% 
-  summarize(
-    XXX = sum(XXX),
-    XXX = sum(XXX, na.rm = TRUE),
-    XXX = sum(XXX, na.rm = TRUE)
-)
-
-aggregate_change</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Now that you know when the biggest drop occured, let’s find out which stock index suffered the biggest loss? To do this, compare the overall losses to the index price on the first trading day of that year. To do this, first identify the first date available for that year and then <code>filter()</code> the data based on the respective character string to retrieve that day’s closing prices. Then divide the overall stock price change by that years first closing price. Which stock index suffered the greatest relative loss?</li>
-</ol>
-<pre class="r"><code>aggregate_change %&gt;% 
-  filter(year == 2008) %&gt;% 
-  select(-1) / data %&gt;% 
-  filter(Date == &quot;2008-01-04&quot;) %&gt;% 
-  select(XXX, XXX, XXX)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>One driver behind the results observed for the last two tasks is that modern financial markets are closely intertwined, to the extent that a change in one market can bring about a change in the markets. Evaluate this aspect of financial markets by correlating the stock index change variables among each other using <code>cor()</code>. Note that <code>cor()</code> can take a data frame as an argument to produce the full correlation matrix among all variables. Also, don’t forget about the <code>NA</code>s - there is an argument for <code>cor()</code> to deal with them. How closely are the stock indices related and which ones are most closely related?</li>
-</ol>
-<pre class="r"><code>financial %&gt;% 
-  select(XXX, XXX, XXX) %&gt;%
-  cor(., use = 'complete.obs')</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. Note that here have to specify each pairwise correlation separately in order to <code>summarise()</code> the correlation for each year (rather than computing the entire correlation matrix).</li>
-</ol>
-<pre class="r"><code>financial %&gt;% 
-  group_by(XXX) %&gt;% 
-  summarize(
-    cor_dow_dax = cor(XXX, XXX, use = 'complete.obs'),
-    cor_dow_nik = cor(XXX, XXX, use = 'complete.obs'),
-    cor_dax_nik = cor(XXX, XXX, use = 'complete.obs')
-)</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Another important index of the financial markets is the exchange rate to other currencies. Generally, it is assumed that a strong economy translates in both a strong stock index and a strong currency relative to other currencies. First, evaluate whether changes in exchange rates correlate with each other the same way that stock indices do.</li>
-</ol>
-<pre class="r"><code>financial %&gt;% 
-  select(XXX, XXX) %&gt;%
-  cor(., use = 'complete.obs')</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>Now evaluate whether exchange rates vary as a function of the difference between stock indices. For example, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theory has also produced an alternative hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exchange them for their own currency to maintain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.</li>
-</ol>
-<pre class="r"><code>XXX %&gt;% 
-  summarize(
-    cor_dow_dax = cor(XXX - XXX, XXX, use = 'complete.obs'),
-    cor_dow_nik = cor(XXX - XXX, XXX, use = 'complete.obs')
-  )</code></pre>
-<ol start="8" style="list-style-type: decimal">
-<li>Now, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.</li>
-</ol>
-<pre class="r"><code>XXX %&gt;% 
-  group_by(XXX) %&gt;% 
-  summarize(
-    cor_dow_dax = cor(XXX - XXX, XXX, use = 'complete.obs'),
-    cor_dow_nik = cor(XXX - XXX, XXX, use = 'complete.obs')
-  )</code></pre>
 <div id="references" class="section level3">
 <h3>References</h3>
 <ul>

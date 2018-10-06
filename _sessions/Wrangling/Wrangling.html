@@ -445,7 +445,7 @@ df %&gt;%
 
 .pull-right6[
 
-Calculate two new columns `age_months` and `age_years`
+Calculate two new columns `age_months` and `age_decades`
 
 
 ```r
@@ -945,18 +945,18 @@ Sort by `arm` and then `age`.
 
 ```r
 combined_df %&gt;%
-  arrange(arm, desc(age))  # Sort by arm then age
+  arrange(arm, age)  # Sort by arm then age
 ```
 
 ```
 ## # A tibble: 5 x 6
 ##      id   age   arm arm_char    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1 placebo    123   135
-## 2     4    34     1 placebo    100   105
-## 3     2    65     2 drug       143   140
+## 1     4    34     1 placebo    100   105
+## 2     1    37     1 placebo    123   135
+## 3     5    45     2 drug        NA    NA
 ## 4     3    57     2 drug        NA    NA
-## 5     5    45     2 drug        NA    NA
+## 5     2    65     2 drug       143   140
 ```
 
 ]
@@ -997,7 +997,7 @@ c(2, 6, 10)
 
 .pull-right55[
 
-Select rows `3`, `6`, and `10`.
+Select rows `3` and `5`.
 
 
 ```r

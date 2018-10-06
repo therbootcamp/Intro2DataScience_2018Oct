@@ -404,7 +404,7 @@ df %>%
 
 .pull-right6[
 
-Calculate two new columns `age_months` and `age_years`
+Calculate two new columns `age_months` and `age_decades`
 
 ```{r, warning = FALSE}
 patients_df %>% 
@@ -837,7 +837,7 @@ Sort by `arm` and then `age`.
 
 ```{r}
 combined_df %>%
-  arrange(arm, desc(age))  # Sort by arm then age
+  arrange(arm, age)  # Sort by arm then age
 ```
 
 ]
@@ -868,7 +868,7 @@ c(2, 6, 10)
 
 .pull-right55[
 
-Select rows `3`, `6`, and `10`.
+Select rows `3` and `5`.
 
 ```{r}
 # Rows 3 and 5 only

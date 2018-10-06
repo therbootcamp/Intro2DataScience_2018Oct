@@ -146,10 +146,6 @@ library(tidyverse)
 kc_house <- read_csv(file = "XX")
 ```
 
-```{r}
-kc_house <- read_csv(file = "1_Data/kc_house.csv")
-```
-
 4. Using `print()`, `summary()`, and `head()`, explore the data to make sure it was loaded correctly.
 
 ```{r}
@@ -157,7 +153,6 @@ kc_house
 summary(kc_house)
 head(kc_house)
 ```
-
 
 ### B - Recap
 
@@ -591,6 +586,8 @@ names(living_glm)
 
 summary(living_glm)
 ```
+
+6. The `chisq.test()` function allows you to do conduct a chi squre test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?
 
 
 ## Additional Resources
