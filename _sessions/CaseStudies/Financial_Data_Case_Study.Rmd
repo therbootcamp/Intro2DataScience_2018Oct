@@ -367,7 +367,7 @@ financial %>%
   )
 ```
 
-8. Finally, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends. As always.
+8. Finally, evaluate the stability of the above relationship for each year separately. Can you make out a stable pattern? No? I guess it depends. As always.
 
 ```{r, echo = FALSE, eval = FALSE}
 XXX %>% 
