@@ -531,7 +531,7 @@ kc_house</code></pre>
 <li><p>Do houses built in later years tend to have more living space? To answer this, group the data by <code>built_yr</code>, and then calculate the mean number of living square meters. Be sure to also include the number of houses built in each year!</p></li>
 <li><p>Was that table too big? Try using the following code to get the results for each decade rather than each year!</p></li>
 </ol>
-<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
+<pre class="r"><code>kc_house %&gt;%
   mutate(built_decade = floor(built_yr / 10)) %&gt;%
   group_by(built_decade) %&gt;%
   summarise(XX = XX,

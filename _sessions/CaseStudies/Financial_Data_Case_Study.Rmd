@@ -217,7 +217,7 @@ financial <- financial %>%
 ```
 
 
-4. Alright, now let's create change that tell how how the exchange rates and stock indices have moved. Use the `mutate`- and the `diff()`-function. The `diff` computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
+4. Alright, now let's create `change` variables that tell how the exchange rates and stock indices have moved. Use the `mutate`- and the `diff()`-function. The `diff` computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
 
 ```{r, echo = FALSE, eval = FALSE}
 # create variables representing day-to-day changes
@@ -265,7 +265,7 @@ financial <- financial %>%
   mutate(year = year(Date))
 ```
 
-6. Finally, we want the data in the "long", instead of the current "wide" format. In long formats variables occupy different rows rather than columns. To this using the `gather()`-function. Replace the XXs below below to create the `financial_long` data frame. Hint: The first two arguments to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the `?gather`-help file.
+6. Finally, we want the data in the "long", instead of the current "wide" format. Call this dataset `financial_long`. In long formats variables occupy different rows rather than columns. To this using the `gather()`-function. Hint: The first two arguments to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the `?gather`-help file.
 
 ```{r}
 # create long version of data frame
@@ -367,7 +367,7 @@ financial %>%
   )
 ```
 
-8. Finally, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends. As always.
+8. Finally, evaluate the stability of the above relationship for each year separately. Can you make out a stable pattern? No? I guess it depends. As always.
 
 ```{r, echo = FALSE, eval = FALSE}
 XXX %>% 

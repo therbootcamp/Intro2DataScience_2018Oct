@@ -261,11 +261,7 @@ $(document).ready(function () {
 <div id="a---getting-setup" class="section level2">
 <h2>A - Getting setup</h2>
 <ol style="list-style-type: decimal">
-<<<<<<< HEAD
-<li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Inside of the <code>2_Code</code> folder, you should have all of the data sets listed in the Datasets section above!</p></li>
-=======
 <li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Inside of the <code>1_Data</code> folder, you should have all of the data sets listed in the Datasets section above!</p></li>
->>>>>>> bd9722bfa3e23ad1fc833b4e0443509e1b4ac028
 <li><p>Open a new R script and save it as a new file in your <code>R</code> folder called <code>financial_casestudy.R</code>. At the top of the script, using comments, write your name and the date. Then, load the <code>tidyverse</code> package. Here’s how the top of your script should look:</p></li>
 </ol>
 <pre class="r"><code>## My Name
@@ -320,9 +316,9 @@ financial &lt;- dow %&gt;%
              suffix = c('_dow','_dax'))</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Looks better now? OK, now that you know how to join two data sets repeat the steps until all five data sets are included in <code>financial</code>. Remember, we only want the dates variable (<code>Date</code>), the stock index (unadjusted) closing prices (<code>Close</code>). Note if you have trouble fixing all variables names using the <code>suffix</code>-argument you can also take of this at the end using <code>rename()</code>.</p></li>
-<li><p>Alright, now let’s create change that tell how how the exchange rates and stock indices have moved. Use the <code>mutate</code>- and the <code>diff()</code>-function. The <code>diff</code> computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an <code>NA</code> at the first position of the change variable à la <code>c(NA, diff(my_variable))</code>.</p></li>
+<li><p>Alright, now let’s create <code>change</code> variables that tell how the exchange rates and stock indices have moved. Use the <code>mutate</code>- and the <code>diff()</code>-function. The <code>diff</code> computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an <code>NA</code> at the first position of the change variable à la <code>c(NA, diff(my_variable))</code>.</p></li>
 <li><p>We will be mainly interested in how stock prices and exchange rates change over the course of a year. To create a variable that codes the year <code>mutate()</code> and <code>lubridate::year(Date)</code>, which will extract from <code>Date</code> the year information.</p></li>
-<li><p>Finally, we want the data in the “long”, instead of the current “wide” format. In long formats variables occupy different rows rather than columns. To this using the <code>gather()</code>-function. Replace the XXs below below to create the <code>financial_long</code> data frame. Hint: The first two arguments to the <code>gather</code>-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the <code>?gather</code>-help file.</p></li>
+<li><p>Finally, we want the data in the “long”, instead of the current “wide” format. Call this dataset <code>financial_long</code>. In long formats variables occupy different rows rather than columns. To this using the <code>gather()</code>-function. Hint: The first two arguments to the <code>gather</code>-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the <code>?gather</code>-help file.</p></li>
 <li><p>Now your data is tidy proper (at least with regard to the analyses required here)! Go ahead an explore the data a bit. What data do they contain? Consider using <code>summary</code> or <code>skimr::skim()</code>.</p></li>
 </ol>
 </div>
@@ -336,7 +332,7 @@ financial &lt;- dow %&gt;%
 <li><p>Evaluate the stability of the relationships between financial markets by calculating pair-wise correlations for each year using <code>group_by</code> and <code>summarise()</code>. Note that here you have to specify each pairwise correlation separately inside <code>summarise()</code>.</p></li>
 <li><p>Another important aspect of financial markets are exchange rates between currencies. Generally, it is assumed that a strong economy translates into both a strong stock index and a strong currency relative to other currencies. For the end of this practical, let’s find out if that holds true our data. First, evaluate whether changes in exchange rates changes correlate with each other in the same way that stock indices did using the <code>cor</code>-function.</p></li>
 <li><p>Now, evaluate whether exchange rates vary as a function of the <em>difference</em> between stock indices. That is, for instance, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? According to the above intuition this should be the case. However, there is an alternative economic hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exchange them for their own currency to maintain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.</p></li>
-<li><p>Finally, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends. As always.</p></li>
+<li><p>Finally, evaluate the stability of the above relationship for each year separately. Can you make out a stable pattern? No? I guess it depends. As always.</p></li>
 </ol>
 <div id="references" class="section level3">
 <h3>References</h3>
