@@ -11,8 +11,8 @@ knitr::opts_chunk$set(comment = NA,
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = FALSE, 
-                      eval = FALSE, 
+                      echo = TRUE, 
+                      eval = TRUE, 
                       warning = FALSE)
 
 options(digits = 3)
@@ -565,6 +565,12 @@ summary(price_glm)
 
 11. The `$residuals` element in your `price_glm` object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called `residuals` to your `kc_house` object using `mutate()`
 
+```{r}
+kc_house <- kc_house %>%
+  mutate(residuals = price_glm$residuals)
+```
+
+
 12. Using the following template, create a histogram of the residuals.
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -572,16 +578,47 @@ ggplot(data = kc_house,
        aes(x = residuals)) +
   geom_histogram(col = "white") +
   labs(title = "Residual regression")
-  
+```
+
+```{r, fig.width = 6, fig.height = 4}
+ggplot(data = kc_house,
+       aes(x = residuals)) +
+  geom_histogram(col = "white") +
+  labs(title = "Residual regression")
 ```
 
 12. What is the mean of the residuals? How do you interpret this?
 
+```{r}
+kc_house %>% 
+  summarise(resid_mean = mean(residuals))
+```
+
 13. Now, create a new column called `residuals_abs` which shows the absolute value of the residuals (hint: use the `abs()` function).
+
+```{r}
+kc_house <- kc_house %>%
+  mutate(residuals_abs = abs(price_glm$residuals))
+```
 
 14. Create a histogram of the absolute value of the residuals.
 
+```{r, fig.width = 6, fig.height = 4}
+ggplot(data = kc_house,
+       aes(x = residuals_abs)) +
+  geom_histogram(col = "white") +
+  labs(title = "Residual regression")
+```
+
 15. What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?
+
+```{r}
+kc_house %>% 
+  summarise(resid_abs_mean = mean(residuals_abs))
+
+# On average, the model's fitted values are off by 144,018. So the model isn't terribly accurate on average.
+
+```
 
 ### X - Challenges
 
@@ -662,6 +699,15 @@ summary(living_glm)
 ```
 
 6. The `chisq.test()` function allows you to do conduct a chi square test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?
+
+```{r}
+# First look at a table
+
+table(kc_house$waterfront, kc_house$grade)
+
+chisq.test(table(kc_house$waterfront, kc_house$grade))
+```
+
 
 
 ## Additional Resources
