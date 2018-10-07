@@ -509,6 +509,26 @@ price_glm$coefficients
 summary(price_glm)
 ```
 
+11. The `$residuals` element in your `price_glm` object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called `residuals` to your `kc_house` object using `mutate()`
+
+12. Using the following template, create a histogram of the residuals
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = kc_house,
+       aes(x = residuals)) +
+  geom_histogram(col = "white") +
+  labs(title = "Residual regression")
+  
+```
+
+12. What is the mean of the residuals? How do you interpret this?
+
+13. Now, create a new column called `residuals_abs` which shows the absolute value of the residuals (hint: use the `abs()` function)
+
+14. Create a histogram of the absolute value of the residuals.
+
+15. What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?
+
 ### F - Challenges
 
 1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order) with `arrange()`, then select the first row with `slice()`. Once you find it, try searching for that zipcode on Google Maps and see if it's location makes sense!

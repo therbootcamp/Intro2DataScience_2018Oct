@@ -522,6 +522,18 @@ kc_house</code></pre>
 <li><p>Look at the names of your <code>price_glm</code> object with <code>names()</code></p></li>
 <li><p>Using <code>$</code> print the coefficients from your analysis.</p></li>
 <li><p>Using the <code>summary()</code> function, show summary results from your <code>price_glm</code> object.</p></li>
+<li><p>The <code>$residuals</code> element in your <code>price_glm</code> object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called <code>residuals</code> to your <code>kc_house</code> object using <code>mutate()</code></p></li>
+<li><p>Using the following template, create a histogram of the residuals</p></li>
+</ol>
+<pre class="r"><code>ggplot(data = kc_house,
+       aes(x = residuals)) +
+  geom_histogram(col = &quot;white&quot;) +
+  labs(title = &quot;Residual regression&quot;)</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li><p>What is the mean of the residuals? How do you interpret this?</p></li>
+<li><p>Now, create a new column called <code>residuals_abs</code> which shows the absolute value of the residuals (hint: use the <code>abs()</code> function)</p></li>
+<li><p>Create a histogram of the absolute value of the residuals.</p></li>
+<li><p>What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?</p></li>
 </ol>
 </div>
 <div id="f---challenges" class="section level3">
