@@ -386,7 +386,7 @@ rsq(price_glm)</code></pre>
 <div id="a---setup" class="section level2">
 <h2>A - Setup</h2>
 <ol style="list-style-type: decimal">
-<li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Make sure that the data files listed in the <code>Datasets</code> section above are in your <code>1_Data</code> folder</p></li>
+<li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Make sure that the data files listed in the <code>Datasets</code> section above are in your <code>1_Data</code> folder.</p></li>
 <li>Open a new R script. At the top of the script, using comments, write your name and the date. Save it as a new file called <code>analysing_practical.R</code> in the <code>2_Code</code> folder.<br />
 </li>
 <li><p>Using <code>library()</code> load the set of packages for this practical listed in the packages section above.</p></li>
@@ -436,12 +436,8 @@ rsq(price_glm)</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
-  rename(NEW = OLD,
-         NEW = OLD,
-         NEW = OLD)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Create new column(s) <code>living_sqm</code>, <code>lot_sqm</code>, <code>above_sqm</code> and <code>basement_sqm</code> which show the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093)</li>
+<li>Create new column(s) <code>living_sqm</code>, <code>lot_sqm</code>, <code>above_sqm</code> and <code>basement_sqm</code> which show the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093).</li>
 </ol>
 <pre class="r"><code>kc_house &lt;- kc_house %&gt;%
   mutate(living_sqm = XXX * XXX,
@@ -449,12 +445,8 @@ rsq(price_glm)</code></pre>
          XXX = XXX,
          XXX = XXX)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Add a new variable to the dataframe called <code>mansion</code> which is “Yes” when the <em>sum</em> of the house’s living, above, and basement space is above 750 square meters</li>
+<li>Add a new variable to the dataframe called <code>mansion</code> which is “Yes” when the <em>sum</em> of the house’s living, above, and basement space is above 750 square meters.</li>
 </ol>
-<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
-                mutate(XXX = case_when(
-                              XXX + XXX + XXX &gt; XXX ~ &quot;XXX&quot;,
-                              XXXX + XXX + XXX &lt;= XXX ~ &quot;XXX&quot;))</code></pre>
 </div>
 <div id="c---simple-summaries" class="section level3">
 <h3>C - Simple summaries</h3>
@@ -479,24 +471,18 @@ rsq(price_glm)</code></pre>
 
 kc_house</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>What percentage of houses sold for more than 1,000,000? Let’s answer this with <code>summarise()</code></li>
+<li>What percentage of houses sold for more than 1,000,000? Let’s answer this with <code>summarise()</code>.</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   summarise(mil_p = mean(XXX &gt; 1000000))</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>For mansions <em>only</em>, calculate the mean number of floors and bathrooms (hint: before summarising the data, use <code>filter()</code> to only select mansions!)</li>
 </ol>
-<pre class="r"><code>kc_house %&gt;%
-  filter(XXX == XXX) %&gt;%
-  summarise(
-    floors_mean = XXX(XXX),
-    bathrooms_mean = XXX(XXX)
-  )</code></pre>
 </div>
 <div id="d---simple-grouped-summaries" class="section level3">
 <h3>D - Simple grouped summaries</h3>
 <ol style="list-style-type: decimal">
-<li>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases:</li>
+<li>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases.</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   group_by(XXX) %&gt;%
@@ -509,7 +495,7 @@ kc_house</code></pre>
   summarise(N = n(),
             XXX = XXX(XXX))</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Using <code>group_by()</code> and <code>summarise()</code>, create a dataframe showing the same results as the following table</li>
+<li>Using <code>group_by()</code> and <code>summarise()</code>, create a dataframe showing the same results as the following table.</li>
 </ol>
 <table>
 <thead>
@@ -551,7 +537,7 @@ kc_house</code></pre>
   summarise(XX = XX,
             XX = XX(XX))</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have</li>
+<li>A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have.</li>
 </ol>
 </div>
 <div id="e---multiple-groups" class="section level3">
@@ -579,13 +565,13 @@ kc_house</code></pre>
 <li><p>Look at the names of your <code>waterfront_htest</code> object with <code>names()</code></p></li>
 <li><p>Using the <code>$</code>, print the test statistic (<code>statistic</code>) from your <code>waterfront_htest</code> object.</p></li>
 <li><p>Now using <code>$</code>, print only the p-value (<code>p.value</code>) from the object.</p></li>
-<li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below</p></li>
+<li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below.</p></li>
 </ol>
 <pre class="r"><code>price_glm &lt;- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX + XXX,
                  data = XXX)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li><p>Print your <code>price_glm</code> object. What do you see?</p></li>
-<li><p>Look at the names of your <code>price_glm</code> object with <code>names()</code></p></li>
+<li><p>Look at the names of your <code>price_glm</code> object with <code>names()</code>.</p></li>
 <li><p>Using <code>$</code> print the coefficients from your analysis.</p></li>
 <li><p>Using the <code>summary()</code> function, show summary results from your <code>price_glm</code> object.</p></li>
 <li><p>The <code>$residuals</code> element in your <code>price_glm</code> object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called <code>residuals</code> to your <code>kc_house</code> object using <code>mutate()</code></p></li>
@@ -608,7 +594,7 @@ kc_house</code></pre>
 <li><p>Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using <code>mean()</code>, then sort the data in descending order) with <code>arrange()</code>, then select the first row with <code>slice()</code>. Once you find it, try searching for that zipcode on Google Maps and see if it’s location makes sense!</p></li>
 <li><p>Which house had the highest price to living space ratio? To answer this, create a new variable called <code>price_to_living</code> that takes <code>price / living_sqm</code>. Then, sort the data in descending order of this variable, and select the first row with <code>slice()</code>! What id value do you get?</p></li>
 <li><p>Which are the top 10 zip codes in terms of mean housing prices? To answer this, group the data by zipcode, calculate the mean price, arrange the dataset in descending order of mean price, then select the top 10 rows!</p></li>
-<li><p>Create the following table</p></li>
+<li><p>Create the following dataframe <em>exactly</em> as it appears.</p></li>
 </ol>
 <table>
 <thead>
@@ -688,7 +674,7 @@ kc_house</code></pre>
 </table>
 <ol start="5" style="list-style-type: decimal">
 <li><p>Create a regression object called <code>living_glm</code> predicting the amount of living space (<code>living_sqm</code>) as a function of <code>bedrooms</code>, <code>bathrooms</code>, <code>waterfront</code>, and <code>built_yr</code>. Explore the object with <code>names()</code> and <code>summary()</code>. Which variables seem to predict living space?</p></li>
-<li><p>The <code>chisq.test()</code> function allows you to do conduct a chi squre test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?</p></li>
+<li><p>The <code>chisq.test()</code> function allows you to do conduct a chi square test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?</p></li>
 </ol>
 </div>
 </div>
