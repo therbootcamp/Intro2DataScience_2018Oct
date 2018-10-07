@@ -386,7 +386,7 @@ rsq(price_glm)</code></pre>
 <div id="a---setup" class="section level2">
 <h2>A - Setup</h2>
 <ol style="list-style-type: decimal">
-<li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Make sure that the data files listed in the <code>Datasets</code> section above are in your <code>1_Data</code> folder</p></li>
+<li><p>Open your <code>baselrbootcamp</code> R project. It should already have the folders <code>1_Data</code> and <code>2_Code</code>. Make sure that the data files listed in the <code>Datasets</code> section above are in your <code>1_Data</code> folder.</p></li>
 <li>Open a new R script. At the top of the script, using comments, write your name and the date. Save it as a new file called <code>analysing_practical.R</code> in the <code>2_Code</code> folder.<br />
 </li>
 <li><p>Using <code>library()</code> load the set of packages for this practical listed in the packages section above.</p></li>
@@ -441,7 +441,7 @@ rsq(price_glm)</code></pre>
          NEW = OLD,
          NEW = OLD)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Create new column(s) <code>living_sqm</code>, <code>lot_sqm</code>, <code>above_sqm</code> and <code>basement_sqm</code> which show the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093)</li>
+<li>Create new column(s) <code>living_sqm</code>, <code>lot_sqm</code>, <code>above_sqm</code> and <code>basement_sqm</code> which show the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093).</li>
 </ol>
 <pre class="r"><code>kc_house &lt;- kc_house %&gt;%
   mutate(living_sqm = XXX * XXX,
@@ -449,7 +449,7 @@ rsq(price_glm)</code></pre>
          XXX = XXX,
          XXX = XXX)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Add a new variable to the dataframe called <code>mansion</code> which is “Yes” when the <em>sum</em> of the house’s living, above, and basement space is above 750 square meters</li>
+<li>Add a new variable to the dataframe called <code>mansion</code> which is “Yes” when the <em>sum</em> of the house’s living, above, and basement space is above 750 square meters.</li>
 </ol>
 <pre class="r"><code>kc_house &lt;- kc_house %&gt;%
                 mutate(XXX = case_when(
@@ -479,7 +479,7 @@ rsq(price_glm)</code></pre>
 
 kc_house</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>What percentage of houses sold for more than 1,000,000? Let’s answer this with <code>summarise()</code></li>
+<li>What percentage of houses sold for more than 1,000,000? Let’s answer this with <code>summarise()</code>.</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   summarise(mil_p = mean(XXX &gt; 1000000))</code></pre>
@@ -496,7 +496,7 @@ kc_house</code></pre>
 <div id="d---simple-grouped-summaries" class="section level3">
 <h3>D - Simple grouped summaries</h3>
 <ol style="list-style-type: decimal">
-<li>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases:</li>
+<li>How many mansions are there? To do this, use <code>group_by()</code> to group the dataset by the <code>mansions</code> column, then use the <code>n()</code> function to count the number of cases.</li>
 </ol>
 <pre class="r"><code>kc_house %&gt;%
   group_by(XXX) %&gt;%
@@ -509,7 +509,7 @@ kc_house</code></pre>
   summarise(N = n(),
             XXX = XXX(XXX))</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Using <code>group_by()</code> and <code>summarise()</code>, create a dataframe showing the same results as the following table</li>
+<li>Using <code>group_by()</code> and <code>summarise()</code>, create a dataframe showing the same results as the following table.</li>
 </ol>
 <table>
 <thead>
@@ -551,7 +551,7 @@ kc_house</code></pre>
   summarise(XX = XX,
             XX = XX(XX))</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have</li>
+<li>A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have.</li>
 </ol>
 </div>
 <div id="e---multiple-groups" class="section level3">
@@ -579,13 +579,13 @@ kc_house</code></pre>
 <li><p>Look at the names of your <code>waterfront_htest</code> object with <code>names()</code></p></li>
 <li><p>Using the <code>$</code>, print the test statistic (<code>statistic</code>) from your <code>waterfront_htest</code> object.</p></li>
 <li><p>Now using <code>$</code>, print only the p-value (<code>p.value</code>) from the object.</p></li>
-<li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below</p></li>
+<li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below.</p></li>
 </ol>
 <pre class="r"><code>price_glm &lt;- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX + XXX,
                  data = XXX)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li><p>Print your <code>price_glm</code> object. What do you see?</p></li>
-<li><p>Look at the names of your <code>price_glm</code> object with <code>names()</code></p></li>
+<li><p>Look at the names of your <code>price_glm</code> object with <code>names()</code>.</p></li>
 <li><p>Using <code>$</code> print the coefficients from your analysis.</p></li>
 <li><p>Using the <code>summary()</code> function, show summary results from your <code>price_glm</code> object.</p></li>
 </ol>
