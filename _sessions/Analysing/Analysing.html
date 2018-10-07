@@ -92,7 +92,7 @@ baselers &lt;- baselers %&gt;%
 ---
 .pull-left45[
 
-# What do we mean by analysing??
+# What is analysing?
 
 &lt;font size = 5&gt;&lt;high&gt;Create Groups&lt;/high&gt;&lt;/font&gt;
 
@@ -232,12 +232,12 @@ Use `summarise()` to create new columns of &lt;high&gt;summary statistics&lt;/hi
 ```r
 df %&gt;%
   summarise(
-    NAME = FUN(A),
-    NAME = FUN(B)
+    NAME = SUMMARY_FUN(A),
+    NAME = SUMMARY_FUN(B)
   )
 ```
 
-&lt;u&gt;Statistical functions&lt;/u&gt;
+&lt;u&gt;Summary functions&lt;/u&gt;
 
 | Function| Purpose |
 |:-------------|:---|
@@ -255,7 +255,7 @@ baselers %&gt;%
     N = n(),
     age_mean = mean(age),
     height_median = median(height),
-    children_max = max(children)
+    children_max = max(children, na.rm = TRUE)
   )
 ```
 
@@ -265,6 +265,11 @@ baselers %&gt;%
 ##   &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;
 ## 1 10000     44.6          171.            6
 ```
+
+The result of `summarise()` will always be a tibble!
+
+&lt;high&gt;Important&lt;/high&gt; You can only include summary functions that return a single value (i.e.; can't use `table()`)
+
 
 ]
 
