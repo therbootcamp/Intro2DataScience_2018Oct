@@ -399,8 +399,8 @@ rsq(price_glm)</code></pre>
 <div id="b---recap" class="section level3">
 <h3>B - Recap</h3>
 <ol style="list-style-type: decimal">
-<li><p>Print the names of the <code>kc_house</code> data with <code>names()</code></p></li>
-<li><p>Change the following column names using <code>rename()</code></p></li>
+<li><p>Print the names of the <code>kc_house</code> data with <code>names()</code>.</p></li>
+<li><p>Change the following column names using <code>rename()</code>.</p></li>
 </ol>
 <table>
 <thead>
@@ -464,7 +464,7 @@ rsq(price_glm)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>What is the <em>median</em> price of all houses? Use the <code>median()</code> function!</p></li>
 <li><p>What was the highest selling price? Use the <code>max()</code> function!</p></li>
-<li><p>Using the following template, sort the dataframe in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?</p></li>
+<li><p>Using the following template, sort the data frame in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?</p></li>
 </ol>
 <pre class="r"><code>kc_house &lt;- kc_house %&gt;%
   arrange(desc(XXX))
@@ -531,7 +531,7 @@ kc_house</code></pre>
 <li><p>Do houses built in later years tend to have more living space? To answer this, group the data by <code>built_yr</code>, and then calculate the mean number of living square meters. Be sure to also include the number of houses built in each year!</p></li>
 <li><p>Was that table too big? Try using the following code to get the results for each decade rather than each year!</p></li>
 </ol>
-<pre class="r"><code>kc_house &lt;- kc_house %&gt;%
+<pre class="r"><code>kc_house %&gt;%
   mutate(built_decade = floor(built_yr / 10)) %&gt;%
   group_by(built_decade) %&gt;%
   summarise(XX = XX,
@@ -548,7 +548,7 @@ kc_house</code></pre>
 <pre class="r"><code>brumhilda &lt;- kc_house %&gt;%
   filter(XXX %in% c(XXX, XXX, XXX, XXX))</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li><p>For each of the zip codes, calculate the mean and median selling price (as well as the number of houses) in each zip code.</p></li>
+<li><p>For each of the zip codes, calculate the <code>mean()</code> and <code>median()</code> selling price (as well as the number of houses) in each zip code.</p></li>
 <li><p>Now Brumhilda wants the same data separated by whether or not the house is a mansion or not. Include these results by also grouping the data by <code>mansion</code> (as well as <code>zipcode</code>), and calculating the same summary statistics as before.</p></li>
 <li><p>Ok that was good, but now she also wants to know what the maximum and minimum number of floors were in each group. Add these summary statistics!</p></li>
 </ol>
@@ -561,8 +561,8 @@ kc_house</code></pre>
 <pre class="r"><code>waterfront_htest &lt;- t.test(formula = XXX ~ XXX,
                            data = XXX)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Print your <code>waterfront_htest</code> object to see a printout of the main results</p></li>
-<li><p>Look at the names of your <code>waterfront_htest</code> object with <code>names()</code></p></li>
+<li><p>Print your <code>waterfront_htest</code> object to see a printout of the main results.</p></li>
+<li><p>Look at the names of your <code>waterfront_htest</code> object with <code>names()</code>.</p></li>
 <li><p>Using the <code>$</code>, print the test statistic (<code>statistic</code>) from your <code>waterfront_htest</code> object.</p></li>
 <li><p>Now using <code>$</code>, print only the p-value (<code>p.value</code>) from the object.</p></li>
 <li><p>Which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>living_sqm</code>, <code>waterfront</code>, <code>lat</code> and <code>long</code> best predict a house’s price (<code>price</code>)? Answer this by conducting a regression analysis using the <code>glm()</code> function and assign the result to <code>price_glm</code>. Fill in the XXXs in the code below.</p></li>
@@ -575,7 +575,7 @@ kc_house</code></pre>
 <li><p>Using <code>$</code> print the coefficients from your analysis.</p></li>
 <li><p>Using the <code>summary()</code> function, show summary results from your <code>price_glm</code> object.</p></li>
 <li><p>The <code>$residuals</code> element in your <code>price_glm</code> object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called <code>residuals</code> to your <code>kc_house</code> object using <code>mutate()</code></p></li>
-<li><p>Using the following template, create a histogram of the residuals</p></li>
+<li><p>Using the following template, create a histogram of the residuals.</p></li>
 </ol>
 <pre class="r"><code>ggplot(data = kc_house,
        aes(x = residuals)) +
@@ -583,7 +583,7 @@ kc_house</code></pre>
   labs(title = &quot;Residual regression&quot;)</code></pre>
 <ol start="12" style="list-style-type: decimal">
 <li><p>What is the mean of the residuals? How do you interpret this?</p></li>
-<li><p>Now, create a new column called <code>residuals_abs</code> which shows the absolute value of the residuals (hint: use the <code>abs()</code> function)</p></li>
+<li><p>Now, create a new column called <code>residuals_abs</code> which shows the absolute value of the residuals (hint: use the <code>abs()</code> function).</p></li>
 <li><p>Create a histogram of the absolute value of the residuals.</p></li>
 <li><p>What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?</p></li>
 </ol>

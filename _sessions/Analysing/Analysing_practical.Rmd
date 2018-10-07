@@ -210,13 +210,13 @@ head(kc_house)
 
 ### B - Recap
 
-1. Print the names of the `kc_house` data with `names()`
+1. Print the names of the `kc_house` data with `names()`.
 
 ```{r}
 names(kc_house)
 ```
 
-2. Change the following column names using `rename()`
+2. Change the following column names using `rename()`.
 
 |New Name | Old Name|
 |:----|:----|
@@ -324,7 +324,7 @@ kc_house %>%
   )
 ```
 
-5. Using the following template, sort the dataframe in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?
+5. Using the following template, sort the data frame in descending order of price. Then, print it. Do you see the house with the highest selling price at the top?
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house <- kc_house %>%
@@ -430,7 +430,7 @@ kc_house %>%
 5. Was that table too big? Try using the following code to get the results for each decade rather than each year!
 
 ```{r, echo = TRUE, eval = FALSE}
-kc_house <- kc_house %>%
+kc_house %>%
   mutate(built_decade = floor(built_yr / 10)) %>%
   group_by(built_decade) %>%
   summarise(XX = XX,
@@ -453,7 +453,7 @@ brumhilda <- kc_house %>%
   filter(zipcode %in% c(98001, 98109, 98117, 98199))
 ```
 
-2. For each of the zip codes, calculate the mean and median selling price (as well as the number of houses) in each zip code.
+2. For each of the zip codes, calculate the `mean()` and `median()` selling price (as well as the number of houses) in each zip code.
 
 ```{r}
 brumhilda %>%
@@ -501,13 +501,13 @@ waterfront_htest <- t.test(formula = price ~ waterfront,
                            data = kc_house)
 ```
 
-2. Print your `waterfront_htest` object to see a printout of the main results
+2. Print your `waterfront_htest` object to see a printout of the main results.
 
 ```{r}
 waterfront_htest
 ```
 
-3. Look at the names of your `waterfront_htest` object with `names()`
+3. Look at the names of your `waterfront_htest` object with `names()`.
 
 ```{r}
 names(waterfront_htest)
@@ -565,7 +565,7 @@ summary(price_glm)
 
 11. The `$residuals` element in your `price_glm` object contains the residuals (difference from the predicted and true dependent variable values). Add this vector as a new column called `residuals` to your `kc_house` object using `mutate()`
 
-12. Using the following template, create a histogram of the residuals
+12. Using the following template, create a histogram of the residuals.
 
 ```{r, echo = TRUE, eval = FALSE}
 ggplot(data = kc_house,
@@ -577,7 +577,7 @@ ggplot(data = kc_house,
 
 12. What is the mean of the residuals? How do you interpret this?
 
-13. Now, create a new column called `residuals_abs` which shows the absolute value of the residuals (hint: use the `abs()` function)
+13. Now, create a new column called `residuals_abs` which shows the absolute value of the residuals (hint: use the `abs()` function).
 
 14. Create a histogram of the absolute value of the residuals.
 
