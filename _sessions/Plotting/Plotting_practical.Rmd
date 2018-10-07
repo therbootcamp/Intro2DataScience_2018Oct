@@ -648,4 +648,31 @@ ggplot(data = kc_house,
   theme_minimal()
 ```
 
+3. Make this plot
+- Hint: Start by creating an aggregated dataset with median home prices of the top 20 zipcodes. Then, use this dataset in ggplot!
+
+```{r, eval = TRUE, echo = FALSE, fig.height = 3, fig.width = 5.5}
+agg <- kc_house %>%
+  group_by(zipcode) %>%
+  summarise(price_median = median(price)) %>%
+  arrange(desc(price_median)) %>%
+  mutate(zipcode = factor(zipcode, levels = zipcode, ordered = TRUE)) %>%
+  slice(1:20) %>%
+  mutate(rank = 1:20)
+
+ggplot(agg,
+       aes(x = rank, y = price_median, label = zipcode, size = price_median, alpha = price_median)) +
+  geom_point(col = "skyblue") +
+  geom_text(aes(x = rank, y = price_median), nudge_x = .7, nudge_y = 200000, angle = 45, size = 3, col = "black") +
+  labs(y = "Median Home Price",
+       x = "Rank",
+       title = "Top 10 Most Expensive King County Zipcodes") +
+  scale_x_continuous(breaks = 1:20) +
+  ylim(c(0, 2300000)) +
+    guides(size = FALSE, alpha = FALSE) +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+```
+
 
