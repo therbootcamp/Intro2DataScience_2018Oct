@@ -265,7 +265,7 @@ financial <- financial %>%
   mutate(year = year(Date))
 ```
 
-6. Finally, we want the data in the "long", instead of the current "wide" format. In long formats variables occupy different rows rather than columns. To this using the `gather()`-function. Replace the XXs below below to create the `financial_long` data frame. Hint: The first two arguments to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the `?gather`-help file.
+6. Finally, we want the data in the "long", instead of the current "wide" format. Call this dataset `financial_long`. In long formats variables occupy different rows rather than columns. To this using the `gather()`-function. Hint: The first two arguments to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the `?gather`-help file.
 
 ```{r}
 # create long version of data frame
