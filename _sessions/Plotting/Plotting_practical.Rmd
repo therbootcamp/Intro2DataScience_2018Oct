@@ -581,7 +581,7 @@ ggplot(mcdonalds, aes(x = XX,
 
 4. Customize your `geom_text()` by including the arguments: `geom_text(col = "black", check_overlap = TRUE, hjust = "left")`.
 
-5. Using the `data` argument in `geom_text()`, specify that the labels should only apply to items over 1100 calories (hint: `geom_point(data = mcdonalds %>% filter(XX > XX))`)
+5. Using the `data` argument in `geom_text()`, specify that the labels should only apply to items over 1100 calories (hint: `geom_text(data = mcdonalds %>% filter(XX > XX))`)
 
 6. Play around! 
 
