@@ -328,7 +328,7 @@ To <high>create a ggplot2 object</high>, use the `ggplot()` function
 
 `ggplot()` has two main arguments:
 
-- `data` - A data frame (aka `tibble)
+- `data` - A data frame (aka `tibble`)
 - `mapping` - A call to `aes()`
 
 ]

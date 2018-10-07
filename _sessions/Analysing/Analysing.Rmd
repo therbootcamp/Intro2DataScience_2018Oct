@@ -164,8 +164,7 @@ baselers %>%
 |obligatory_school |male   |  525|   7293.7|      6.8|
 |SEK_II            |female |  469|   7385.0|      6.9|
 |SEK_II            |male   |  272|   7254.7|      6.9|
-|SEK_III           |female | 1649|   7666.1|      7.0|
-|SEK_III           |male   | 2385|   7477.5|      6.9|
+
 
 ]
 
