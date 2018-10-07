@@ -227,7 +227,7 @@ names(kc_house)
 |built_yr|yr_built |
 |renovated_yr|yr_renovated|
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 kc_house <- kc_house %>%
   rename(NEW = OLD,
          NEW = OLD,
@@ -264,7 +264,7 @@ kc_house <- kc_house %>%
 
 4. Add a new variable to the dataframe called `mansion` which is "Yes" when the *sum* of the house's living, above, and basement space is above 750 square meters.
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 kc_house <- kc_house %>%
                 mutate(XXX = case_when(
                               XXX + XXX + XXX > XXX ~ "XXX",
@@ -354,7 +354,7 @@ kc_house %>%
 
 7. For mansions *only*, calculate the mean number of floors and bathrooms (hint: before summarising the data, use `filter()` to only select mansions!)
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 kc_house %>%
   filter(XXX == XXX) %>%
   summarise(
@@ -614,7 +614,7 @@ kc_house %>%
   slice(1:10)
 ```
 
-4. Create the following table
+4. Create the following dataframe *exactly* as it appears.
 
 ```{r, eval = FALSE, echo = FALSE}
 kc_house %>%
@@ -661,7 +661,7 @@ names(living_glm)
 summary(living_glm)
 ```
 
-6. The `chisq.test()` function allows you to do conduct a chi squre test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?
+6. The `chisq.test()` function allows you to do conduct a chi square test testing the relationship between two nominal variables. Look at the help menu to see how the function works. Then, conduct a chi-square test to see if there is a relationship between whether a house is on the waterfront and the grade of the house. Do houses on the waterfront tend to have higher (or lower) grades than houses not on the waterfront?
 
 
 ## Additional Resources

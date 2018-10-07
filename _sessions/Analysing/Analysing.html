@@ -107,6 +107,13 @@ Group data by certain variables
 - Calculate mean of age (`mean(age)`)
 - Calculate number of events (`sum(events)`)
 
+&lt;font size = 5&gt;&lt;high&gt;Bonus: Statistical Analyses&lt;/high&gt;&lt;/font&gt;
+
+- Simple hypothesis tests (t-test, correlation test)
+- Generalised linear model (regression, ANOVA)
+
+
+
 ]
 
 
@@ -781,22 +788,24 @@ baselers %&gt;%
 
 ]
 
+
+
 ---
 
 # What have we not covered yet? &lt;high&gt;Statistics!&lt;/high&gt;
 
 .pull-left4[
 
-Statistical functions always require a &lt;high&gt;data frame&lt;/high&gt; called `data`, e.g.,...
+Statistical functions (almost) always require two key arguments
+
+|||
+|:----|:-----|
+|`data`| A dataframe|
+|`formula`| A formula specifying variables in the model|
 
 
-|sex    | age| height| weight| income|
-|:------|---:|------:|------:|------:|
-|male   |  44|  174.3|  113.4|   6300|
-|male   |  65|  180.3|   75.2|  10900|
-|female |  31|  168.3|   55.5|   5100|
 &lt;br&gt;
-They also require a &lt;high&gt;formula&lt;/high&gt; that specifies a &lt;high&gt;dependent&lt;/high&gt; variable (y) as a function of one or more &lt;high&gt;independent&lt;/high&gt; variables (x1, x2, ...) in the form:
+A &lt;high&gt;formula&lt;/high&gt; specifies a &lt;high&gt;dependent&lt;/high&gt; variable (y) as a function of one or more &lt;high&gt;independent&lt;/high&gt; variables (x1, x2, ...) in the form:
 
 &lt;p align='center'&gt;&lt;font size = 6&gt;formula = y ~ x1 + x2 +...&lt;/font&gt;&lt;/p&gt;
 
@@ -908,7 +917,7 @@ Part of the `baselers` dataframe:
 ```r
 # food (y) on income (x1) and happiness (x2)
 food_glm &lt;- glm(formula = food ~ income + happiness,
-              data = baselers)
+                data = baselers)
 
 # Print food_glm
 food_glm
@@ -964,22 +973,35 @@ predict(obj, ..) # Predict
 my_glm &lt;- glm(formula = income ~ happiness + age,
               data = baselers)
 
-# print the my_glm object
-print(my_glm)
+
+summary(my_glm)
 ```
 
 ```
 ## 
-## Call:  glm(formula = income ~ happiness + age, data = baselers)
+## Call:
+## glm(formula = income ~ happiness + age, data = baselers)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+##  -4045    -835       3     814    4899  
 ## 
 ## Coefficients:
-## (Intercept)    happiness          age  
-##        1575         -100          149  
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1575.497     94.363   16.70  &lt; 2e-16 ***
+## happiness   -100.431     12.520   -8.02  1.2e-15 ***
+## age          149.312      0.815  183.31  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Degrees of Freedom: 8509 Total (i.e. Null);  8507 Residual
+## (Dispersion parameter for gaussian family taken to be 1501842)
+## 
+##     Null deviance: 6.3307e+10  on 8509  degrees of freedom
+## Residual deviance: 1.2776e+10  on 8507  degrees of freedom
 ##   (1490 observations deleted due to missingness)
-## Null Deviance:	    6.33e+10 
-## Residual Deviance: 1.28e+10 	AIC: 145000
+## AIC: 145186
+## 
+## Number of Fisher Scoring iterations: 2
 ```
 
 ]
@@ -1051,23 +1073,21 @@ tidy(my_glm)
 ]
 
 
-
-
 ---
 
 # Summary
 
 .pull-left4[
 
-1 - To calculate summary statistics across all rows, use `summarise()`
+1 - To calculate summary statistics across all rows, use `summarise()`.
 
-2 - To calculate grouped summary statistics, use `group_by()` and then `summarise()`
+2 - To calculate grouped summary statistics, use `group_by()` and then `summarise()`.
 
 3 - "Keep the pipe &lt;high&gt;%&gt;%&lt;/high&gt; going" to continue working with your data frame.
 
-4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating
+4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating.
 
-5 - Use `glm()` for regression,
+5 - Statistical functions (like `glm()`, `t.test()`) require `data` and `formula` arguments
 
 ]
 
@@ -1127,23 +1147,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

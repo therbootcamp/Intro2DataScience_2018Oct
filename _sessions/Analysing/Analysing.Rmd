@@ -113,6 +113,13 @@ Group data by certain variables
 - Calculate mean of age (`mean(age)`)
 - Calculate number of events (`sum(events)`)
 
+<font size = 5><high>Bonus: Statistical Analyses</high></font>
+
+- Simple hypothesis tests (t-test, correlation test)
+- Generalised linear model (regression, ANOVA)
+
+
+
 ]
 
 
@@ -632,20 +639,24 @@ baselers %>%
 
 ]
 
+
+
 ---
 
 # What have we not covered yet? <high>Statistics!</high>
 
 .pull-left4[
 
-Statistical functions always require a <high>data frame</high> called `data`, e.g.,...
+Statistical functions (almost) always require two key arguments
 
-```{r, echo = FALSE}
-baselers %>%
-  slice(1:3) %>% select(2:6) %>% knitr::kable(format = 'markdown')
-```
+|||
+|:----|:-----|
+|`data`| A dataframe|
+|`formula`| A formula specifying variables in the model|
+
+
 <br>
-They also require a <high>formula</high> that specifies a <high>dependent</high> variable (y) as a function of one or more <high>independent</high> variables (x1, x2, ...) in the form:
+A <high>formula</high> specifies a <high>dependent</high> variable (y) as a function of one or more <high>independent</high> variables (x1, x2, ...) in the form:
 
 <p align='center'><font size = 6>formula = y ~ x1 + x2 +...</font></p>
 
@@ -741,7 +752,7 @@ baselers %>%
 ```{r}
 # food (y) on income (x1) and happiness (x2)
 food_glm <- glm(formula = food ~ income + happiness,
-              data = baselers)
+                data = baselers)
 
 # Print food_glm
 food_glm
@@ -781,8 +792,8 @@ predict(obj, ..) # Predict
 my_glm <- glm(formula = income ~ happiness + age,
               data = baselers)
 
-# print the my_glm object
-print(my_glm)
+
+summary(my_glm)
 ```
 
 ]
@@ -845,7 +856,7 @@ tidy(my_glm)
 
 4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating.
 
-5 - Use `glm()` for regression,
+5 - Statistical functions (like `glm()`, `t.test()`) require `data` and `formula` arguments
 
 ]
 
