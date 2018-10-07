@@ -28,11 +28,12 @@ options(digits = 3)
 
 ### Overview
 
-In this practical you'll practice grouping and analysing data with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
+In this practical, you'll practice grouping and analysing data with the `dplyr` and `tidyr` packages (part of the `tidyverse collection of packages).
 
 By the end of this practical you will know how to:
 
 1. Group data and calculate summary statistics
+2. Run simple statistical analyses.
 
 ### Datasets
 
@@ -53,6 +54,8 @@ kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootc
 
 ### Glossary
 
+*Wrangling*
+
 | Function| Package | Description |
 |:---|:------|:---------------------------------------------|
 |     `rename()`|`dplyr`|    Rename columns| 
@@ -65,6 +68,14 @@ kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootc
 |     `left_join()`|`dplyr`|   Combine multiple data sets using a key column|
 |     `spread()`|`tidyr`|    Convert long data to wide format - from rows to columns| 
 |     `gather()`|`tidyr`|    Convert wide data to long format - from columns to rows|
+
+*Statistical Tests*
+
+| Function| Hypothesis Test|
+|:------|:-------------------|
+|     `t.test()`|    One and two sample t-test|
+|     `cor.test()`|    Correlation test|
+|     `glm()`, `lm()`|    Generalized linear model and linear model|
 
 ### Cheatsheet
 
@@ -121,13 +132,56 @@ bas_sex_ed <- baselers %>%
 baselers %>%
   group_by(sex, education) %>%
   summarise_if(is.numeric, mean, na.rm = TRUE)
+
+
+# Examples of hypothesis tests on the diamonds -------------
+
+library(tidyverse)
+library(broom)
+library(rsq)
+
+# First few rows of the diamonds data
+
+diamonds
+
+
+# 2-sample t- test ---------------------------
+
+# Q: Is there a difference in the carats of color = E and color = I diamonds?
+
+htest_B <- t.test(formula = carat ~ color,     # DV ~ IV
+                   alternative = "two.sided",  # Two-sided test
+                   data = diamonds,         # The data
+                   subset = color %in% c("E", "I")) # Compare Diet 1 and Diet 2
+
+htest_B  # Print result
+
+
+# Regression ----------------------------
+
+
+# Q: Create regression equation predicting price by carat, depth, table, and x
+
+price_glm <- glm(formula = price ~ carat + depth + table + x,
+                  data = diamonds)
+
+# Print coefficients
+price_glm$coefficients
+
+# Tidy version
+tidy(price_glm)
+
+# Extract R-Squared
+rsq(price_glm)
+
+
 ```
 
 # Tasks
 
 ## A - Setup
 
-1. Open your `baselrbootcamp` R project. It should already have the folders `1_Data` and `2_Code`. Make sure that the data files listed in the `Datasets` section above are in your `1_Data` folder
+1. Open your `baselrbootcamp` R project. It should already have the folders `1_Data` and `2_Code`. Make sure that the data files listed in the `Datasets` section above are in your `1_Data` folder.
 
 ```{r}
 # Done!
@@ -190,7 +244,7 @@ kc_house <- kc_house %>%
          renovated_yr = yr_renovated)
 ```
 
-3. Create new column(s) `living_sqm`, `lot_sqm`, `above_sqm` and `basement_sqm` which show  the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093)
+3. Create new column(s) `living_sqm`, `lot_sqm`, `above_sqm` and `basement_sqm` which show  the respective room sizes in square meters rather than square feet (Hint: Multiply each by 0.093).
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house <- kc_house %>%
@@ -208,7 +262,7 @@ kc_house <- kc_house %>%
          basement_sqm  = basement_sqft * 0.093)
 ```
 
-4. Add a new variable to the dataframe called `mansion` which is "Yes" when the *sum* of the house's living, above, and basement space is above 750 square meters
+4. Add a new variable to the dataframe called `mansion` which is "Yes" when the *sum* of the house's living, above, and basement space is above 750 square meters.
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house <- kc_house %>%
@@ -286,7 +340,7 @@ kc_house <- kc_house %>%
 kc_house
 ```
 
-6. What percentage of houses sold for more than 1,000,000? Let's answer this with `summarise()`
+6. What percentage of houses sold for more than 1,000,000? Let's answer this with `summarise()`.
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house %>%
@@ -321,7 +375,7 @@ kc_house %>%
 
 ### D - Simple grouped summaries
 
-1. How many mansions are there? To do this, use `group_by()` to group the dataset by the `mansions` column, then use the `n()` function to count the number of cases:
+1. How many mansions are there? To do this, use `group_by()` to group the dataset by the `mansions` column, then use the `n()` function to count the number of cases.
 
 ```{r, echo = TRUE, eval = FALSE}
 kc_house %>%
@@ -351,7 +405,7 @@ kc_house %>%
             price_mean = mean(price))
 ```
 
-3. Using `group_by()` and `summarise()`, create a dataframe showing the same results as the following table
+3. Using `group_by()` and `summarise()`, create a dataframe showing the same results as the following table.
 
 ```{r, echo = FALSE, eval = TRUE, results = 'asis'}
 kc_house %>%
@@ -383,7 +437,7 @@ kc_house <- kc_house %>%
             XX = XX(XX))
 ```
 
-6. A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have
+6. A friend of yours who is getting into Seattle real estate wants to know how the number of floors a house has affects its selling price. Create a table for her showing the minimum, mean, and maximum price for houses separated by the number of floors they have.
 
 ### E - Multiple groups
 
@@ -473,7 +527,7 @@ waterfront_htest$statistic
 waterfront_htest$p.value
 ```
 
-6. Which of the variables `bedrooms`, `bathrooms`, `living_sqm`,  `waterfront`, `lat` and `long` best predict a house's price (`price`)? Answer this by conducting a regression analysis using the `glm()` function and assign the result to `price_glm`. Fill in the XXXs in the code below 
+6. Which of the variables `bedrooms`, `bathrooms`, `living_sqm`,  `waterfront`, `lat` and `long` best predict a house's price (`price`)? Answer this by conducting a regression analysis using the `glm()` function and assign the result to `price_glm`. Fill in the XXXs in the code below.
 
 ```{r, echo = TRUE, eval = FALSE}
 price_glm <- glm(formula = XXX ~ XXX + XXX + XXX + XXX + XXX + XXX,
@@ -491,7 +545,7 @@ price_glm <- glm(formula = price ~ bedrooms + bathrooms + living_sqm + waterfron
 price_glm
 ```
 
-8. Look at the names of your `price_glm` object with `names()`
+8. Look at the names of your `price_glm` object with `names()`.
 
 ```{r}
 names(price_glm)
@@ -529,7 +583,7 @@ ggplot(data = kc_house,
 
 15. What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?
 
-### F - Challenges
+### X - Challenges
 
 1. Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using `mean()`, then sort the data in descending order) with `arrange()`, then select the first row with `slice()`. Once you find it, try searching for that zipcode on Google Maps and see if it's location makes sense!
 

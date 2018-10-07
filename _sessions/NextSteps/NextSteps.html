@@ -27,6 +27,7 @@ layout: true
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
 &lt;/span&gt;&lt;/div&gt; 
 
+
 ---
 
 
@@ -56,7 +57,7 @@ layout: true
 ]
 
 .pull-right5[
-&lt;p align="center"&gt;&lt;img src="https://i0.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot.png?zoom=2&amp;w=450" width=400 align="center"&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align="center"&gt;&lt;img src="https://i0.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot.png?zoom=2&amp;w=450" width=380 align="center"&gt;&lt;br&gt;&lt;br&gt;
 &lt;font size=2&gt;source &lt;a href="https://www.r-bloggers.com/exploring-the-cran-social-network/"&gt;R-bloggers.com&lt;/a&gt;
 &lt;/p&gt;
 ]
@@ -64,73 +65,84 @@ layout: true
 
 ---
 
+.pull-left45[
 
 # Stats packages
 
-&gt;"If there is a new statistical method, it is first implemented in R" &lt;br&gt;
-&gt; -- duw
+&gt; "It's easy to lie with statistics; it is easier to lie without them."
+&gt;
 
-&lt;br&gt;
 
 | Package| Description| 
 |:------|:------------|
-| `stats`  | Many individual tests plus all the distributions in the world.|
-| `lme`, `glm`  | (Generalized) linear models.|
-| `lme4`, `afex`  | Mixed-mode, hierarchical regression.|
-| `caret`, `mlr`, `e1071`, `rpart`, etc.| Machine learning.|
-| `BayesFactor`, `rstanarm`| Bayesian linear models.|
-| `rjags`, `rstan`| Bayesian graphical models.|
-| `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
-| `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
+| [`stats`](https://www.rdocumentation.org/packages/stats/versions/3.5.1)  | Linear, generalized linear models, individual tests, and all the distributions in the world.|
+| [`lme4`](https://cran.r-project.org/web/packages/lme4/index.html), [`afex`](https://cran.r-project.org/web/packages/afex/index.html)  | Mixed-mode, hierarchical regression.|
+| [`sem`](https://cran.r-project.org/web/packages/sem/index.html), [`lavaan`](https://cran.r-project.org/web/packages/lavaan/index.html), [`OpenMx`](https://cran.r-project.org/web/packages/OpenMx/index.html) | Structural equation modeling |
+| [`survival`](https://cran.r-project.org/web/packages/survival/index.html) | Survival analysis |
 
+]
 
+.pull-right45[
+&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+&lt;img src="https://discourse-cdn-sjc1.com/business6/uploads/analyticsvidhya/143/8d72f17e0b2a743d.png" height = 500&gt;&lt;br&gt;
+&lt;font size=2&gt;&lt;a href="http://www.xkcd.com/"&gt;xkcd.com&lt;/a&gt;
+&lt;/p&gt;
+]
 ---
+
+
+.pull-left5[
 
 # Bayesian statistics
 
-.pull-left5[
-Recent years several convenient and efficient packages for &lt;high&gt;Bayesian statistics&lt;/high&gt; have been developed, facilitating a shift to a more informative and consistent statistical framework. &lt;br&gt;&lt;br2&gt;
-Using these packages is oftentimes &lt;high&gt;as easy as using their Frequentist counterparts&lt;/high&gt;. See in particular the [BayesFactor](http://bayesfactorpcl.r-forge.r-project.org/) package.  
+&gt;The subjectivist (i.e. Bayesian) states his judgements, whereas the objectivist sweeps them under the carpet by calling assumptions knowledge, and he basks in the glorious objectivity of science.
 
-&lt;br&gt;
-&lt;p align="center"&gt;
-  &lt;img src="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg" width=350&gt;&lt;br&gt;
-  &lt;font size=2&gt;source &lt;a href="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg/"&gt;labtimes.org&lt;/a&gt;&lt;/p&gt;
+&gt; I. J. Good
+
+
+
+| Package| Description| 
+|:------|:------------|
+| [`BayesFactor`](https://cran.r-project.org/web/packages/BayesFactor/index.html), [`rstanarm`](https://cran.r-project.org/web/packages/rstanarm/index.html)  | Bayesian linear models. As easy as non-Bayesian methods. |
+| [`rjags`](https://cran.r-project.org/web/packages/rjags/index.html), [`rstan`](https://cran.r-project.org/web/packages/rstan/index.html)  | Build flexible, hierarchical Bayesian models. |
+| [`mcmc`](https://cran.r-project.org/web/packages/mcmc/index.html)| Random-walk Metropolis algorithm. |
+| [`bridgesampling`](https://cran.r-project.org/web/packages/mcmc/index.html)| Estimating marginal likelihoods, Bayes factors, etc. using bridgesampling. |
+
   ]
 
-.pull-right45[
-
-```r
-# load package
-library(BayesFactor)
-
-# define data
-x &lt;- rnorm(100, 0, 1)
-y &lt;- rnorm(100, 1, 1)
-
-# run Frequentist analysis
-t.test(x, y)
-
-# run Bayesian analysis
-ttestBF(x, y)
-```
 
 
-```
-## Bayes factor analysis
-## --------------
-## [1] Alt., r=0.707 : 190107974 ±0%
-## 
-## Against denominator:
-##   Null, mu1-mu2 = 0 
-## ---
-## Bayes factor type: BFindepSample, JZS
-```
+.pull-right4[
+&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+&lt;img src="https://i.stack.imgur.com/tStr4.png" height=500&gt;&lt;br&gt;
+&lt;font size=2&gt;&lt;a href="http://www.xkcd.com/"&gt;xkcd.com&lt;/a&gt;
+&lt;/p&gt;
+
 ]
+
 
 ---
 
 # Machine learning
+
+.pull-left45[
+
+| `caret`, `mlr`, `e1071`, `rpart`, etc.| Machine learning.|
+
+| `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
+
+| `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
+
+
+]
+
+.pull-right45[
+
+&lt;img src="image/machine_learning.png" height="300px" width="480px"&gt;&lt;/img&gt;
+
+]
 
 
 ---
@@ -175,8 +187,7 @@ model %&gt;%
 
 # Text analysis
 
-Another area were R has seen much development is &lt;high&gt;text analysis&lt;/high&gt;. New packages provide access to lightning fast &lt;high&gt;C++ string libraries&lt;/high&gt;, typical data formats for text such as &lt;high&gt;`html`&lt;/high&gt;, &lt;high&gt;xml&lt;/high&gt;, and &lt;high&gt;json&lt;/high&gt;, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
-&lt;br&gt;&lt;br&gt;
+.pull-left45[
 
 | Package| Description| 
 |:------|:------------|
@@ -187,6 +198,20 @@ Another area were R has seen much development is &lt;high&gt;text analysis&lt;/h
 | `SentimentAnalysis`| Sentiment analysis.|
 | `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
 | `Rfacebook`| Accessing the Facebook API. |
+
+]
+
+
+.pull-right45[
+  &lt;iframe width="600" height="337" src="https://www.youtube.com/embed/bd1mEm2Fy08" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;high&gt;Sundar Pichai @ Google IO, May 2018&lt;/high&gt;
+
+
+
+]
+
+
+
 
 
 ---
@@ -496,7 +521,7 @@ Feel free to contact us.
 
 ---
 
-# New courses
+# Next courses
 
 .pull-left[
 
@@ -551,12 +576,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

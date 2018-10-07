@@ -139,10 +139,11 @@ $(document).ready(function () {
 <h2></h2>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
-<p>In this practical you’ll practice grouping and analysing data with the <code>dplyr</code> and <code>tidyr</code> packages (part of the `tidyverse collection of packages).</p>
+<p>In this practical, you’ll practice grouping and analysing data with the <code>dplyr</code> and <code>tidyr</code> packages (part of the `tidyverse collection of packages).</p>
 <p>By the end of this practical you will know how to:</p>
 <ol style="list-style-type: decimal">
 <li>Group data and calculate summary statistics</li>
+<li>Run simple statistical analyses.</li>
 </ol>
 </div>
 <div id="datasets" class="section level3">
@@ -191,6 +192,7 @@ $(document).ready(function () {
 </div>
 <div id="glossary" class="section level3">
 <h3>Glossary</h3>
+<p><em>Wrangling</em></p>
 <table style="width:83%;">
 <colgroup>
 <col width="6%"></col>
@@ -257,6 +259,29 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
+<p><em>Statistical Tests</em></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+<th align="left">Hypothesis Test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>t.test()</code></td>
+<td align="left">One and two sample t-test</td>
+</tr>
+<tr class="even">
+<td align="left"><code>cor.test()</code></td>
+<td align="left">Correlation test</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>glm()</code>, <code>lm()</code></td>
+<td align="left">Generalized linear model and linear model</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="cheatsheet" class="section level3">
 <h3>Cheatsheet</h3>
@@ -312,7 +337,48 @@ bas_sex_ed &lt;- baselers %&gt;%
 # Calculate mean of ALL numeric variables
 baselers %&gt;%
   group_by(sex, education) %&gt;%
-  summarise_if(is.numeric, mean, na.rm = TRUE)</code></pre>
+  summarise_if(is.numeric, mean, na.rm = TRUE)
+
+
+# Examples of hypothesis tests on the diamonds -------------
+
+library(tidyverse)
+library(broom)
+library(rsq)
+
+# First few rows of the diamonds data
+
+diamonds
+
+
+# 2-sample t- test ---------------------------
+
+# Q: Is there a difference in the carats of color = E and color = I diamonds?
+
+htest_B &lt;- t.test(formula = carat ~ color,     # DV ~ IV
+                   alternative = &quot;two.sided&quot;,  # Two-sided test
+                   data = diamonds,         # The data
+                   subset = color %in% c(&quot;E&quot;, &quot;I&quot;)) # Compare Diet 1 and Diet 2
+
+htest_B  # Print result
+
+
+# Regression ----------------------------
+
+
+# Q: Create regression equation predicting price by carat, depth, table, and x
+
+price_glm &lt;- glm(formula = price ~ carat + depth + table + x,
+                  data = diamonds)
+
+# Print coefficients
+price_glm$coefficients
+
+# Tidy version
+tidy(price_glm)
+
+# Extract R-Squared
+rsq(price_glm)</code></pre>
 </div>
 </div>
 <div id="tasks" class="section level1">
@@ -536,8 +602,8 @@ kc_house</code></pre>
 <li><p>What is the mean of the absolute value of the residuals? How do you interpret this? In general, do you think you can predict the price of a house very well based on the features in your regression model?</p></li>
 </ol>
 </div>
-<div id="f---challenges" class="section level3">
-<h3>F - Challenges</h3>
+<div id="x---challenges" class="section level3">
+<h3>X - Challenges</h3>
 <ol style="list-style-type: decimal">
 <li><p>Which zipcode has the highest percentage of houses on the waterfront? (Hint: group by zipcode, calculate the percentage of houses on the waterfront using <code>mean()</code>, then sort the data in descending order) with <code>arrange()</code>, then select the first row with <code>slice()</code>. Once you find it, try searching for that zipcode on Google Maps and see if it’s location makes sense!</p></li>
 <li><p>Which house had the highest price to living space ratio? To answer this, create a new variable called <code>price_to_living</code> that takes <code>price / living_sqm</code>. Then, sort the data in descending order of this variable, and select the first row with <code>slice()</code>! What id value do you get?</p></li>

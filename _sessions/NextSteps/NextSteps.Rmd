@@ -24,6 +24,7 @@ layout: true
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
+
 ---
 
 ```{r setup, include=FALSE}
@@ -62,7 +63,7 @@ options(digits = 4)
 ]
 
 .pull-right5[
-<p align="center"><img src="https://i0.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot.png?zoom=2&w=450" width=400 align="center"><br><br>
+<p align="center"><img src="https://i0.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot.png?zoom=2&w=450" width=380 align="center"><br><br>
 <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a>
 </p>
 ]
@@ -70,75 +71,84 @@ options(digits = 4)
 
 ---
 
+.pull-left45[
 
 # Stats packages
 
->"If there is a new statistical method, it is first implemented in R" <br>
-> -- duw
+> "It's easy to lie with statistics; it is easier to lie without them."
+>
 
-<br>
 
 | Package| Description| 
 |:------|:------------|
-| `stats`  | Many individual tests plus all the distributions in the world.|
-| `lme`, `glm`  | (Generalized) linear models.|
-| `lme4`, `afex`  | Mixed-mode, hierarchical regression.|
-| `caret`, `mlr`, `e1071`, `rpart`, etc.| Machine learning.|
-| `BayesFactor`, `rstanarm`| Bayesian linear models.|
-| `rjags`, `rstan`| Bayesian graphical models.|
-| `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
-| `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
+| [`stats`](https://www.rdocumentation.org/packages/stats/versions/3.5.1)  | Linear, generalized linear models, individual tests, and all the distributions in the world.|
+| [`lme4`](https://cran.r-project.org/web/packages/lme4/index.html), [`afex`](https://cran.r-project.org/web/packages/afex/index.html)  | Mixed-mode, hierarchical regression.|
+| [`sem`](https://cran.r-project.org/web/packages/sem/index.html), [`lavaan`](https://cran.r-project.org/web/packages/lavaan/index.html), [`OpenMx`](https://cran.r-project.org/web/packages/OpenMx/index.html) | Structural equation modeling |
+| [`survival`](https://cran.r-project.org/web/packages/survival/index.html) | Survival analysis |
 
+]
 
+.pull-right45[
+<br><br>
+<p align = "center">
+<img src="https://discourse-cdn-sjc1.com/business6/uploads/analyticsvidhya/143/8d72f17e0b2a743d.png" height = 500><br>
+<font size=2><a href="http://www.xkcd.com/">xkcd.com</a>
+</p>
+]
 ---
+
+
+.pull-left5[
 
 # Bayesian statistics
 
-.pull-left5[
-Recent years several convenient and efficient packages for <high>Bayesian statistics</high> have been developed, facilitating a shift to a more informative and consistent statistical framework. <br><br2>
-Using these packages is oftentimes <high>as easy as using their Frequentist counterparts</high>. See in particular the [BayesFactor](http://bayesfactorpcl.r-forge.r-project.org/) package.  
+>The subjectivist (i.e. Bayesian) states his judgements, whereas the objectivist sweeps them under the carpet by calling assumptions knowledge, and he basks in the glorious objectivity of science.
 
-<br>
-<p align="center">
-  <img src="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg" width=350><br>
-  <font size=2>source <a href="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg/">labtimes.org</a></p>
+> I. J. Good
+
+
+
+| Package| Description| 
+|:------|:------------|
+| [`BayesFactor`](https://cran.r-project.org/web/packages/BayesFactor/index.html), [`rstanarm`](https://cran.r-project.org/web/packages/rstanarm/index.html)  | Bayesian linear models. As easy as non-Bayesian methods. |
+| [`rjags`](https://cran.r-project.org/web/packages/rjags/index.html), [`rstan`](https://cran.r-project.org/web/packages/rstan/index.html)  | Build flexible, hierarchical Bayesian models. |
+| [`mcmc`](https://cran.r-project.org/web/packages/mcmc/index.html)| Random-walk Metropolis algorithm. |
+| [`bridgesampling`](https://cran.r-project.org/web/packages/mcmc/index.html)| Estimating marginal likelihoods, Bayes factors, etc. using bridgesampling. |
+
   ]
 
-.pull-right45[
-```{r, message=F, eval = F}
-# load package
-library(BayesFactor)
 
-# define data
-x <- rnorm(100, 0, 1)
-y <- rnorm(100, 1, 1)
 
-# run Frequentist analysis
-t.test(x, y)
+.pull-right4[
+<br><br>
+<p align = "center">
+<img src="https://i.stack.imgur.com/tStr4.png" height=500><br>
+<font size=2><a href="http://www.xkcd.com/">xkcd.com</a>
+</p>
 
-# run Bayesian analysis
-ttestBF(x, y)
-```
-
-```{r, message=F, echo = F}
-# load package
-library(BayesFactor)
-
-# define data
-x <- rnorm(100, 0, 1)
-y <- rnorm(100, 1, 1)
-
-# run Frequentist analysis
-#t.test(x, y)
-
-# run Bayesian analysis
-ttestBF(x, y)
-```
 ]
+
 
 ---
 
 # Machine learning
+
+.pull-left45[
+
+| `caret`, `mlr`, `e1071`, `rpart`, etc.| Machine learning.|
+
+| `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
+
+| `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
+
+
+]
+
+.pull-right45[
+
+<img src="image/machine_learning.png" height="300px" width="480px"></img>
+
+]
 
 
 ---
@@ -182,8 +192,7 @@ model %>%
 
 # Text analysis
 
-Another area were R has seen much development is <high>text analysis</high>. New packages provide access to lightning fast <high>C++ string libraries</high>, typical data formats for text such as <high>`html`</high>, <high>xml</high>, and <high>json</high>, as well as to the APIs of social platforms, such as [facebook.com](www.facebook.com) and [twitter.com](www.twitter.com).
-<br><br>
+.pull-left45[
 
 | Package| Description| 
 |:------|:------------|
@@ -194,6 +203,27 @@ Another area were R has seen much development is <high>text analysis</high>. New
 | `SentimentAnalysis`| Sentiment analysis.|
 | `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
 | `Rfacebook`| Accessing the Facebook API. |
+
+]
+
+
+.pull-right45[
+  <iframe width="600" height="337" src="https://www.youtube.com/embed/bd1mEm2Fy08" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<high>Sundar Pichai @ Google IO, May 2018</high>
+
+```{r, include=F,eval=F}
+
+.pull-right45[
+<p align = "center">
+<img src="http://languagelog.ldc.upenn.edu/myl/begging_the_question_2x.png" height=450><br>
+<font size=2><a href="http://www.xkcd.com/">xkcd.com</a>
+</p>
+```
+
+]
+
+
+
 
 
 ---
@@ -502,7 +532,7 @@ Feel free to contact us.
 
 ---
 
-# New courses
+# Next courses
 
 .pull-left[
 

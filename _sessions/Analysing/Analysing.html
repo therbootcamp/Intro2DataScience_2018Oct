@@ -781,197 +781,275 @@ baselers %&gt;%
 
 ]
 
-
 ---
 
-.pull-left3[
+# What have we not covered yet? &lt;high&gt;Statistics!&lt;/high&gt;
 
-# Statistics
+.pull-left4[
 
-What have we not covered yet? Statistics!
-
-R is full of amazing statistical functions and packages
-
-Here are some common functions that come with the `stats` package
+Statistical functions always require a &lt;high&gt;data frame&lt;/high&gt; called `data`, e.g.,...
 
 
-|Function|Procedure|
-|:-----|:----|
-|`glm()`|regression|
-|`t.test()`|t-test|
-|`cor.test()`|correlation test|
+|sex    | age| height| weight| income|
+|:------|---:|------:|------:|------:|
+|male   |  44|  174.3|  113.4|   6300|
+|male   |  65|  180.3|   75.2|  10900|
+|female |  31|  168.3|   55.5|   5100|
+&lt;br&gt;
+They also require a &lt;high&gt;formula&lt;/high&gt; that specifies a &lt;high&gt;dependent&lt;/high&gt; variable (y) as a function of one or more &lt;high&gt;independent&lt;/high&gt; variables (x1, x2, ...) in the form:
 
-Each of these functions returns a list object with many named elements
+&lt;p align='center'&gt;&lt;font size = 6&gt;formula = y ~ x1 + x2 +...&lt;/font&gt;&lt;/p&gt;
+
+]
+
+.pull-right55[
+
+How to create a statistical object:
+
+
+```r
+# Example: Create regression object (my_glm)
+my_glm &lt;- glm(formula = income ~ age + height,
+              data = baselers)
+```
+
+
+![](https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/formula_description.png)&lt;!-- --&gt;
+
 
 
 ]
 
+---
 
-.pull-right65[
+# Simple hypothesis tests
+
+.pull-left45[
+
+All of the basic &lt;high&gt;one and two sample hypothesis tests&lt;/high&gt; are included in the `stats` package.
+
+These tests take either a &lt;high&gt;formula&lt;/high&gt; for the argument `formula`, or &lt;high&gt;individual vectors&lt;/high&gt; for the arguments `x`, and `y`
 
 &lt;br&gt;
 
-Specify dependent and independent variables with &lt;high&gt;formula&lt;/high&gt;
+.pull-left6[
 
-- `formula = y ~ x1 + x2 + ...`
-- `formula = y ~ .` (use *all* variables in `data`)
+| Hypothesis Test| R Function|
+|------------:|------------:|
+|     t-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+]
 
-Use `glm()` (or `lm()`) to create a linear model (regression) object
+]
 
 
+.pull-right5[
 
-```r
-# Create regression model predicting income
-income_glm &lt;- glm(formula = income ~ age + height + children,
-                data = baselers)
+### t-test with `t.test()`
 
-# What is in this object?
-names(income_glm)[1:10] # only showing first 10
-```
-
-```
-##  [1] "coefficients"      "residuals"         "fitted.values"     "effects"           "R"                
-##  [6] "rank"              "qr"                "family"            "linear.predictors" "deviance"
-```
 
 ```r
-# Print coefficients
-income_glm$coefficients
+# 2-sample t-test
+t.test(formula = income ~ sex,
+       data = baselers)
 ```
 
 ```
-## (Intercept)         age      height    children 
-##     574.740     149.302       1.720       7.727
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  income by sex
+## t = 4, df = 8500, p-value = 6e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  120.6 352.2
+## sample estimates:
+## mean in group female   mean in group male 
+##                 7650                 7414
 ```
 
 
 ]
-
 
 ---
 
-.pull-left3[
 
-# Statistics
+# Regression with `glm()`, `lm()`
 
-What have we not covered yet? Statistics!
+.pull-left35[
 
-R is full of amazing statistical functions and packages
-
-Here are some common functions that come with the `stats` package
-
-
-|Function|Procedure|
-|:-----|:----|
-|`glm()`|regression|
-|`t.test()`|t-test|
-|`cor.test()`|correlation test|
-
-Each of these functions returns a list object with many named elements
-
-
-]
-
-
-.pull-right65[
+How to &lt;high&gt;create a regression model&lt;/high&gt; predicting, e.g., how much money people spend on `food` as a function of `income`?
 
 &lt;br&gt;
+Part of the `baselers` dataframe:
 
-Specify dependent and independent variables with &lt;high&gt;formula&lt;/high&gt;
-
-- `formula = y ~ x1 + x2 + ...`
-- `formula = y ~ .` (use *all* variables in `data`)
-
-Use `t.test()` to create a hypothesis test object
+.pull-left6[
 
 
+| food| income| happiness|
+|----:|------:|---------:|
+|  610|   6300|         5|
+| 1550|  10900|         7|
+|  720|   5100|         7|
+|  680|   4200|         7|
+|  260|   4000|         5|
 
-```r
-# T-test comparing height by sex
-height_ttest &lt;- t.test(formula = height ~ sex,
-                       data = baselers)
+]
+&lt;!-- `$$\Large food = \beta_{0} + \beta_{1} \times Inc + \beta_{1} \times Hap+ \epsilon$$` --&gt;
 
-# What is in this object?
-names(height_ttest)
-```
+]
 
-```
-## [1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"    "null.value"  "alternative"
-## [8] "method"      "data.name"
-```
+.pull-right6[
 
-```r
-height_ttest$statistic # Print test statistic
-```
+### Generalized regression with `glm()`
 
-```
-##      t 
-## -66.59
-```
 
 ```r
-height_ttest$conf.int # Print confidence interval
+# food (y) on income (x1) and happiness (x2)
+food_glm &lt;- glm(formula = food ~ income + happiness,
+              data = baselers)
+
+# Print food_glm
+food_glm
 ```
 
 ```
-## [1] -14.41 -13.59
-## attr(,"conf.level")
-## [1] 0.95
+## 
+## Call:  glm(formula = food ~ income + happiness, data = baselers)
+## 
+## Coefficients:
+## (Intercept)       income    happiness  
+##    -302.089        0.101       52.205  
+## 
+## Degrees of Freedom: 8509 Total (i.e. Null);  8507 Residual
+##   (1490 observations deleted due to missingness)
+## Null Deviance:	    1.27e+09 
+## Residual Deviance: 6.06e+08 	AIC: 119000
 ```
-
 
 ]
 
 
 ---
 
-.pull-left3[
+# Exploring statistical objects
 
-# Statistics
+.pull-left35[
 
-What have we not covered yet? Statistics!
+Explore statistical objects using &lt;high&gt;generic&lt;/high&gt; functions such as `print()`, `summary()`, `predict()` and `plot()`.
 
-R is full of amazing statistical functions and packages
+&lt;high&gt;Generic&lt;/high&gt; functions different things depending on the &lt;high&gt;class label&lt;/high&gt; of the object. 
 
-Here are some common functions that come with the `stats` package
 
-|Function|Procedure|
-|:-----|:----|
-|`glm()`|regression|
-|`t.test()`|t-test|
-|`cor.test()`|correlation test|
+```r
+# Create statistical object
+obj &lt;- STAT_FUN(formula = ...,
+                data = ...)
 
-Each of these functions returns a list object with many named elements
+names(obj)       # Elements
+print(obj)       # Print
+summary(obj)     # Summary
+plot(obj)        # Plotting
+predict(obj, ..) # Predict
+```
 
 ]
 
-.pull-right65[
-&lt;br&gt;&lt;br&gt;
-&lt;high&gt;Tip!&lt;/high&gt;
-Use the `tidy()` function from the `broom` package to create nice looking tables from statistical objects 
+.pull-right6[
+
 
 ```r
+# Create a glm object
+my_glm &lt;- glm(formula = income ~ happiness + age,
+              data = baselers)
+
+# print the my_glm object
+print(my_glm)
+```
+
+```
+## 
+## Call:  glm(formula = income ~ happiness + age, data = baselers)
+## 
+## Coefficients:
+## (Intercept)    happiness          age  
+##        1575         -100          149  
+## 
+## Degrees of Freedom: 8509 Total (i.e. Null);  8507 Residual
+##   (1490 observations deleted due to missingness)
+## Null Deviance:	    6.33e+10 
+## Residual Deviance: 1.28e+10 	AIC: 145000
+```
+
+]
+
+
+---
+
+.pull-left4[
+
+# `tidy()`
+
+The `tidy()` function from the `broom` package &lt;high&gt;converts&lt;/high&gt; the most important results of many statistical object like "glm" to a &lt;high&gt;data frame&lt;/high&gt;.
+
+
+```r
+# install and load broom
+install.packages('broom')
 library(broom)
-
-# Create regression mdoel predicting income
-income_glm &lt;- glm(formula = income ~ age + height + children,
-                  data = baselers)
-
-tidy(income_glm) # Return a 'tidy' dataframe
 ```
 
-```
-## # A tibble: 4 x 5
-##   term        estimate std.error statistic p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)   575.     186.        3.08  0.00206
-## 2 age           149.       0.818   182.    0      
-## 3 height          1.72     1.05      1.64  0.102  
-## 4 children        7.73    12.9       0.601 0.548
-```
+&lt;p align="center"&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/broom_hex.png" height="200px" vspace="10"&gt;
+&lt;/p&gt;
 
 
 ]
+
+.pull-right55[
+
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+# Original printout
+my_glm
+```
+
+```
+## 
+## Call:  glm(formula = income ~ happiness + age, data = baselers)
+## 
+## Coefficients:
+## (Intercept)    happiness          age  
+##        1575         -100          149  
+## 
+## Degrees of Freedom: 8509 Total (i.e. Null);  8507 Residual
+##   (1490 observations deleted due to missingness)
+## Null Deviance:	    6.33e+10 
+## Residual Deviance: 1.28e+10 	AIC: 145000
+```
+
+
+
+
+```r
+# Tidy printout
+tidy(my_glm)
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1575.    94.4       16.7  1.33e-61
+## 2 happiness      -100.    12.5       -8.02 1.18e-15
+## 3 age             149.     0.815    183.   0.
+```
+
+]
+
 
 
 
@@ -1049,12 +1127,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
