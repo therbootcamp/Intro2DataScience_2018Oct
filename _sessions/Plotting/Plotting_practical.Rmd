@@ -38,12 +38,12 @@ library(tidyverse)
 library(plotly)
 library(ggthemes)
 mcdonalds <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/mcdonalds.csv")
+kc_house <- read_csv("https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/baselrbootcamp_data/kc_house.csv")
 ```
 
 |File  |Rows | Columns |
 |:----|:-----|:------|
 |[mcdonalds.csv](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp_2018July/master/_sessions/_data/complete/mcdonalds.csv)| 260 | 24 |
-
 
 ### Packages
 
@@ -608,3 +608,42 @@ ggplotly(MyPlot)
 2. Play around with your plot! See what happens when you hover over the points with your mouse. You can even zoom in by dragging your mouse.
 
 3. Try turning one of your favorite previous plots into an interactive `plotly` plot using the `ggplotly()` function!
+
+### X - Challenges
+
+For these challenges, use the `kc_house` dataset. Load the data as `kc_house`
+
+1. Make this plot (hint: use `scale_color_gradient(low = "green", high = "red") `)
+
+```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+ggplot(data = kc_house,
+       aes(x = bedrooms, y = bathrooms, col = price)) +
+  geom_count() +
+  labs(title = "King County Housing Prices",
+       subtitle = "Lighter color = higher price",
+       x = "# of Bedrooms",
+       y = "# of Bathrooms") +
+scale_color_gradient(low = "green", high = "red") +
+  xlim(c(0, 12)) +
+  theme_bw()
+```
+
+2. Make this plot (hint: take the log of price with `log(price)`)
+
+```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
+ggplot(data = kc_house,
+       aes(x = yr_built, y = log(price))) +
+  geom_count(alpha = .01) +
+  geom_smooth() +
+  stat_summary(size = .1) +
+  guides(size = FALSE) +
+  ylim(c(11, 15)) +
+  labs(x = "Year Built",
+       y = "Price (log-scale)",
+       title = "Selling Seattle price of houses by year",
+       subtitle = "Points indicate mean by year",
+       caption = 'Line created by gam()') +
+  theme_minimal()
+```
+
+
