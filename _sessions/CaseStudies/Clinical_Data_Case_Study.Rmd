@@ -494,9 +494,21 @@ ggplot(data = dimarta_df,
 
 ## D - Statistics
 
-1. Create a regression model predicting final histamine levels as a function of all variables. Which variables predict final histamine levels?
+1. Create a regression model predicting final histamine levels as a function of all variables in the dataset that make clinical sense to include. Call it `full_glm`.
 
-2. Now do the same predicing histamine *change*, but *don't* include final histamine levels. Do you get the same results as above? 
+2. Explore the object with `summary()`, `broom::tidy()`, and `names()`. Which variables predict final histamine levels? 
 
-3. Try running the same model as above but *do* include final histamine levels. What do you find?
+3. Add the residuals from this model as a new column in your data called `residuals_full`
+
+4. Plot the residuals from the regression as a histogram (hint: you can find the residuals in your regression object). How do they look?
+
+5. Add the absolute value of the residuals from the model as a new column in your data called `residuals_abs_full` 
+
+6. Plot the absolute value of the residuals as a histogram. How do these look?
+
+7. What is the mean value of the absolute value of this residuals?
+
+8. Now create a regression model predicting histamine change based *only* on the study arm. Call it `arm_glm`. Then follow the steps above to add the residuals (original and absolute) from this model to your dataframe. Call them `residuals_arm` and `residuals_abs_arm`.
+
+9. Calculate the mean of the raw and absolute residuals from your `arm_glm` model. How do they compare to your `full_glm` model? What does this mean?\
 

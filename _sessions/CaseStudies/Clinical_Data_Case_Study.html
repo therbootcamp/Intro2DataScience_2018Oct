@@ -351,9 +351,16 @@ biomarker_wide_df &lt;- biomarker_df %&gt;%
 <div id="d---statistics" class="section level2">
 <h2>D - Statistics</h2>
 <ol style="list-style-type: decimal">
-<li><p>Create a regression model predicting final histamine levels as a function of all variables. Which variables predict final histamine levels?</p></li>
-<li><p>Now do the same predicing histamine <em>change</em>, but <em>don’t</em> include final histamine levels. Do you get the same results as above?</p></li>
-<li><p>Try running the same model as above but <em>do</em> include final histamine levels. What do you find?</p></li>
+<li><p>Create a regression model predicting final histamine levels as a function of all variables in the dataset that make clinical sense to include. Call it <code>full_glm</code>.</p></li>
+<li><p>Explore the object with <code>summary()</code>, <code>broom::tidy()</code>, and <code>names()</code>. Which variables predict final histamine levels?</p></li>
+<li><p>Add the residuals from this model as a new column in your data called <code>residuals_full</code></p></li>
+<li><p>Plot the residuals from the regression as a histogram (hint: you can find the residuals in your regression object). How do they look?</p></li>
+<li><p>Add the absolute value of the residuals from the model as a new column in your data called <code>residuals_abs_full</code></p></li>
+<li><p>Plot the absolute value of the residuals as a histogram. How do these look?</p></li>
+<li><p>What is the mean value of the absolute value of this residuals?</p></li>
+<li><p>Now create a regression model predicting histamine change based <em>only</em> on the study arm. Call it <code>arm_glm</code>. Then follow the steps above to add the residuals (original and absolute) from this model to your dataframe. Call them <code>residuals_arm</code> and <code>residuals_abs_arm</code>.</p></li>
+<li><p>Calculate the mean of the raw and absolute residuals from your <code>arm_glm</code> model. How do they compare to your <code>full_glm</code> model? What does this mean?<br />
+</p></li>
 </ol>
 </div>
 </div>
