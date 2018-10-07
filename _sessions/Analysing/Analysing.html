@@ -92,7 +92,7 @@ baselers &lt;- baselers %&gt;%
 ---
 .pull-left45[
 
-# What do we mean by analysing??
+# What is analysing?
 
 &lt;font size = 5&gt;&lt;high&gt;Create Groups&lt;/high&gt;&lt;/font&gt;
 
@@ -106,6 +106,13 @@ Group data by certain variables
 - Count number of cases
 - Calculate mean of age (`mean(age)`)
 - Calculate number of events (`sum(events)`)
+
+&lt;font size = 5&gt;&lt;high&gt;Bonus: Statistical Analyses&lt;/high&gt;&lt;/font&gt;
+
+- Simple hypothesis tests (t-test, correlation test)
+- Generalised linear model (regression, ANOVA)
+
+
 
 ]
 
@@ -137,8 +144,7 @@ Aggregated data
 |obligatory_school |male   |  525|   7293.7|      6.8|
 |SEK_II            |female |  469|   7385.0|      6.9|
 |SEK_II            |male   |  272|   7254.7|      6.9|
-|SEK_III           |female | 1649|   7666.1|      7.0|
-|SEK_III           |male   | 2385|   7477.5|      6.9|
+
 
 ]
 
@@ -226,12 +232,12 @@ Use `summarise()` to create new columns of &lt;high&gt;summary statistics&lt;/hi
 ```r
 df %&gt;%
   summarise(
-    NAME = FUN(A),
-    NAME = FUN(B)
+    NAME = SUMMARY_FUN(A),
+    NAME = SUMMARY_FUN(B)
   )
 ```
 
-&lt;u&gt;Statistical functions&lt;/u&gt;
+&lt;u&gt;Summary functions&lt;/u&gt;
 
 | Function| Purpose |
 |:-------------|:---|
@@ -249,7 +255,7 @@ baselers %&gt;%
     N = n(),
     age_mean = mean(age),
     height_median = median(height),
-    children_max = max(children)
+    children_max = max(children, na.rm = TRUE)
   )
 ```
 
@@ -259,6 +265,11 @@ baselers %&gt;%
 ##   &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;
 ## 1 10000     44.6          171.            6
 ```
+
+The result of `summarise()` will always be a tibble!
+
+&lt;high&gt;Important&lt;/high&gt; You can only include summary functions that return a single value (i.e.; can't use `table()`)
+
 
 ]
 
@@ -781,22 +792,24 @@ baselers %&gt;%
 
 ]
 
+
+
 ---
 
 # What have we not covered yet? &lt;high&gt;Statistics!&lt;/high&gt;
 
 .pull-left4[
 
-Statistical functions always require a &lt;high&gt;data frame&lt;/high&gt; called `data`, e.g.,...
+Statistical functions (almost) always require two key arguments
+
+|||
+|:----|:-----|
+|`data`| A dataframe|
+|`formula`| A formula specifying variables in the model|
 
 
-|sex    | age| height| weight| income|
-|:------|---:|------:|------:|------:|
-|male   |  44|  174.3|  113.4|   6300|
-|male   |  65|  180.3|   75.2|  10900|
-|female |  31|  168.3|   55.5|   5100|
 &lt;br&gt;
-They also require a &lt;high&gt;formula&lt;/high&gt; that specifies a &lt;high&gt;dependent&lt;/high&gt; variable (y) as a function of one or more &lt;high&gt;independent&lt;/high&gt; variables (x1, x2, ...) in the form:
+A &lt;high&gt;formula&lt;/high&gt; specifies a &lt;high&gt;dependent&lt;/high&gt; variable (y) as a function of one or more &lt;high&gt;independent&lt;/high&gt; variables (x1, x2, ...) in the form:
 
 &lt;p align='center'&gt;&lt;font size = 6&gt;formula = y ~ x1 + x2 +...&lt;/font&gt;&lt;/p&gt;
 
@@ -908,7 +921,7 @@ Part of the `baselers` dataframe:
 ```r
 # food (y) on income (x1) and happiness (x2)
 food_glm &lt;- glm(formula = food ~ income + happiness,
-              data = baselers)
+                data = baselers)
 
 # Print food_glm
 food_glm
@@ -964,22 +977,35 @@ predict(obj, ..) # Predict
 my_glm &lt;- glm(formula = income ~ happiness + age,
               data = baselers)
 
-# print the my_glm object
-print(my_glm)
+
+summary(my_glm)
 ```
 
 ```
 ## 
-## Call:  glm(formula = income ~ happiness + age, data = baselers)
+## Call:
+## glm(formula = income ~ happiness + age, data = baselers)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+##  -4045    -835       3     814    4899  
 ## 
 ## Coefficients:
-## (Intercept)    happiness          age  
-##        1575         -100          149  
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1575.497     94.363   16.70  &lt; 2e-16 ***
+## happiness   -100.431     12.520   -8.02  1.2e-15 ***
+## age          149.312      0.815  183.31  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Degrees of Freedom: 8509 Total (i.e. Null);  8507 Residual
+## (Dispersion parameter for gaussian family taken to be 1501842)
+## 
+##     Null deviance: 6.3307e+10  on 8509  degrees of freedom
+## Residual deviance: 1.2776e+10  on 8507  degrees of freedom
 ##   (1490 observations deleted due to missingness)
-## Null Deviance:	    6.33e+10 
-## Residual Deviance: 1.28e+10 	AIC: 145000
+## AIC: 145186
+## 
+## Number of Fisher Scoring iterations: 2
 ```
 
 ]
@@ -1065,7 +1091,7 @@ tidy(my_glm)
 
 4 - You can always do wrangling operations (`filter()`, `rename()`) before (or after!) aggregating.
 
-5 - Use `glm()` for regression,
+5 - Statistical functions (like `glm()`, `t.test()`) require `data` and `formula` arguments
 
 ]
 
@@ -1125,23 +1151,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
