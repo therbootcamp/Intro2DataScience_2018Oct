@@ -613,7 +613,8 @@ ggplotly(MyPlot)
 
 For these challenges, use the `kc_house` dataset. Load the data as `kc_house`
 
-1. Make this plot (hint: use `scale_color_gradient(low = "green", high = "red") `)
+1. Make this plot
+- Hint: use `scale_color_gradient(low = "green", high = "red") `)
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
 ggplot(data = kc_house,
@@ -628,7 +629,8 @@ scale_color_gradient(low = "green", high = "red") +
   theme_bw()
 ```
 
-2. Make this plot (hint: take the log of price with `log(price)`)
+2. Make this plot 
+- Hint: take the log of price with `log(price)`
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 4}
 ggplot(data = kc_house,
