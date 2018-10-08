@@ -7,8 +7,8 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE,
-                      eval = FALSE,
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
                       message = FALSE,
                       warning = FALSE,
                       error = FALSE)
@@ -19,6 +19,7 @@ library(baselers)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(readxl)
 ```
 
 
@@ -696,16 +697,16 @@ write_csv(x = airbnb_zuerich,
 
 ## G - Creating data frames
 
-1. Using the `data.frame()` function, create a data frame called `ten_df` that contains each of vectors you just created: `id`, `age`, `sex`, `height`, `weight`, `tall_180`
+1. Using the `data.frame()` function, create a data frame called `ten_df` that contains each of vectors you just created: `id`, `age`, `sex`, `height`, `weight`.
 
 ```{r, eval = FALSE, echo = TRUE}
-# Create data frame ten_df containing vectors id, age, sex, height, weight, and tall_180
+# Create data frame ten_df containing vectors id, age, sex, height, and weight.
 XX <- data.frame(XX, XX, XX, XX, XX, XX) 
 ```
 
 ```{r}
 # Create ten_df data frame from vectors
-ten_df <- data.frame(id, age, sex, height, weight, tall_180) 
+ten_df <- data.frame(id, age, sex, height, weight) 
 ```
 
 2. Print your `ten_df` object to see how it looks! Does it contain all of the vectors?
@@ -754,7 +755,7 @@ max(ten_df$age)
 
 ```{r}
 # create tibble
-ten_tibble = tibble(id, sex, height, weight, tall_180)
+ten_tibble = tibble(id, sex, height, weight)
 ```
 
 9. Print your new `ten_tibble` object, how does it look different from `ten_df`? Try calculating the maximum `age` from this object. Is it different from what you got before?

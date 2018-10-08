@@ -11,8 +11,8 @@ knitr::opts_chunk$set(comment = NA,
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = FALSE, 
-                      eval = FALSE, 
+                      echo = TRUE, 
+                      eval = TRUE, 
                       warning = FALSE)
 
 options(digits = 3)
@@ -120,15 +120,6 @@ eur_usd <- read_delim(file = '1_Data/euro-dollar.txt', delim = '\t')
 yen_usd <- read_delim(file = '1_Data/yen-dollar.txt', delim = '\t')
 ```
 
-```{r, eval = FALSE, echo = FALSE}
-# Load exchange rate data from local data folder 
-eur_usd <- read_delim(file = 'XXX/XXX', 
-                      delim = '\t')
-
-yen_usd <- read_delim(file = 'XXX/XXX',
-                      delim = '\t')
-```
-
 4. Print the `eur_usd` and `yen_usd` objects. Are all the data types and variable names correct? Not quite, right?
 
 ```{r}
@@ -139,7 +130,7 @@ yen_usd
 
 5. To fix the data, first load the data again and use the `col_names`-argument to explicitly assign the column names to be `Date` and `Rate`. This will prevent R to take names from the first row of the data.
 
-```{r, echo = FALSE, eval = FALSE}
+```{r}
 # load data specifying col_names
 eur_usd <- read_delim(file = '1_Data/euro-dollar.txt', 
                       delim = '\t',
@@ -150,26 +141,8 @@ yen_usd <- read_delim(file = '1_Data/yen-dollar.txt',
                       col_names = c('Date', 'Rate'))
 ``` 
 
-```{r, echo = FALSE, eval = FALSE}
-eur_usd <- read_delim(file = 'XXX/XXX', 
-                      delim = '\t',
-                      col_names = c('XXX', 'XXX'))
 
-yen_usd <- read_delim(file = 'XXX/XXX', 
-                      delim = '\t', 
-                      col_names = c('XXX', 'XXX'))
-```  
-  
 6. Now, change the variable `Date` to type `date`. Fix this using the `parse_date()` function with `format = '%d %b %Y'`. This specifies the exact format the dates are formatted in. Overwrite the existing `Date`-variable.
-
-```{r, echo = TRUE}
-# change Date to date type in both datasets
-eur_usd <- eur_usd %>%
-  mutate(XXX = parse_date(XXX, format = '%d %b %Y'))
-
-yen_usd <- yen_usd %>%
-  mutate(XXX = parse_date(XXX, format = '%d %b %Y'))
-```
 
 ```{r, echo = TRUE}
 # change Date to date type in both datasets
@@ -192,6 +165,7 @@ yen_usd <- yen_usd %>%
 financial <- dow %>% 
   select(Date,Close) %>% 
   inner_join(dax %>% select(Date, Close), by = 'Date')
+financial
 ```
 
 2. Inspect the data! What has R done with the names of the two `Close` variables? Run the code again, this time using the `suffix`-argument to give both variables suffixes preserve the origin of these variables, e.g., `suffix = c(_dow','_dax')`.  
@@ -203,6 +177,7 @@ financial <- dow %>%
   inner_join(dax %>% select(Date, Close),
             by = 'Date',
              suffix = c('_dow','_dax'))
+financial
 ```
 
 3. Looks better now? OK, now that you know how to join two data sets repeat the steps until all five data sets are included in `financial`. Remember, we only want the dates variable (`Date`), the stock index (unadjusted) closing prices (`Close`). Note if you have trouble fixing all variables names using the `suffix`-argument you can also take of this at the end using `rename()`.
@@ -217,20 +192,7 @@ financial <- financial %>%
 ```
 
 
-4. Alright, now let's create `change` variables that tell how the exchange rates and stock indices have moved. Use the `mutate`- and the `diff()`-function. The `diff` computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
-
-```{r, echo = FALSE, eval = FALSE}
-# create variables representing day-to-day changes
-financial <- financial %>% 
-  mutate(
-  Close_dow_change = c(NA, diff(XXX)),
-  Close_dax_change = c(NA, diff(XXX)),
-  Close_nik_change = c(NA, diff(XXX)),
-  Rate_eur_change = c(NA, diff(XXX)),
-  Rate_yen_change = c(NA, diff(XXX))
-)
-
-```
+4. Alright, now let's create `change` variables that show how the exchange rates and stock indices have moved. Use the `mutate`- and the `diff()`-function. The `diff` computes the differences between every adjacent pair of entries in a vector. As this results in one fewer differences than there values in the vector add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
 
 ```{r}
 # create variables representing day-to-day changes
@@ -247,15 +209,6 @@ financial <- financial %>%
 
 5. We will be mainly interested in how stock prices and exchange rates change over the course of a year. To create a variable that codes the year `mutate()` and `lubridate::year(Date)`, which will extract from `Date` the year information.
 
-```{r, echo = FALSE, eval = FALSE}
-# load lubridate
-library(lubridate)
-
-# create year variable
-financial <- financial %>% 
-  mutate(year = year(XXX))
-```
-
 ```{r}
 # load lubridate
 library(lubridate)
@@ -267,7 +220,7 @@ financial <- financial %>%
 
 6. Finally, we want the data in the "long", instead of the current "wide" format. Call this dataset `financial_long`. In long formats variables occupy different rows rather than columns. To this using the `gather()`-function. Hint: The first two arguments to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variables whose format you would like to change (minus in front is intentional). Check out the example in the `?gather`-help file.
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 # create long version of data frame
 financial_long <- financial %>% 
                 gather(variable, 
@@ -283,6 +236,7 @@ financial_long <- financial %>%
          value, 
          -Date, 
          -year)
+financial_long
 ```
 
 7. Now your data is tidy proper (at least with regard to the analyses required here)! Go ahead an explore the data a bit. What data do they contain? Consider using `summary` or `skimr::skim()`.
@@ -368,15 +322,6 @@ financial %>%
 ```
 
 8. Finally, evaluate the stability of the above relationship for each year separately. Can you make out a stable pattern? No? I guess it depends. As always.
-
-```{r, echo = FALSE, eval = FALSE}
-XXX %>% 
-  group_by(XXX) %>% 
-  summarize(
-    cor_dow_dax = cor(XXX - XXX, XXX, use = 'complete.obs'),
-    cor_dow_nik = cor(XXX - XXX, XXX, use = 'complete.obs')
-  )
-```
 
 ```{r}
 financial %>% 

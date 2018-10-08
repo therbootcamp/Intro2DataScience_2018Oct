@@ -11,8 +11,8 @@ knitr::opts_chunk$set(comment = NA,
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = FALSE, 
-                      eval = FALSE, 
+                      echo = TRUE, 
+                      eval = TRUE, 
                       warning = FALSE,
                       message = FALSE)
 
@@ -205,7 +205,7 @@ library(tidyverse)
 4. For this practical, we'll use the `mcondalds.csv` data set, which contains nutrition information about items from McDonalds. Using `read_csv()`, load the data into R and store it as a new object called `mcdonalds`.
 
 ```{r}
-mcdonalds <- read_csv("1_Data/mcondalds.csv")
+mcdonalds <- read_csv("1_Data/mcdonalds.csv")
 ```
 
 5. Take a look at the first few rows of the dataset(s) by printing them to the console.
