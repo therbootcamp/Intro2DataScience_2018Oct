@@ -11,8 +11,8 @@ knitr::opts_chunk$set(comment = NA,
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = FALSE, 
-                      eval = FALSE, 
+                      echo = TRUE, 
+                      eval = TRUE, 
                       warning = FALSE)
 
 options(digits = 3)
@@ -133,6 +133,10 @@ baselers %>%
 
 2. Open a new R script. At the top of the script, using comments, write your name and the date. Save it as a new file called `wrangling_practical.R` in the `2_Code` folder.  
 
+```{r}
+# Done!
+```
+
 3. Using `library()` load the set of packages for this practical listed in the packages section above.
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = TRUE}
@@ -146,7 +150,6 @@ library(tidyverse)
 
 trial_act <- read_csv(file = "XX")
 ```
-
 
 ```{r, eval = FALSE}
 trial_act <- read_csv(file = "1_Data/trial_act.csv")
@@ -170,7 +173,7 @@ library(tidyverse)
 
 6. Take a look at the first few rows of the datasets by printing them to the console.
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, echo = TRUE}
 # Print trial_act object
 trial_act
 ```
@@ -181,7 +184,6 @@ trial_act
 summary(trial_act)
 summary(trial_act_demo)
 ```
-
 
 ### Tips
 
@@ -404,7 +406,7 @@ trial_act <- trial_act %>%
 
 1. Using the `arrange()` function, arrange the `trial_act` data in ascending order of `age_y` (from lowest to highest). After you do, print the data to make sure it worked!
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 trial_act <- trial_act %>% 
  arrange(XXX)
 ```
@@ -444,7 +446,7 @@ trial_act
 
 1. Using the `filter()` function, filter only the rows from males (Hint: `gender_char == "male"`)
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 trial_act %>%
   filter(XXX == "XXX")
 ```
@@ -571,6 +573,11 @@ CD4_long %>%
          XX)   # Value columnn
 ```
 
+```{r}
+CD4_long %>%
+  spread(time, value)
+```
+
 ### Practice!
 
 1. Create a new dataframe called `trial_A` from `trial_act` with the following restrictions:
@@ -584,16 +591,20 @@ trial_A <- trial_act %>%
   filter(drugs == 1,
          age_y < 60,
          cd40 > 250 & cd40 < 400)
+
+trial_A
 ```
 
-2. Add a new column to `trial_act` called `drugs_char` which is `"User"` when drug == 1, and `"Non User"` when drug == 0.
+2. Add a new column to `trial_act` called `drugs_char` which is `"User"` when drugs == 1, and `"Non User"` when drugs == 0.
 
 ```{r}
 trial_act <- trial_act %>%
   mutate(drugs_char = case_when(
-    drug == 1 ~ "User",
-    drug == 0 ~ "Non User"
+    drugs == 1 ~ "User",
+    drugs == 0 ~ "Non User"
   ))
+
+trial_act
 ```
 
 3. Create a new dataframe called `trial_B` from `trial_act` with the following restrictions:
@@ -605,8 +616,10 @@ trial_act <- trial_act %>%
 trial_B <- trial_act %>%
   filter(
     cd496 - cd40 > 200,
-    drug == 1
+    drugs == 1
   )
+
+trial_B
 ```
 
 

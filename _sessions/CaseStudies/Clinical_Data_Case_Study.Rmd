@@ -6,14 +6,13 @@ output:
     css: practical.css
 ---
 
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(comment = NA, 
                       fig.width = 6, 
                       fig.height = 6,
                       fig.align = 'center',
-                      echo = FALSE, 
-                      eval = FALSE, 
+                      echo = TRUE, 
+                      eval = TRUE, 
                       warning = FALSE)
 
 options(digits = 3)
@@ -173,7 +172,7 @@ library(tidyverse)
 
 2. Using `read_csv()`, load the `dimarta_trial.csv`, `dimarta_demographics.csv`, and `dimarta_biomarker.csv` datasets as *three* new objects called `trial_df`, `demographics_df`, and `biomarker_df`.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 ## read in datasets
 trial_df <- read_csv("XXX/XXX")
 demographics_df <- read_csv("XXX/XXX")
@@ -257,13 +256,13 @@ demographics_df <- demographics_df %>%
 
 4. Now let's create a new object called `dimarta_df` that combines data from `trial_df` and `demographics_df`. To do this, use `left_join()` to combine the `trial_df` data with the `demographics_df` data. This will merge the two datasets so you can have the study results and demographic data in the same dataframe. Make sure to assign the result to a new object called `dimarta_df`
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df <- trial_df %>%
   left_join(XXX)
 ```
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE}
+```{r}
 # Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df <- trial_df %>%
   left_join(demographics_df)
@@ -271,7 +270,7 @@ dimarta_df <- trial_df %>%
 
 5. You'll notice that the `biomarker_df` dataframe is in the 'long' format, where each row is a patient's biomarker result. Making use of the `spread()` function, create a new dataframe called `biomarker_wide_df` where each row is a patient, and the results from different biomarkers are in different columns. When you finish, look at `biomarker_wide_df` to see how it looks!
 
-```{r, echo = FALSE, eval = TRUE}
+```{r}
 # Convert biomarker_df to a wide format using spread()
 biomarker_wide_df <- biomarker_df %>%
   spread(Biomarker, BiomarkerStatus)
@@ -279,7 +278,7 @@ biomarker_wide_df <- biomarker_df %>%
 
 6. Now, using the `left_join` function, add the `biomarker_wide_df` data  to the `dimarta_df` data! Now you should have all of the data in a single dataframe called `dimarta_df`
 
-```{r, eval = TRUE, message = FALSE}
+```{r}
 dimarta_df <- dimarta_df %>% 
   left_join(biomarker_wide_df)
 ```
@@ -430,7 +429,7 @@ dimarta_df %>%
 
 1. Create boxplots showing the relationship between study arm and histamine change.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 ggplot(data = XXX,
        mapping = aes(x = XXX, 
                      y = XXX)) +
@@ -440,7 +439,7 @@ ggplot(data = XXX,
        caption = "XX")
 ```
 
-```{r, echo = FALSE, eval = TRUE}
+```{r}
 ggplot(data = dimarta_df,
        mapping = aes(x = StudyArm, 
                      y = histamine_change)) +
@@ -452,7 +451,7 @@ ggplot(data = dimarta_df,
 
 2. Try using `geom_jitter()` to add the raw points to the plot
 
-```{r, eval = TRUE}
+```{r}
 ggplot(data = dimarta_df,
        mapping = aes(x = StudyArm, 
                      y = histamine_change)) +
@@ -463,13 +462,39 @@ ggplot(data = dimarta_df,
        caption = "I love R!")
 ```
 
-3. Create the same plot as above, but instead of analysing study arm, try analysing gender. What do you find? Did one gender have better histamine improvements than the other?
+3. Create the same plot as above, but instead of analysing study arm, try analysing gender. (Tip! convert gender to a factor with `factor(gender)`) What do you find? Did one gender have better histamine improvements than the other?
+
+```{r}
+ggplot(data = dimarta_df,
+       mapping = aes(x = factor(gender), 
+                     y = histamine_change)) +
+  geom_boxplot() +
+  geom_jitter(width = .1) +
+  labs(title = "Histamine change",
+       subtitle = "Dimarta",
+       caption = "I love R!",
+       x = "Gender")
+```
+
 
 4. Now create the same plot but show both gender and study arm in the same plot. One way to do this would be to color the points by gender!
 
+```{r}
+ggplot(data = dimarta_df,
+       mapping = aes(x = StudyArm, 
+                     y = histamine_change,
+                     col = factor(gender))) +
+  geom_boxplot() +
+  geom_jitter(width = .1) +
+  labs(title = "Histamine change",
+       subtitle = "Dimarta",
+       caption = "I love R!",
+       x = "Gender")
+```
+
 5. Is there a correlation between patient's starting and ending histamiine levels? Create a scatterplot with a regression line to find out!
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 ggplot(data = XXX,
        aes(x = XXX, y = XXX)) +
   geom_XXX() + 
@@ -490,25 +515,103 @@ ggplot(data = dimarta_df,
 
 6. Now create the same plot as above, but have different colored points for different study arms (but only one regression line).
 
+```{r, eval = TRUE, message = FALSE}
+ggplot(data = dimarta_df,
+       aes(x = histamine_start, 
+           y = histamine_end,
+           col = StudyArm)) +
+  geom_point() + 
+  geom_smooth(col = "black") +
+  labs(title = "Histamine start and end correlation",
+       caption = "Dimarta")
+```
+
 7. Instead of having different study arms as different colored points, create another plot using `facet_wrap()` to have different study arms in different plotting panels.
+
+```{r, eval = TRUE, message = FALSE}
+ggplot(data = dimarta_df,
+       aes(x = histamine_start, 
+           y = histamine_end)) +
+  geom_point() + 
+  geom_smooth(col = "black") +
+  facet_wrap(~ StudyArm) +
+  labs(title = "Histamine start and end correlation",
+       caption = "Dimarta")
+```
 
 ## D - Statistics
 
 1. Create a regression model predicting final histamine levels as a function of all variables in the dataset that make clinical sense to include. Call it `full_glm`.
 
+```{r}
+full_glm <- glm(formula = histamine_end ~ age + StudyArm + gender + site + histamine_start,
+                data = dimarta_df)
+```
+
+
 2. Explore the object with `summary()`, `tidy()` (part of the `broom` package), and `names()`. Which variables predict final histamine levels? 
+```{r}
+summary(full_glm)
+
+library(broom)
+
+tidy(full_glm)
+
+names(full_glm)
+```
 
 3. Add the residuals from this model as a new column in your data called `residuals_full`
 
+```{r}
+dimarta_df <- dimarta_df %>%
+  mutate(residuals_full = full_glm$residuals)
+```
+
 4. Plot the residuals from the regression as a histogram (hint: you can find the residuals in your regression object). How do they look?
+
+```{r}
+ggplot(dimarta_df,
+       aes(x = residuals_full)) +
+  geom_histogram()
+```
 
 5. Add the absolute value of the residuals from the model as a new column in your data called `residuals_abs_full` 
 
+```{r}
+dimarta_df <- dimarta_df %>%
+  mutate(residuals_abs_full = abs(residuals_full))
+```
+
 6. Plot the absolute value of the residuals as a histogram. How do these look?
+
+```{r}
+ggplot(dimarta_df,
+       aes(x = residuals_abs_full)) +
+  geom_histogram()
+```
+
 
 7. What is the mean value of the absolute value of this residuals?
 
+```{r}
+dimarta_df %>%
+  summarise(residuals_abs_full_mean = mean(residuals_abs_full))
+```
+
 8. Now create a regression model predicting histamine change based *only* on the study arm. Call it `arm_glm`. Then follow the steps above to add the residuals (original and absolute) from this model to your dataframe. Call them `residuals_arm` and `residuals_abs_arm`.
 
-9. Calculate the mean of the raw and absolute residuals from your `arm_glm` model. How do they compare to your `full_glm` model? What does this mean?\
+```{r}
+arm_glm <- glm(formula = histamine_end ~ StudyArm,
+               data = dimarta_df)
+```
+
+9. Calculate the mean of the raw and absolute residuals from your `arm_glm` model. How do they compare to your `full_glm` model? What does this mean?
+
+```{r}
+mean(arm_glm$residuals)
+
+mean(abs(arm_glm$residuals))
+
+```
+
 
