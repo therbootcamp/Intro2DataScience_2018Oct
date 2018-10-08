@@ -7,12 +7,19 @@ to_path = '_sessions/_pdf/'
 
 # htmls to be saved as pdf
 htmls = c(
+  'Welcome/Welcome.html',
   'IntroToR/IntroToR.html',
-  'Objects/Objects.html',
-  'DataIO/DataIO.html',
+  'Data/Data.html',
+  'Data/Data_practical.html',
   'Wrangling/Wrangling.html',
-  'Statistics/Statistics.html',
-  'MachineLearning/MachineLearning.html'
+  'Wrangling/Wrangling_practical.html',
+  'Analysing/Analysing.html',
+  'Analysing/Analysing_practical.html',
+  'Plotting/Plotting.html',
+  'Plotting/Plotting_practical.html',
+  'CaseStudies/Financial_Data_Case_Study.html',
+  'CaseStudies/Clinical_Data_Case_Study.html',
+  'NextSteps/NextSteps.html'
 )
 
 # get pdf names
@@ -32,7 +39,7 @@ for(i in 1:length(htmls)){
 }
 
 # zip files
-zip(paste0(to_path, 'Baselrbootcamp_slides_pt1.zip'),
+zip(paste0(to_path, 'Intro2DataScienceWithR_pdfs.zip'),
     c(paste0(to_path, pdfs), paste0(to_path, 'README.rtf'))
     )
 
